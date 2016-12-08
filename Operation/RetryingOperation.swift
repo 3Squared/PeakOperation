@@ -16,7 +16,7 @@ open class RetryingOperation<T>: ConcurrentOperation<T> {
 
     var failureCount = 0
     
-    var retryStrategy = RetryStrategy.none
+    public var retryStrategy = RetryStrategy.none
     
     public override func finish() {
         switch result() {
@@ -35,18 +35,18 @@ open class RetryingOperation<T>: ConcurrentOperation<T> {
 
 
 /// Common retry strategies that can be used to determine if a RetryingOperation should retry on failure
-class RetryStrategy {
+public class RetryStrategy {
     /// Takes the number of attempts and returns a boolean indicating whether to retry
-    typealias StrategyBlock = (Int) -> Bool
+    public typealias StrategyBlock = (Int) -> Bool
 
     /// Don't retry
-    static let none: StrategyBlock = { _ in return false }
+    public static let none: StrategyBlock = { _ in return false }
 
     /// Retry N times. There is no delay between attempts.
     ///
     /// - Parameter times: number of times to retry.
     /// - Returns: a StrategyBlock
-    static func retry(times: Int) -> StrategyBlock {
+    public static func retry(times: Int) -> StrategyBlock {
         return { attemptCount in return attemptCount <= times }
     }
 }
