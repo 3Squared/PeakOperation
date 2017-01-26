@@ -133,6 +133,30 @@ class OperationTests: XCTestCase {
         waitForExpectations(timeout: 10)
     }
     
+    func testSingleOperationRecursiveDependencies() {
+        let op1 = MapOperation<Bool, Bool> { _ in
+            return Result { return false }
+        }
+        XCTAssertEqual(op1.recursiveDependencies, [op1])
+    }
+    
+    func testManyOperationsRecursiveDependencies() {
+        let op1 = MapOperation<Bool, Bool> { _ in
+            return Result { return false }
+        }
+        
+        let op2 = MapOperation<Bool, Bool> { _ in
+            return Result { return false }
+        }
+        
+        let op3 = MapOperation<Bool, Bool> { _ in
+            return Result { return false }
+        }
+        
+        op1.passesResult(to: op2).passesResult(to: op3)
+        
+        XCTAssertEqual(op3.recursiveDependencies, [op1, op2, op3])
+    }
     
     func testMultipleResultBlocks() {
         let expect1 = expectation(description: "")

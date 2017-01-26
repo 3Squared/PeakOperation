@@ -61,4 +61,14 @@ extension ProducesResult where Self: Operation {
         }
         return operation
     }
+    
+    func enqueueAll(on queue: OperationQueue = OperationQueue()) {
+        recursiveDependencies.enqueue(on: queue)
+    }
+}
+
+public extension Operation {
+    var recursiveDependencies: [Operation] {
+        return dependencies.flatMap { $0.recursiveDependencies } + [self]
+    }
 }
