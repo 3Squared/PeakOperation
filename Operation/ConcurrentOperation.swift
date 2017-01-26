@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class ConcurrentOperation<T>: ResultOperation<T> {
+open class ConcurrentOperation<T>: ObservableOperation {
     
     var _executing = false
     var _finished = false
@@ -19,6 +19,7 @@ open class ConcurrentOperation<T>: ResultOperation<T> {
     }
     
     override open func start() {
+        super.start()
         if isCancelled {
             notifyChanges(#keyPath(Operation.isFinished)) {
                 _finished = true

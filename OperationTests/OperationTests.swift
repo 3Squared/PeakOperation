@@ -12,14 +12,43 @@ import THRResult
 
 class OperationTests: XCTestCase {
     
-    func testDependancies() {
+    func testInput() {
         let expect = expectation(description: "")
         
-        let trueOperation = BlockResultOperation {
+        let negatingOperation = MapOperation<Bool, Bool> { input in
+            do {
+                let boolean = try input.resolve()
+                return Result { return !boolean }
+            } catch {
+                return Result { throw error }
+            }
+        }
+        
+        negatingOperation.input = Result { true }
+        
+        negatingOperation.addResultBlock { output in
+            do {
+                let boolean = try output.resolve()
+                XCTAssertFalse(boolean)
+                expect.fulfill()
+            } catch {
+                XCTFail()
+            }
+        }
+        
+        negatingOperation.enqueue()
+        
+        waitForExpectations(timeout: 1)
+    }
+
+    func testInjectionDepending() {
+        let expect = expectation(description: "")
+        
+        let trueOperation = BlockOperation {
             return true
         }
         
-        let negatingOperation = MapResultOperation<Bool, Bool> { previous in
+        let negatingOperation = MapOperation<Bool, Bool> { previous in
             do {
                 let boolean = try previous.resolve()
                 return Result { return !boolean }
@@ -28,26 +57,88 @@ class OperationTests: XCTestCase {
             }
         }
         
-        negatingOperation.addResultBlock { result in
+        let stringOperation = MapOperation<Bool, String> { previous in
             do {
-                let boolean = try result.resolve()
-                XCTAssertFalse(boolean)
+                let boolean = try previous.resolve()
+                return Result { return boolean.description }
+            } catch {
+                return Result { throw error }
+            }
+        }
+
+        
+        stringOperation.addResultBlock { result in
+            do {
+                let string = try result.resolve()
+                XCTAssertEqual(string, "false")
                 expect.fulfill()
             } catch {
                 XCTFail()
             }
         }
         
-        trueOperation.then(do: negatingOperation).enqueue()
+        stringOperation
+            .dependsOnResult(of: negatingOperation)
+            .dependsOnResult(of: trueOperation)
         
-        waitForExpectations(timeout: 1)
+        
+        [trueOperation, negatingOperation, stringOperation].enqueue()
+                
+        waitForExpectations(timeout: 10)
     }
+    
+    func testInjectionPassing() {
+        let expect = expectation(description: "")
+        
+        let trueOperation = BlockOperation {
+            return true
+        }
+        
+        let negatingOperation = MapOperation<Bool, Bool> { previous in
+            do {
+                let boolean = try previous.resolve()
+                return Result { return !boolean }
+            } catch {
+                return Result { throw error }
+            }
+        }
+        
+        let stringOperation = MapOperation<Bool, String> { previous in
+            do {
+                let boolean = try previous.resolve()
+                return Result { return boolean.description }
+            } catch {
+                return Result { throw error }
+            }
+        }
+        
+        
+        stringOperation.addResultBlock { result in
+            do {
+                let string = try result.resolve()
+                XCTAssertEqual(string, "false")
+                expect.fulfill()
+            } catch {
+                XCTFail()
+            }
+        }
+        
+        trueOperation
+            .passesResult(to: negatingOperation)
+            .passesResult(to: stringOperation)
+        
+        
+        [trueOperation, negatingOperation, stringOperation].enqueue()
+        
+        waitForExpectations(timeout: 10)
+    }
+    
     
     func testMultipleResultBlocks() {
         let expect1 = expectation(description: "")
         let expect2 = expectation(description: "")
         
-        let operation = BlockResultOperation {
+        let operation = BlockOperation {
             return true
         }
         
@@ -94,7 +185,7 @@ public enum TestError: Error {
 
 open class TestRetryOperation: RetryingOperation<AnyObject> {
     open override func run() {
-        operationResult = Result { throw TestError.justATest }
+        output = Result { throw TestError.justATest }
         finish()
     }
 }
