@@ -40,52 +40,6 @@ class OperationTests: XCTestCase {
         
         waitForExpectations(timeout: 1)
     }
-
-    func testInjectionDepending() {
-        let expect = expectation(description: "")
-        
-        let trueOperation = BlockOperation {
-            return true
-        }
-        
-        let negatingOperation = MapOperation<Bool, Bool> { previous in
-            do {
-                let boolean = try previous.resolve()
-                return Result { return !boolean }
-            } catch {
-                return Result { throw error }
-            }
-        }
-        
-        let stringOperation = MapOperation<Bool, String> { previous in
-            do {
-                let boolean = try previous.resolve()
-                return Result { return boolean.description }
-            } catch {
-                return Result { throw error }
-            }
-        }
-
-        
-        stringOperation.addResultBlock { result in
-            do {
-                let string = try result.resolve()
-                XCTAssertEqual(string, "false")
-                expect.fulfill()
-            } catch {
-                XCTFail()
-            }
-        }
-        
-        stringOperation
-            .dependsOnResult(of: negatingOperation)
-            .dependsOnResult(of: trueOperation)
-        
-        
-        [trueOperation, negatingOperation, stringOperation].enqueue()
-                
-        waitForExpectations(timeout: 10)
-    }
     
     func testInjectionPassing() {
         let expect = expectation(description: "")
@@ -126,9 +80,7 @@ class OperationTests: XCTestCase {
         trueOperation
             .passesResult(to: negatingOperation)
             .passesResult(to: stringOperation)
-        
-        
-        [trueOperation, negatingOperation, stringOperation].enqueue()
+            .enqueue()
         
         waitForExpectations(timeout: 10)
     }
@@ -179,7 +131,6 @@ class OperationTests: XCTestCase {
         waitForExpectations(timeout: 1)
     }
     
-    
     func testOperationFailureWithRetry() {
         let expect = expectation(description: "")
         
@@ -213,4 +164,3 @@ open class TestRetryOperation: RetryingOperation<AnyObject> {
         finish()
     }
 }
-
