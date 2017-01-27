@@ -89,7 +89,7 @@ class OperationTests: XCTestCase {
         let op1 = MapOperation<Bool, Bool> { _ in
             return Result { return false }
         }
-        XCTAssertEqual(op1.recursiveDependencies, [op1])
+        XCTAssertEqual(op1.operationChain, [op1])
     }
     
     func testManyOperationsRecursiveDependencies() {
@@ -107,7 +107,7 @@ class OperationTests: XCTestCase {
         
         op1.passesResult(to: op2).passesResult(to: op3)
         
-        XCTAssertEqual(op3.recursiveDependencies, [op1, op2, op3])
+        XCTAssertEqual(op3.operationChain, [op1, op2, op3])
     }
     
     func testMultipleResultBlocks() {

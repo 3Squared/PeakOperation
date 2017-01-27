@@ -10,12 +10,12 @@ import Foundation
 
 public extension Operation {
 
-    internal var recursiveDependencies: [Operation] {
-        return dependencies.flatMap { $0.recursiveDependencies } + [self]
+    internal var operationChain: [Operation] {
+        return dependencies.flatMap { $0.operationChain } + [self]
     }
     
     func enqueue(on queue: OperationQueue = OperationQueue()) {
-        recursiveDependencies.enqueue(on: queue)
+        operationChain.enqueue(on: queue)
     }
     
     @discardableResult
