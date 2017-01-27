@@ -19,7 +19,6 @@ public protocol ConsumesResult: class {
     var input: Result<Input> { get set }
 }
 
-
 public enum ResultError: Error {
     case noResult
 }
@@ -40,18 +39,6 @@ extension ProducesResult where Self: Operation {
     }
 }
 
-extension ConsumesResult where Self: ObservableOperation {
-    @discardableResult
-    public func dependsOnResult<Output>(of operation: Output) -> Output where Output: Operation, Output: ProducesResult, Output.Output == Self.Input {
-        addDependency(operation)
-        willStart = {
-            self.input = operation.output
-        }
-        return operation
-    }
-}
-
-
 extension ProducesResult where Self: Operation {
     @discardableResult
     public func passesResult<Consumer>(to operation: Consumer) -> Consumer where Consumer: ObservableOperation, Consumer: ConsumesResult, Consumer.Input == Self.Output {
@@ -62,3 +49,4 @@ extension ProducesResult where Self: Operation {
         return operation
     }
 }
+

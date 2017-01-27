@@ -10,8 +10,12 @@ import Foundation
 
 public extension Operation {
 
+    internal var operationChain: [Operation] {
+        return dependencies.flatMap { $0.operationChain } + [self]
+    }
+    
     func enqueue(on queue: OperationQueue = OperationQueue()) {
-        queue.addOperation(self)
+        operationChain.enqueue(on: queue)
     }
     
     @discardableResult
