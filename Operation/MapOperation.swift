@@ -9,7 +9,7 @@
 import Foundation
 import THRResult
 
-open class MapOperation<Input, Output>: ObservableOperation, ProducesResult, ConsumesResult {
+open class MapOperation<Input, Output>: BaseOperation, ProducesResult, ConsumesResult {
     
     public var output: Result<Output> = Result { throw ResultError.noResult }
     public var input: Result<Input> = Result { throw ResultError.noResult }

@@ -41,7 +41,7 @@ extension ProducesResult where Self: Operation {
 
 extension ProducesResult where Self: Operation {
     @discardableResult
-    public func passesResult<Consumer>(to operation: Consumer) -> Consumer where Consumer: ObservableOperation, Consumer: ConsumesResult, Consumer.Input == Self.Output {
+    public func passesResult<Consumer>(to operation: Consumer) -> Consumer where Consumer: BaseOperation, Consumer: ConsumesResult, Consumer.Input == Self.Output {
         operation.addDependency(self)
         operation.willStart = {
             operation.input = self.output

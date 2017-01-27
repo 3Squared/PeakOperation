@@ -9,7 +9,7 @@
 import Foundation
 import THRResult
 
-open class BlockOperation<Output>: ObservableOperation, ProducesResult {
+open class BlockOperation<Output>: BaseOperation, ProducesResult {
     public var output: Result<Output> = Result { throw ResultError.noResult }
     let block: () -> (Result<Output>)
     

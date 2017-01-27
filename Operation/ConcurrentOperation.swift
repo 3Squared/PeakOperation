@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class ConcurrentOperation<T>: ObservableOperation {
+open class ConcurrentOperation<T>: BaseOperation {
     
     var _executing = false
     var _finished = false

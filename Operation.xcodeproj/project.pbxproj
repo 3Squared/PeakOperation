@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		04F7F0A8FC683F3680F64164 /* Pods_OperationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B15FA159FCAF02C0621F66B3 /* Pods_OperationTests.framework */; };
 		37A17FFEA5CCDE30789A56B2 /* Pods_Operation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A06144D1CD43E2478070122 /* Pods_Operation.framework */; };
-		CB47513A1E3A06D600A43672 /* ObservableOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4751391E3A06D600A43672 /* ObservableOperation.swift */; };
+		CB47513A1E3A06D600A43672 /* BaseOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4751391E3A06D600A43672 /* BaseOperation.swift */; };
 		CB47513C1E3A4A4400A43672 /* Collection+Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB47513B1E3A4A4400A43672 /* Collection+Operations.swift */; };
 		CB47513E1E3A4AA500A43672 /* Operation+Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB47513D1E3A4AA500A43672 /* Operation+Queue.swift */; };
 		CB4C11661DF9800600837343 /* Operation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4C115C1DF9800600837343 /* Operation.framework */; };
@@ -40,7 +40,7 @@
 		894503B04E6CA2CDF1860AB5 /* Pods-OperationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OperationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OperationTests/Pods-OperationTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9A06144D1CD43E2478070122 /* Pods_Operation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Operation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B15FA159FCAF02C0621F66B3 /* Pods_OperationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OperationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CB4751391E3A06D600A43672 /* ObservableOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservableOperation.swift; sourceTree = "<group>"; };
+		CB4751391E3A06D600A43672 /* BaseOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseOperation.swift; sourceTree = "<group>"; };
 		CB47513B1E3A4A4400A43672 /* Collection+Operations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+Operations.swift"; sourceTree = "<group>"; };
 		CB47513D1E3A4AA500A43672 /* Operation+Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Operation+Queue.swift"; sourceTree = "<group>"; };
 		CB4C115C1DF9800600837343 /* Operation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Operation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,7 +110,7 @@
 				CB4C117B1DF9818500837343 /* ProducesResult.swift */,
 				CB4C117C1DF9818500837343 /* BlockOperation.swift */,
 				CB4C117D1DF9818500837343 /* RetryingOperation.swift */,
-				CB4751391E3A06D600A43672 /* ObservableOperation.swift */,
+				CB4751391E3A06D600A43672 /* BaseOperation.swift */,
 				CB4C11601DF9800600837343 /* Info.plist */,
 			);
 			path = Operation;
@@ -347,7 +347,7 @@
 				CB4C11811DF9818500837343 /* MapOperation.swift in Sources */,
 				CB4C11801DF9818500837343 /* Errors.swift in Sources */,
 				CB4C11851DF9818500837343 /* RetryingOperation.swift in Sources */,
-				CB47513A1E3A06D600A43672 /* ObservableOperation.swift in Sources */,
+				CB47513A1E3A06D600A43672 /* BaseOperation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

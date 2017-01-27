@@ -1,5 +1,5 @@
 //
-//  ObservableOperation.swift
+//  BaseOperation.swift
 //  Operation
 //
 //  Created by Sam Oakley on 26/01/2017.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-open class ObservableOperation: Operation {
-    open var willStart: () -> () = { }
-
+open class BaseOperation: Operation {
+    internal var willStart: () -> () = { }
+    
     open override func start() {
         willStart()
         super.start()
