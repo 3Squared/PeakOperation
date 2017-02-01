@@ -20,7 +20,8 @@ open class MapOperation<Input, Output>: BaseOperation, ProducesResult, ConsumesR
         self.block = block
     }
     
-    open override func main() {
+    open override func run() {
         self.output = self.block(input)
+        finish()
     }
 }

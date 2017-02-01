@@ -23,7 +23,8 @@ open class BlockOperation<Output>: BaseOperation, ProducesResult {
         self.block = block
     }
     
-    open override func main() {
+    open override func run() {
         self.output = self.block()
+        finish()
     }
 }

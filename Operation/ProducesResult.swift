@@ -39,11 +39,11 @@ extension ProducesResult where Self: Operation {
     }
 }
 
-extension ProducesResult where Self: Operation {
+extension ProducesResult where Self: BaseOperation {
     @discardableResult
-    public func passesResult<Consumer>(to operation: Consumer) -> Consumer where Consumer: BaseOperation, Consumer: ConsumesResult, Consumer.Input == Self.Output {
+    public func passesResult<Consumer>(to operation: Consumer) -> Consumer where Consumer: Operation, Consumer: ConsumesResult, Consumer.Input == Self.Output {
         operation.addDependency(self)
-        operation.willStart = {
+        self.didFinish = {
             operation.input = self.output
         }
         return operation
