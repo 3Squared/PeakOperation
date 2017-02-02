@@ -52,7 +52,7 @@ open class BaseOperation: Operation {
             didChangeValue(forKey: key)
         }
     }
-
+    
     override open var isExecuting: Bool {
         return _executing
     }

@@ -152,6 +152,35 @@ class OperationTests: XCTestCase {
         waitForExpectations(timeout: 100)
     }
 
+    
+    func testCancelledOperationPassesNoInput() {
+        let expect = expectation(description: "")
+        
+        let firstOperation = MapOperation<String, String> { _ in
+            return Result { "first" }
+        }
+
+        let secondOperation = MapOperation<String, String> { input in
+            do {
+                _ = try input.resolve()
+                XCTFail()
+            } catch {
+                expect.fulfill()
+            }
+            return Result { throw TestError.justATest }
+        }
+        
+        firstOperation
+            .passesResult(to: secondOperation)
+            .enqueue()
+        
+        
+        firstOperation.cancel()
+        
+        waitForExpectations(timeout: 10)
+        print("")
+    }
+
 }
 
 public enum TestError: Error {
