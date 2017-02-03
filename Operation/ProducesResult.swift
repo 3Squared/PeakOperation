@@ -43,7 +43,7 @@ extension ProducesResult where Self: BaseOperation {
     @discardableResult
     public func passesResult<Consumer>(to operation: Consumer) -> Consumer where Consumer: Operation, Consumer: ConsumesResult, Consumer.Input == Self.Output {
         operation.addDependency(self)
-        self.didFinish = {
+        self.willFinish = {
             if !self.isCancelled {
                 operation.input = self.output
             }

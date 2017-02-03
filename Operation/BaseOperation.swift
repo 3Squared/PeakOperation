@@ -10,7 +10,7 @@ import Foundation
 
 open class BaseOperation: Operation {
     internal var willStart: () -> () = { }
-    internal var didFinish: () -> () = { }
+    internal var willFinish: () -> () = { }
 
     var _executing = false
     var _finished = false
@@ -36,7 +36,7 @@ open class BaseOperation: Operation {
     }
 
     public func finish()  {
-        didFinish()
+        willFinish()
         notifyChanges(#keyPath(Operation.isFinished), #keyPath(Operation.isExecuting)) {
             _executing = false
             _finished = true
