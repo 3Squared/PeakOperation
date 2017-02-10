@@ -1,5 +1,5 @@
 //
-//  ConcurrentOperation.swift
+//  BaseOperation.swift
 //  THROperations
 //
 //  Created by Sam Oakley on 10/10/2016.
@@ -8,17 +8,19 @@
 
 import Foundation
 
-open class ConcurrentOperation<T>: ResultOperation<T> {
-    
+open class BaseOperation: Operation {
+    internal var willStart: () -> () = { }
+    internal var willFinish: () -> () = { }
+
     var _executing = false
     var _finished = false
     
     open func run() {
-        print("\(self) must override `run()`.")
-        finish()
+        fatalError("\(self) must override `run()`.")
     }
     
     override open func start() {
+        super.start()
         if isCancelled {
             notifyChanges(#keyPath(Operation.isFinished)) {
                 _finished = true
@@ -26,6 +28,7 @@ open class ConcurrentOperation<T>: ResultOperation<T> {
             return
         }
         
+        willStart()
         notifyChanges(#keyPath(Operation.isExecuting)) {
             _executing = true
             run()
@@ -33,6 +36,7 @@ open class ConcurrentOperation<T>: ResultOperation<T> {
     }
 
     public func finish()  {
+        willFinish()
         notifyChanges(#keyPath(Operation.isFinished), #keyPath(Operation.isExecuting)) {
             _executing = false
             _finished = true
@@ -48,7 +52,7 @@ open class ConcurrentOperation<T>: ResultOperation<T> {
             didChangeValue(forKey: key)
         }
     }
-
+    
     override open var isExecuting: Bool {
         return _executing
     }

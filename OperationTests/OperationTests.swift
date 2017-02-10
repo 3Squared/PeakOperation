@@ -12,14 +12,43 @@ import THRResult
 
 class OperationTests: XCTestCase {
     
-    func testDependancies() {
+    func testInput() {
         let expect = expectation(description: "")
         
-        let trueOperation = BlockResultOperation {
+        let negatingOperation = MapOperation<Bool, Bool> { input in
+            do {
+                let boolean = try input.resolve()
+                return Result { return !boolean }
+            } catch {
+                return Result { throw error }
+            }
+        }
+        
+        negatingOperation.input = Result { true }
+        
+        negatingOperation.addResultBlock { output in
+            do {
+                let boolean = try output.resolve()
+                XCTAssertFalse(boolean)
+                expect.fulfill()
+            } catch {
+                XCTFail()
+            }
+        }
+        
+        negatingOperation.enqueue()
+        
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testInjectionPassing() {
+        let expect = expectation(description: "")
+        
+        let trueOperation = BlockOperation {
             return true
         }
         
-        let negatingOperation = MapResultOperation<Bool, Bool> { previous in
+        let negatingOperation = MapOperation<Bool, Bool> { previous in
             do {
                 let boolean = try previous.resolve()
                 return Result { return !boolean }
@@ -28,26 +57,64 @@ class OperationTests: XCTestCase {
             }
         }
         
-        negatingOperation.addResultBlock { result in
+        let stringOperation = MapOperation<Bool, String> { previous in
             do {
-                let boolean = try result.resolve()
-                XCTAssertFalse(boolean)
+                let boolean = try previous.resolve()
+                return Result { return boolean.description }
+            } catch {
+                return Result { throw error }
+            }
+        }
+        
+        
+        stringOperation.addResultBlock { result in
+            do {
+                let string = try result.resolve()
+                XCTAssertEqual(string, "false")
                 expect.fulfill()
             } catch {
                 XCTFail()
             }
         }
         
-        trueOperation.then(do: negatingOperation).enqueue()
+        trueOperation
+            .passesResult(to: negatingOperation)
+            .passesResult(to: stringOperation)
+            .enqueue()
         
-        waitForExpectations(timeout: 1)
+        waitForExpectations(timeout: 10)
+    }
+    
+    func testSingleOperationRecursiveDependencies() {
+        let op1 = MapOperation<Bool, Bool> { _ in
+            return Result { return false }
+        }
+        XCTAssertEqual(op1.operationChain, [op1])
+    }
+    
+    func testManyOperationsRecursiveDependencies() {
+        let op1 = MapOperation<Bool, Bool> { _ in
+            return Result { return false }
+        }
+        
+        let op2 = MapOperation<Bool, Bool> { _ in
+            return Result { return false }
+        }
+        
+        let op3 = MapOperation<Bool, Bool> { _ in
+            return Result { return false }
+        }
+        
+        op1.passesResult(to: op2).passesResult(to: op3)
+        
+        XCTAssertEqual(op3.operationChain, [op1, op2, op3])
     }
     
     func testMultipleResultBlocks() {
         let expect1 = expectation(description: "")
         let expect2 = expectation(description: "")
         
-        let operation = BlockResultOperation {
+        let operation = BlockOperation {
             return true
         }
         
@@ -63,7 +130,6 @@ class OperationTests: XCTestCase {
         
         waitForExpectations(timeout: 1)
     }
-    
     
     func testOperationFailureWithRetry() {
         let expect = expectation(description: "")
@@ -86,6 +152,35 @@ class OperationTests: XCTestCase {
         waitForExpectations(timeout: 100)
     }
 
+    
+    func testCancelledOperationPassesNoInput() {
+        let expect = expectation(description: "")
+        
+        let firstOperation = MapOperation<String, String> { _ in
+            return Result { "first" }
+        }
+
+        let secondOperation = MapOperation<String, String> { input in
+            do {
+                _ = try input.resolve()
+                XCTFail()
+            } catch {
+                expect.fulfill()
+            }
+            return Result { throw TestError.justATest }
+        }
+        
+        firstOperation
+            .passesResult(to: secondOperation)
+            .enqueue()
+        
+        
+        firstOperation.cancel()
+        
+        waitForExpectations(timeout: 10)
+        print("")
+    }
+
 }
 
 public enum TestError: Error {
@@ -94,8 +189,7 @@ public enum TestError: Error {
 
 open class TestRetryOperation: RetryingOperation<AnyObject> {
     open override func run() {
-        operationResult = Result { throw TestError.justATest }
+        output = Result { throw TestError.justATest }
         finish()
     }
 }
-
