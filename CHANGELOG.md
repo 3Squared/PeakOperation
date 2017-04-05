@@ -4,6 +4,12 @@ The changelog for `THROperation`.
 
 --------------------------------------
 
+0.2.0
+-----
+- Ensure thread-safety in state changes in BaseOperation
+- Rename BaseOperation -> ConcurrentOperation
+- Rename run() -> execute()
+
 0.1.0
 -----
 - If an operation is cancelled, do not pass its result along
