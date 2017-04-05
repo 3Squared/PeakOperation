@@ -6,6 +6,8 @@
 //  Copyright © 2017 3Squared. All rights reserved.
 //
 
+// Adapted from: https://gist.github.com/calebd/93fa347397cec5f88233
+
 @objc
 fileprivate enum OperationState: Int {
     case ready
