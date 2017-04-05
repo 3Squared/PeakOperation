@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		04F7F0A8FC683F3680F64164 /* Pods_OperationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B15FA159FCAF02C0621F66B3 /* Pods_OperationTests.framework */; };
 		37A17FFEA5CCDE30789A56B2 /* Pods_Operation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A06144D1CD43E2478070122 /* Pods_Operation.framework */; };
+		8D1A2D781E951E2F001EF435 /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A2D771E951E2F001EF435 /* ConcurrentOperation.swift */; };
 		CB47513C1E3A4A4400A43672 /* Collection+Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB47513B1E3A4A4400A43672 /* Collection+Operations.swift */; };
 		CB47513E1E3A4AA500A43672 /* Operation+Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB47513D1E3A4AA500A43672 /* Operation+Queue.swift */; };
 		CB4C11661DF9800600837343 /* Operation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4C115C1DF9800600837343 /* Operation.framework */; };
 		CB4C116B1DF9800600837343 /* OperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C116A1DF9800600837343 /* OperationTests.swift */; };
 		CB4C116D1DF9800600837343 /* Operation.h in Headers */ = {isa = PBXBuildFile; fileRef = CB4C115F1DF9800600837343 /* Operation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CB4C117F1DF9818500837343 /* BaseOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C11771DF9818500837343 /* BaseOperation.swift */; };
 		CB4C11801DF9818500837343 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C11781DF9818500837343 /* Errors.swift */; };
 		CB4C11811DF9818500837343 /* MapOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C11791DF9818500837343 /* MapOperation.swift */; };
 		CB4C11831DF9818500837343 /* ProducesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C117B1DF9818500837343 /* ProducesResult.swift */; };
@@ -37,6 +37,7 @@
 		2E503B0500355D779A902F51 /* Pods-Operation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Operation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Operation/Pods-Operation.debug.xcconfig"; sourceTree = "<group>"; };
 		6BAD05164ACF33ADC01BF327 /* Pods-OperationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OperationTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OperationTests/Pods-OperationTests.release.xcconfig"; sourceTree = "<group>"; };
 		894503B04E6CA2CDF1860AB5 /* Pods-OperationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OperationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OperationTests/Pods-OperationTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8D1A2D771E951E2F001EF435 /* ConcurrentOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcurrentOperation.swift; sourceTree = "<group>"; };
 		9A06144D1CD43E2478070122 /* Pods_Operation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Operation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B15FA159FCAF02C0621F66B3 /* Pods_OperationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OperationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB47513B1E3A4A4400A43672 /* Collection+Operations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+Operations.swift"; sourceTree = "<group>"; };
@@ -47,7 +48,6 @@
 		CB4C11651DF9800600837343 /* OperationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OperationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB4C116A1DF9800600837343 /* OperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationTests.swift; sourceTree = "<group>"; };
 		CB4C116C1DF9800600837343 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CB4C11771DF9818500837343 /* BaseOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseOperation.swift; sourceTree = "<group>"; };
 		CB4C11781DF9818500837343 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		CB4C11791DF9818500837343 /* MapOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapOperation.swift; sourceTree = "<group>"; };
 		CB4C117B1DF9818500837343 /* ProducesResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProducesResult.swift; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				CB4C115F1DF9800600837343 /* Operation.h */,
-				CB4C11771DF9818500837343 /* BaseOperation.swift */,
+				8D1A2D771E951E2F001EF435 /* ConcurrentOperation.swift */,
 				CB47513B1E3A4A4400A43672 /* Collection+Operations.swift */,
 				CB47513D1E3A4AA500A43672 /* Operation+Queue.swift */,
 				CB4C11781DF9818500837343 /* Errors.swift */,
@@ -204,7 +204,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = 3Squared;
 				TargetAttributes = {
 					CB4C115B1DF9800600837343 = {
@@ -340,7 +340,7 @@
 				CB47513C1E3A4A4400A43672 /* Collection+Operations.swift in Sources */,
 				CB47513E1E3A4AA500A43672 /* Operation+Queue.swift in Sources */,
 				CB4C11841DF9818500837343 /* BlockOperation.swift in Sources */,
-				CB4C117F1DF9818500837343 /* BaseOperation.swift in Sources */,
+				8D1A2D781E951E2F001EF435 /* ConcurrentOperation.swift in Sources */,
 				CB4C11811DF9818500837343 /* MapOperation.swift in Sources */,
 				CB4C11801DF9818500837343 /* Errors.swift in Sources */,
 				CB4C11851DF9818500837343 /* RetryingOperation.swift in Sources */,
@@ -384,6 +384,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -407,7 +408,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -437,6 +438,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -454,7 +456,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

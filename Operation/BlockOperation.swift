@@ -9,7 +9,7 @@
 import Foundation
 import THRResult
 
-open class BlockOperation<Output>: BaseOperation, ProducesResult {
+open class BlockOperation<Output>: ConcurrentOperation, ProducesResult {
     public var output: Result<Output> = Result { throw ResultError.noResult }
     let block: () -> (Result<Output>)
     
@@ -23,7 +23,7 @@ open class BlockOperation<Output>: BaseOperation, ProducesResult {
         self.block = block
     }
     
-    open override func run() {
+    open override func execute() {
         self.output = self.block()
         finish()
     }

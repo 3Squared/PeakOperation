@@ -188,7 +188,7 @@ public enum TestError: Error {
 }
 
 open class TestRetryOperation: RetryingOperation<AnyObject> {
-    open override func run() {
+    open override func execute() {
         output = Result { throw TestError.justATest }
         finish()
     }
