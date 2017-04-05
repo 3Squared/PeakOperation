@@ -19,7 +19,7 @@ open class ConcurrentOperation: Operation {
     internal var willStart: () -> () = { }
     internal var willFinish: () -> () = { }
     
-    fileprivate let stateQueue = DispatchQueue(label: "THRCoreData.operation.state", attributes: .concurrent)
+    fileprivate let stateQueue = DispatchQueue(label: "THROperations.ConcurrentOperation.StateQueue", attributes: .concurrent)
     fileprivate var rawState = OperationState.ready
     
     @objc
