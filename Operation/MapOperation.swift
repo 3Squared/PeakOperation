@@ -9,7 +9,7 @@
 import Foundation
 import THRResult
 
-open class MapOperation<Input, Output>: BaseOperation, ProducesResult, ConsumesResult {
+open class MapOperation<Input, Output>: ConcurrentOperation, ProducesResult, ConsumesResult {
     
     public var output: Result<Output> = Result { throw ResultError.noResult }
     public var input: Result<Input> = Result { throw ResultError.noResult }
@@ -20,7 +20,7 @@ open class MapOperation<Input, Output>: BaseOperation, ProducesResult, ConsumesR
         self.block = block
     }
     
-    open override func run() {
+    open override func execute() {
         self.output = self.block(input)
         finish()
     }

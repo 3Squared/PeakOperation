@@ -12,7 +12,7 @@ import THRResult
 /// A BaseOperation with an added RetryStrategy. 
 /// When the operation completes with an error Result, the StrategyBlock is used to determine if the operation should be attempted again.
 /// This does not add a new operation, it simply restarts the original.
-open class RetryingOperation<Output>: BaseOperation, ProducesResult {
+open class RetryingOperation<Output>: ConcurrentOperation, ProducesResult {
 
     public var output: Result<Output> = Result { throw ResultError.noResult }
 
@@ -20,12 +20,12 @@ open class RetryingOperation<Output>: BaseOperation, ProducesResult {
     
     var retryStrategy = RetryStrategy.none
     
-    public override func finish() {
+    open override func finish() {
         switch output {
         case .failure(_):
             failureCount += 1
             if retryStrategy(failureCount) {
-                run()
+                execute()
                 return
             }
         default:
