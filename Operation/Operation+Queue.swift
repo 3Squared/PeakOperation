@@ -20,7 +20,7 @@ public extension Operation {
     
     @discardableResult
     public func then(do operation: Operation) -> Operation {
-        addDependency(operation)
+        operation.addDependency(self)
         return operation
     }
 }

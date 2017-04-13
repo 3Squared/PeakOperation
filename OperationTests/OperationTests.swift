@@ -41,6 +41,33 @@ class OperationTests: XCTestCase {
         waitForExpectations(timeout: 1)
     }
     
+    func testDependancies() {
+        let expectFirst = expectation(description: "")
+        let expectSecond = expectation(description: "")
+
+        let firstOperation = BlockOperation {
+            return true
+        }
+        
+        let secondOperation = BlockOperation {
+            return true
+        }
+        
+        firstOperation.completionBlock = {
+            expectFirst.fulfill()
+        }
+        
+        secondOperation.completionBlock = {
+            expectSecond.fulfill()
+        }
+        
+        firstOperation
+            .then(do: secondOperation)
+            .enqueue()
+        
+        waitForExpectations(timeout: 10)
+    }
+    
     func testInjectionPassing() {
         let expect = expectation(description: "")
         
