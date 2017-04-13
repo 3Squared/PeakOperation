@@ -15,6 +15,10 @@ fileprivate enum OperationState: Int {
     case finished
 }
 
+/// A operation subclass that can perform work asynchronously.
+///
+/// Override `execute()` to perform your work. It is up to the user to perform the work on another thread - one is not made for you.
+/// When your work is completed, call `finish()` to complete the operation.
 open class ConcurrentOperation: Operation {
     internal var willStart: () -> () = { }
     internal var willFinish: () -> () = { }
@@ -56,22 +60,29 @@ open class ConcurrentOperation: Operation {
     
     // MARK: - Operation Overrides
     
+    /// :nodoc:
     public final override var isReady: Bool {
         return state == .ready && super.isReady
     }
     
+    
+    /// :nodoc:
     public final override var isExecuting: Bool {
         return state == .executing
     }
     
+    
+    /// :nodoc:
     public final override var isFinished: Bool {
         return state == .finished
     }
     
+    /// :nodoc:
     public final override var isAsynchronous: Bool {
         return true
     }
     
+    /// :nodoc:
     public override final func start() {
         super.start()
         
@@ -85,10 +96,16 @@ open class ConcurrentOperation: Operation {
     
     // MARK: - Public
     
+    
+    /// Override this method to perform your work. 
+    /// This will not be executed on a separate thread; it is your responsibiity to do so, if needed.
+    ///
+    /// Ensure you call `finish()` at some later point, or the operation will never complete.
     open func execute() {
         fatalError("Subclasses must implement `execute`.")
     }
     
+    /// Call this method to indicate that your work is finished.
     open func finish() {
         willFinish()
         state = .finished
