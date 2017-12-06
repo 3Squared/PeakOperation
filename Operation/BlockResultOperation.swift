@@ -14,7 +14,7 @@ import THRResult
 ///
 /// Executes the block in `execute()` then immediately finishes the operation.
 /// The result of the operation will be set to the result of the block.
-open class BlockOperation<Output>: ConcurrentOperation, ProducesResult {
+open class BlockResultOperation<Output>: ConcurrentOperation, ProducesResult {
     
     /// The result produced by executing the block.
     public var output: Result<Output> = Result { throw ResultError.noResult }

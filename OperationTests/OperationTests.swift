@@ -45,11 +45,11 @@ class OperationTests: XCTestCase {
         let expectFirst = expectation(description: "")
         let expectSecond = expectation(description: "")
 
-        let firstOperation = BlockOperation {
+        let firstOperation = BlockResultOperation {
             return true
         }
         
-        let secondOperation = BlockOperation {
+        let secondOperation = BlockResultOperation {
             return true
         }
         
@@ -71,7 +71,7 @@ class OperationTests: XCTestCase {
     func testInjectionPassing() {
         let expect = expectation(description: "")
         
-        let trueOperation = BlockOperation {
+        let trueOperation = BlockResultOperation {
             return true
         }
         
@@ -141,7 +141,7 @@ class OperationTests: XCTestCase {
         let expect1 = expectation(description: "")
         let expect2 = expectation(description: "")
         
-        let operation = BlockOperation {
+        let operation = BlockResultOperation {
             return true
         }
         
