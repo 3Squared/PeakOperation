@@ -205,7 +205,45 @@ class OperationTests: XCTestCase {
         firstOperation.cancel()
         
         waitForExpectations(timeout: 10)
-        print("")
+    }
+    
+    func testOperationProgress() {
+
+        let operation1 = BlockResultOperation {
+            return true
+        }
+        
+        let operation2 = BlockResultOperation {
+            return true
+        }
+        
+        let operation3 = MapOperation<String, String> { input in
+            return Result { throw TestError.justATest }
+        }
+
+        let operation4 = BlockResultOperation {
+            return true
+        }
+        
+        operation1
+            .then(do: operation2)
+            .then(do: operation3)
+            .then(do: operation4)
+        
+        
+        let progress = operation4.overallProgress()
+        
+        keyValueObservingExpectation(for: progress, keyPath: "completedUnitCount") {  observedObject, change in
+            print("Change: \(change)")
+            return progress.completedUnitCount >= progress.totalUnitCount
+        }
+
+        operation4.enqueue()
+
+        waitForExpectations(timeout: 10)
+
+        XCTAssertEqual(progress.fractionCompleted, 1)
+        print("Total Progress: \(progress.localizedAdditionalDescription!)")
     }
 
 }
