@@ -207,6 +207,101 @@ class OperationTests: XCTestCase {
         waitForExpectations(timeout: 10)
         print("")
     }
+    
+    func testGroupOperationSuccess() {
+        let expect = expectation(description: "")
+        
+        let firstOperation = BlockResultOperation {
+            return "Hello"
+        }
+        
+        let secondOperation = MapOperation<String, String> { input in
+            return Result { try "\(input.resolve()) World!" }
+        }
+        
+        let group1 = firstOperation
+            .passesResult(to: secondOperation)
+            .group()
+        
+        group1.addResultBlock { result in
+            do {
+                let _ = try result.resolve()
+                expect.fulfill()
+            } catch {
+                XCTFail()
+            }
+        }
+        group1.enqueue()
+        
+        waitForExpectations(timeout: 10)
+    }
+    
+    func testGroupOperationFirstFailure() {
+        let expect = expectation(description: "")
+
+        let firstOperation = MapOperation<Void, String> { _ in
+            return Result { throw TestError.justATest }
+        }
+
+        let secondOperation = MapOperation<String, String> { input in
+            return Result { try "\(input.resolve()) World!" }
+        }
+
+        let group1 = firstOperation
+            .passesResult(to: secondOperation)
+            .group()
+
+
+        let group2 = MapOperation<Void, String> { _ in
+            return Result { "Lorem Ipsum." }
+        }.group()
+
+
+        group2.addResultBlock { result in
+            do {
+                let _ = try result.resolve()
+                XCTFail()
+            } catch {
+                expect.fulfill()
+            }
+        }
+
+        group1
+            .passesResult(to: group2)
+            .enqueue()
+
+
+        waitForExpectations(timeout: 10)
+    }
+
+
+    func testGroupOperationSecondFailure() {
+        let expect = expectation(description: "")
+
+        let firstOperation = MapOperation<Void, String> { input in
+            return Result { try "\(input.resolve()) World!" }
+        }
+
+        let secondOperation = MapOperation<String, String> { _ in
+            return Result { throw TestError.justATest }
+        }
+
+        let group1 = firstOperation
+            .passesResult(to: secondOperation)
+            .group()
+
+        group1.addResultBlock { result in
+            do {
+                let _ = try result.resolve()
+                XCTFail()
+            } catch {
+                expect.fulfill()
+            }
+        }
+        group1.execute()
+
+        waitForExpectations(timeout: 10)
+    }
 
 }
 
