@@ -36,3 +36,15 @@ public extension Operation {
         return operation
     }
 }
+
+public extension ConcurrentOperation {
+    /// Enqueue all of the operation chain, which includes the receiver and
+    /// all of the receiver dependancies, and their dependencies, recursively.
+    ///
+    /// - Parameter queue: The queue to use. If not provided, a new one is made (optional).
+    /// - Returns: The progress of the operation chain's execution.
+    func enqueueWithProgress(on queue: OperationQueue = OperationQueue()) -> Progress {
+        enqueue(on: queue)
+        return overallProgress()
+    }
+}
