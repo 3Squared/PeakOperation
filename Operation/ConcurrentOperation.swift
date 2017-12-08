@@ -23,10 +23,13 @@ open class ConcurrentOperation: Operation {
     internal var willStart: () -> () = { }
     internal var willFinish: () -> () = { }
     
+    public typealias TimeInSeconds = Int64
+    
     fileprivate let stateQueue = DispatchQueue(label: "THROperations.ConcurrentOperation.StateQueue", attributes: .concurrent)
     fileprivate var rawState = OperationState.ready
     
-    public var progress = Progress(totalUnitCount: 1)
+    private var progress = Progress(totalUnitCount: 1)
+    public var estimatedExecutionSeconds: TimeInSeconds = 1
     
     @objc
     fileprivate dynamic var state: OperationState {
@@ -121,12 +124,16 @@ open class ConcurrentOperation: Operation {
         state = .finished
     }
     
-    open func overallProgress() -> Progress {
-        let totalProgress = Progress(totalUnitCount: Int64(operationChain.count))
+    public func overallProgress() -> Progress {
+        
+        let totalProgress = Progress(totalUnitCount: 0)
         operationChain.flatMap { $0 as? ConcurrentOperation }.forEach { operation in
-            totalProgress.addChild(operation.progress, withPendingUnitCount: 1)
+            let progress = operation.progress
+            let estimatedTime = operation.estimatedExecutionSeconds
+            totalProgress.addChild(progress, withPendingUnitCount: estimatedTime)
+            totalProgress.totalUnitCount += estimatedTime
         }
         return totalProgress
     }
-
+    
 }

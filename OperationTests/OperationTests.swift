@@ -245,6 +245,37 @@ class OperationTests: XCTestCase {
         XCTAssertEqual(progress.fractionCompleted, 1)
         print("Total Progress: \(progress.localizedAdditionalDescription!)")
     }
+    
+    func testSubclassWithDetailedOperationProgress() {
+        
+        let operation1 = BlockResultOperation {
+            return true
+        }
+        
+        let operation2 = BlockResultOperation {
+            return true
+        }
+        
+        operation1.estimatedExecutionSeconds = 1
+        operation2.estimatedExecutionSeconds = 10
+
+        operation1.then(do: operation2)
+        
+        let progress = operation2.overallProgress()
+        
+        keyValueObservingExpectation(for: progress, keyPath: "completedUnitCount") {  observedObject, change in
+            print("Change: \(progress.localizedDescription)")
+            return progress.completedUnitCount >= progress.totalUnitCount
+        }
+        
+        operation2.enqueue()
+        
+        waitForExpectations(timeout: 10)
+        
+        XCTAssertEqual(progress.fractionCompleted, 1)
+        XCTAssertEqual(progress.totalUnitCount, 11)
+        print("Total Progress: \(progress.localizedAdditionalDescription!)")
+    }
 
 }
 
@@ -258,3 +289,5 @@ open class TestRetryOperation: RetryingOperation<AnyObject> {
         finish()
     }
 }
+
+
