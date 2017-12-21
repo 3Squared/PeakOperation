@@ -45,11 +45,11 @@ class OperationTests: XCTestCase {
         let expectFirst = expectation(description: "")
         let expectSecond = expectation(description: "")
 
-        let firstOperation = BlockOperation {
+        let firstOperation = BlockResultOperation {
             return true
         }
         
-        let secondOperation = BlockOperation {
+        let secondOperation = BlockResultOperation {
             return true
         }
         
@@ -71,7 +71,7 @@ class OperationTests: XCTestCase {
     func testInjectionPassing() {
         let expect = expectation(description: "")
         
-        let trueOperation = BlockOperation {
+        let trueOperation = BlockResultOperation {
             return true
         }
         
@@ -141,7 +141,7 @@ class OperationTests: XCTestCase {
         let expect1 = expectation(description: "")
         let expect2 = expectation(description: "")
         
-        let operation = BlockOperation {
+        let operation = BlockResultOperation {
             return true
         }
         
@@ -205,7 +205,171 @@ class OperationTests: XCTestCase {
         firstOperation.cancel()
         
         waitForExpectations(timeout: 10)
-        print("")
+    }
+    
+    func testOperationProgress() {
+
+        let operation1 = BlockResultOperation {
+            return true
+        }
+        
+        let operation2 = BlockResultOperation {
+            return true
+        }
+        
+        let operation3 = MapOperation<String, String> { input in
+            return Result { throw TestError.justATest }
+        }
+
+        let operation4 = BlockResultOperation {
+            return true
+        }
+        
+        operation1
+            .then(do: operation2)
+            .then(do: operation3)
+            .then(do: operation4)
+        
+        
+        let progress = operation4.overallProgress()
+        
+        keyValueObservingExpectation(for: progress, keyPath: "completedUnitCount") {  observedObject, change in
+            print("Change: \(change)")
+            return progress.completedUnitCount >= progress.totalUnitCount
+        }
+
+        operation4.enqueue()
+
+        waitForExpectations(timeout: 10)
+
+        XCTAssertEqual(progress.fractionCompleted, 1)
+        print("Total Progress: \(progress.localizedAdditionalDescription!)")
+    }
+    
+    func testSubclassWithDetailedOperationProgress() {
+        
+        let operation1 = BlockResultOperation {
+            return true
+        }
+        
+        let operation2 = BlockResultOperation {
+            return true
+        }
+        
+        operation1.estimatedExecutionSeconds = 1
+        operation2.estimatedExecutionSeconds = 10
+
+        operation1.then(do: operation2)
+        
+        let progress = operation2.overallProgress()
+        
+        keyValueObservingExpectation(for: progress, keyPath: "completedUnitCount") {  observedObject, change in
+            print("Change: \(progress.localizedDescription)")
+            return progress.completedUnitCount >= progress.totalUnitCount
+        }
+        
+        operation2.enqueue()
+        
+        waitForExpectations(timeout: 10)
+        
+        XCTAssertEqual(progress.fractionCompleted, 1)
+        XCTAssertEqual(progress.totalUnitCount, 11)
+        print("Total Progress: \(progress.localizedAdditionalDescription!)")
+    }
+    
+    func testGroupOperationSuccess() {
+        let expect = expectation(description: "")
+        
+        let firstOperation = BlockResultOperation {
+            return "Hello"
+        }
+        
+        let secondOperation = MapOperation<String, String> { input in
+            return Result { try "\(input.resolve()) World!" }
+        }
+        
+        let group1 = firstOperation
+            .passesResult(to: secondOperation)
+            .group()
+        
+        group1.addResultBlock { result in
+            do {
+                let _ = try result.resolve()
+                expect.fulfill()
+            } catch {
+                XCTFail()
+            }
+        }
+        group1.enqueue()
+        
+        waitForExpectations(timeout: 10)
+    }
+    
+    func testGroupOperationFirstFailure() {
+        let expect = expectation(description: "")
+
+        let firstOperation = MapOperation<Void, String> { _ in
+            return Result { throw TestError.justATest }
+        }
+
+        let secondOperation = MapOperation<String, String> { input in
+            return Result { try "\(input.resolve()) World!" }
+        }
+
+        let group1 = firstOperation
+            .passesResult(to: secondOperation)
+            .group()
+
+
+        let group2 = MapOperation<Void, String> { _ in
+            return Result { "Lorem Ipsum." }
+        }.group()
+
+
+        group2.addResultBlock { result in
+            do {
+                let _ = try result.resolve()
+                XCTFail()
+            } catch {
+                expect.fulfill()
+            }
+        }
+
+        group1
+            .passesResult(to: group2)
+            .enqueue()
+
+
+        waitForExpectations(timeout: 10)
+    }
+
+
+    func testGroupOperationSecondFailure() {
+        let expect = expectation(description: "")
+
+        let firstOperation = MapOperation<Void, String> { input in
+            return Result { try "\(input.resolve()) World!" }
+        }
+
+        let secondOperation = MapOperation<String, String> { _ in
+            return Result { throw TestError.justATest }
+        }
+
+        let group1 = firstOperation
+            .passesResult(to: secondOperation)
+            .group()
+
+        group1.addResultBlock { result in
+            do {
+                let _ = try result.resolve()
+                XCTFail()
+            } catch {
+                expect.fulfill()
+            }
+        }
+        group1.execute()
+
+        waitForExpectations(timeout: 10)
     }
 
 }
@@ -220,3 +384,5 @@ open class TestRetryOperation: RetryingOperation<AnyObject> {
         finish()
     }
 }
+
+

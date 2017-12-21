@@ -10,6 +10,7 @@
 		04F7F0A8FC683F3680F64164 /* Pods_OperationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B15FA159FCAF02C0621F66B3 /* Pods_OperationTests.framework */; };
 		37A17FFEA5CCDE30789A56B2 /* Pods_Operation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A06144D1CD43E2478070122 /* Pods_Operation.framework */; };
 		8D1A2D781E951E2F001EF435 /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A2D771E951E2F001EF435 /* ConcurrentOperation.swift */; };
+		CB3178711FD7FE9800B063ED /* GroupChainOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3178701FD7FE9800B063ED /* GroupChainOperation.swift */; };
 		CB47513C1E3A4A4400A43672 /* Collection+Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB47513B1E3A4A4400A43672 /* Collection+Operations.swift */; };
 		CB47513E1E3A4AA500A43672 /* Operation+Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB47513D1E3A4AA500A43672 /* Operation+Queue.swift */; };
 		CB4C11661DF9800600837343 /* Operation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4C115C1DF9800600837343 /* Operation.framework */; };
@@ -17,7 +18,7 @@
 		CB4C116D1DF9800600837343 /* Operation.h in Headers */ = {isa = PBXBuildFile; fileRef = CB4C115F1DF9800600837343 /* Operation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CB4C11811DF9818500837343 /* MapOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C11791DF9818500837343 /* MapOperation.swift */; };
 		CB4C11831DF9818500837343 /* UsingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C117B1DF9818500837343 /* UsingResult.swift */; };
-		CB4C11841DF9818500837343 /* BlockOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C117C1DF9818500837343 /* BlockOperation.swift */; };
+		CB4C11841DF9818500837343 /* BlockResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C117C1DF9818500837343 /* BlockResultOperation.swift */; };
 		CB4C11851DF9818500837343 /* RetryingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C117D1DF9818500837343 /* RetryingOperation.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		8D1A2D771E951E2F001EF435 /* ConcurrentOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcurrentOperation.swift; sourceTree = "<group>"; };
 		9A06144D1CD43E2478070122 /* Pods_Operation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Operation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B15FA159FCAF02C0621F66B3 /* Pods_OperationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OperationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB3178701FD7FE9800B063ED /* GroupChainOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupChainOperation.swift; sourceTree = "<group>"; };
 		CB47513B1E3A4A4400A43672 /* Collection+Operations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+Operations.swift"; sourceTree = "<group>"; };
 		CB47513D1E3A4AA500A43672 /* Operation+Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Operation+Queue.swift"; sourceTree = "<group>"; };
 		CB4C115C1DF9800600837343 /* Operation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Operation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,7 +51,7 @@
 		CB4C116C1DF9800600837343 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB4C11791DF9818500837343 /* MapOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapOperation.swift; sourceTree = "<group>"; };
 		CB4C117B1DF9818500837343 /* UsingResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsingResult.swift; sourceTree = "<group>"; };
-		CB4C117C1DF9818500837343 /* BlockOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockOperation.swift; sourceTree = "<group>"; };
+		CB4C117C1DF9818500837343 /* BlockResultOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockResultOperation.swift; sourceTree = "<group>"; };
 		CB4C117D1DF9818500837343 /* RetryingOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryingOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,9 +102,10 @@
 				CB4C115F1DF9800600837343 /* Operation.h */,
 				8D1A2D771E951E2F001EF435 /* ConcurrentOperation.swift */,
 				CB47513B1E3A4A4400A43672 /* Collection+Operations.swift */,
+				CB3178701FD7FE9800B063ED /* GroupChainOperation.swift */,
 				CB47513D1E3A4AA500A43672 /* Operation+Queue.swift */,
 				CB4C11791DF9818500837343 /* MapOperation.swift */,
-				CB4C117C1DF9818500837343 /* BlockOperation.swift */,
+				CB4C117C1DF9818500837343 /* BlockResultOperation.swift */,
 				CB4C117B1DF9818500837343 /* UsingResult.swift */,
 				CB4C117D1DF9818500837343 /* RetryingOperation.swift */,
 				CB4C11601DF9800600837343 /* Info.plist */,
@@ -346,8 +349,9 @@
 				CB4C11831DF9818500837343 /* UsingResult.swift in Sources */,
 				CB47513C1E3A4A4400A43672 /* Collection+Operations.swift in Sources */,
 				CB47513E1E3A4AA500A43672 /* Operation+Queue.swift in Sources */,
-				CB4C11841DF9818500837343 /* BlockOperation.swift in Sources */,
+				CB4C11841DF9818500837343 /* BlockResultOperation.swift in Sources */,
 				8D1A2D781E951E2F001EF435 /* ConcurrentOperation.swift in Sources */,
+				CB3178711FD7FE9800B063ED /* GroupChainOperation.swift in Sources */,
 				CB4C11811DF9818500837343 /* MapOperation.swift in Sources */,
 				CB4C11851DF9818500837343 /* RetryingOperation.swift in Sources */,
 			);
