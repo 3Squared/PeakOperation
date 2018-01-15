@@ -4,6 +4,10 @@ The changelog for `THROperation`.
 
 --------------------------------------
 
+1.2.0
+-----
+- Fix incorrect access level in `GroupChainOperation`
+
 1.1.0
 -----
 - Add `progress` to ConcurrentOperations, allowing the tracking of a set of chained operations
