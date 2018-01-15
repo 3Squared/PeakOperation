@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "THROperations"
-  s.version      = "1.1.0"
+  s.version      = "1.2.0"
   s.summary      = "A collection of Operation subclasses and extensions."
   s.homepage     = "https://gitlab.3squared.com/iOSLibraries/THROperations"
   s.license      = { :type => 'Custom', :file => 'LICENCE' }

@@ -63,7 +63,7 @@ extension ProducesResult where Self: ConcurrentOperation {
     /// Add the operation and its chain to a group.
     ///
     /// - Returns: A GroupChainOperation containing the operation and its chain.
-    func group() -> GroupChainOperation {
+    public func group() -> GroupChainOperation {
         return GroupChainOperation(with: self)
     }
 }
