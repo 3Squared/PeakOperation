@@ -35,6 +35,20 @@ open class GroupChainOperation: ConcurrentOperation, ProducesResult, ConsumesRes
     public init<L>(with operation: L) where L: ProducesResult, L: Operation {
         self.operation = operation
         super.init()
+        
+        managesOwnProgress = true
+        progress = Progress(totalUnitCount: 0)
+        estimatedExecutionSeconds = 0
+        
+        operation.operationChain.flatMap { $0 as? ConcurrentOperation }.forEach { operation in
+            let operationProgress = operation.progress
+            let estimatedTime = operation.estimatedExecutionSeconds
+            estimatedExecutionSeconds += estimatedTime
+            progress.addChild(operationProgress, withPendingUnitCount: estimatedTime)
+            progress.totalUnitCount += estimatedTime
+        }
+
+        
         operation.addResultBlock { result in
             switch result {
             case .success(_):

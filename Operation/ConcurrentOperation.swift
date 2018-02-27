@@ -28,7 +28,9 @@ open class ConcurrentOperation: Operation {
     fileprivate let stateQueue = DispatchQueue(label: "THROperations.ConcurrentOperation.StateQueue", attributes: .concurrent)
     fileprivate var rawState = OperationState.ready
     
-    private var progress = Progress(totalUnitCount: 1)
+    internal var progress = Progress(totalUnitCount: 1)
+    internal var managesOwnProgress = false
+    
     public var estimatedExecutionSeconds: TimeInSeconds = 1
     
     @objc
@@ -43,12 +45,13 @@ open class ConcurrentOperation: Operation {
                 execute: { rawState = newValue }
             )
             
-            switch newValue {
-            case .finished:
-                progress.completedUnitCount = 1
-            default: break;
+            if !managesOwnProgress {
+                switch newValue {
+                case .finished:
+                    progress.completedUnitCount = 1
+                default: break;
+                }
             }
-            
 
             didChangeValue(forKey: "state")
         }
@@ -125,7 +128,6 @@ open class ConcurrentOperation: Operation {
     }
     
     public func overallProgress() -> Progress {
-        
         let totalProgress = Progress(totalUnitCount: 0)
         operationChain.flatMap { $0 as? ConcurrentOperation }.forEach { operation in
             let progress = operation.progress

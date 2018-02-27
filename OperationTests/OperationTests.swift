@@ -277,6 +277,40 @@ class OperationTests: XCTestCase {
         print("Total Progress: \(progress.localizedAdditionalDescription!)")
     }
     
+    func testGroupOperationProgress() {
+        let expect = expectation(description: "")
+        
+        let firstOperation = BlockResultOperation {
+            return "Hello"
+        }
+        
+        let secondOperation = MapOperation<String, String> { input in
+            return Result { try "\(input.resolve()) World!" }
+        }
+        
+        let group1 = firstOperation
+            .passesResult(to: secondOperation)
+            .group()
+        
+        group1.addResultBlock { result in
+            do {
+                let _ = try result.resolve()
+                expect.fulfill()
+            } catch {
+                XCTFail()
+            }
+        }
+        
+        let progress = group1.enqueueWithProgress()
+        
+        waitForExpectations(timeout: 10)
+        
+        XCTAssertEqual(progress.fractionCompleted, 1)
+        XCTAssertEqual(progress.totalUnitCount, 2)
+        print("Total Progress: \(progress.localizedAdditionalDescription!)")
+    }
+
+    
     func testGroupOperationSuccess() {
         let expect = expectation(description: "")
         
