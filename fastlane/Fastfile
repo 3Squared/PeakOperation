@@ -19,7 +19,6 @@ platform :ios do
 			workspace: "Operation.xcworkspace",
 			proj: "Operation.xcodeproj",
 			teamcity: true, 
-			html: true,
 			output_directory: "./fastlane/test_output/coverage"
 		)
 	end
