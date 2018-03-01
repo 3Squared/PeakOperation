@@ -66,3 +66,4 @@ fastlane/screenshots
 fastlane/test_output
 
 Operation.xcworkspace/xcuserdata
+.DS_Store
