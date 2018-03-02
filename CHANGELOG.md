@@ -4,6 +4,11 @@ The changelog for `THROperation`.
 
 --------------------------------------
 
+1.3.0
+-----
+- Add more detailed progress to `GroupChainOperation`
+- Add Fastlane to project for automated testing
+
 1.2.0
 -----
 - Fix incorrect access level in `GroupChainOperation`
