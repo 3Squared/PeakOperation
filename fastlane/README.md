@@ -26,6 +26,16 @@ fastlane ios tests
 fastlane ios coverage
 ```
 
+### ios lint
+```
+fastlane ios lint
+```
+
+### ios release
+```
+fastlane ios release
+```
+
 
 ----
 
