@@ -40,7 +40,7 @@ open class GroupChainOperation: ConcurrentOperation, ProducesResult, ConsumesRes
         progress = Progress(totalUnitCount: 0)
         estimatedExecutionSeconds = 0
         
-        operation.operationChain.flatMap { $0 as? ConcurrentOperation }.forEach { operation in
+        operation.operationChain.compactMap { $0 as? ConcurrentOperation }.forEach { operation in
             let operationProgress = operation.progress
             let estimatedTime = operation.estimatedExecutionSeconds
             estimatedExecutionSeconds += estimatedTime

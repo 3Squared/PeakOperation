@@ -129,7 +129,7 @@ open class ConcurrentOperation: Operation {
     
     public func overallProgress() -> Progress {
         let totalProgress = Progress(totalUnitCount: 0)
-        operationChain.flatMap { $0 as? ConcurrentOperation }.forEach { operation in
+        operationChain.compactMap { $0 as? ConcurrentOperation }.forEach { operation in
             let progress = operation.progress
             let estimatedTime = operation.estimatedExecutionSeconds
             totalProgress.addChild(progress, withPendingUnitCount: estimatedTime)
