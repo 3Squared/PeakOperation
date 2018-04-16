@@ -4,6 +4,10 @@ The changelog for `THROperation`.
 
 --------------------------------------
 
+1.4.0
+-----
+- Update for Swift 4.1
+
 1.3.0
 -----
 - Add more detailed progress to `GroupChainOperation`

@@ -20,22 +20,26 @@ or alternatively using `brew cask install fastlane`
 ```
 fastlane ios tests
 ```
-
+Run the Xcode tests for the project.
 ### ios coverage
 ```
 fastlane ios coverage
 ```
+Gather code coverage stats for the project.
 
+Project must be built first.
 ### ios lint
 ```
 fastlane ios lint
 ```
-
+Run pod lib lint on the project, using 3Squared's spec repo.
 ### ios release
 ```
 fastlane ios release
 ```
+Push the project to the 3Squared spec repo.
 
+This command is only valid on a clean repo where HEAD is a tagged commit on master.
 
 ----
 
