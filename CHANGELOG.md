@@ -3,6 +3,9 @@
 The changelog for `THROperation`.
 
 --------------------------------------
+1.4.1
+-----
+- Bump minimum deployment target to 10.0.
 
 1.4.0
 -----
