@@ -1,5 +1,5 @@
 PODS:
-  - THRResult (1.0.0)
+  - THRResult (1.0.1)
 
 DEPENDENCIES:
   - THRResult
@@ -9,7 +9,7 @@ SPEC REPOS:
     - THRResult
 
 SPEC CHECKSUMS:
-  THRResult: 296480bc05503d1de3329f1dc71e44ace12d9176
+  THRResult: 1e24a2909fa3e56efdd5d5d12108b1d308a9f917
 
 PODFILE CHECKSUM: 31d0763ba21a98d8a2355c3b793fcb6c738dfe05
 
