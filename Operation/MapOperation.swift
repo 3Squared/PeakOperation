@@ -26,7 +26,6 @@ open class MapOperation<Input, Output>: ConcurrentOperation, ProducesResult, Con
     
     let block: (Result<Input>) -> (Result<Output>)
     
-    
     /// Create a new `MapOperation`.
     ///
     /// - Parameter block: A block which takes a Result of type `Input` and maps it to one with type `Output`.

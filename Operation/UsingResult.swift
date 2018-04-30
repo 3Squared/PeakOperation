@@ -17,7 +17,6 @@ public protocol ProducesResult: class {
     var output: Result<Output> { get set }
 }
 
-
 /// Implement this protocol to indicate that the object can receive a `Result` as input.
 public protocol ConsumesResult: class {
     associatedtype Input
@@ -25,7 +24,6 @@ public protocol ConsumesResult: class {
     /// The `Result` to use as input.
     var input: Result<Input> { get set }
 }
-
 
 /// Built-in `Error`s for use as failure states for a `ProducesResult` Operation.
 public enum ResultError: Error {
