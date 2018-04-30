@@ -21,7 +21,6 @@ open class BlockResultOperation<Output>: ConcurrentOperation, ProducesResult {
     
     let block: () -> (Result<Output>)
     
-    
     /// Create a new `BlockOperation`.
     /// The return value of the block will be wrapped and set as the operation's `Result`.
     ///
@@ -31,7 +30,6 @@ open class BlockResultOperation<Output>: ConcurrentOperation, ProducesResult {
             return Result { return block() }
         }
     }
-    
     
     /// Create a new `BlockOperation`. 
     /// The `Result` of the block will be set as the operation's `Result`.

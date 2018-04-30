@@ -44,7 +44,6 @@ open class RetryingOperation<Output>: ConcurrentOperation, ProducesResult {
 /// Takes the number of attempts and returns a boolean indicating whether to retry.
 public typealias StrategyBlock = (Int) -> Bool
 
-
 /// Common retry strategies that can be used to determine if a `RetryingOperation` should retry on failure.
 /// You can implement your own strategies by providing a block of type `(Int) -> Bool`.
 public struct RetryStrategy {

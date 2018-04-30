@@ -81,12 +81,10 @@ open class ConcurrentOperation: Operation {
         return state == .ready && super.isReady
     }
     
-    
     /// :nodoc:
     public final override var isExecuting: Bool {
         return state == .executing
     }
-    
     
     /// :nodoc:
     public final override var isFinished: Bool {
@@ -137,5 +135,4 @@ open class ConcurrentOperation: Operation {
         }
         return totalProgress
     }
-    
 }

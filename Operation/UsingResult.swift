@@ -17,7 +17,6 @@ public protocol ProducesResult: class {
     var output: Result<Output> { get set }
 }
 
-
 /// Implement this protocol to indicate that the object can receive a `Result` as input.
 public protocol ConsumesResult: class {
     associatedtype Input
@@ -25,7 +24,6 @@ public protocol ConsumesResult: class {
     /// The `Result` to use as input.
     var input: Result<Input> { get set }
 }
-
 
 /// Built-in `Error`s for use as failure states for a `ProducesResult` Operation.
 public enum ResultError: Error {
@@ -42,21 +40,22 @@ extension ProducesResult where Self: Operation {
     /// - Parameter block: The block to be called on completion.
     public func addResultBlock(block: @escaping (Result<Output>) -> Void) {
         if let existing = completionBlock {
-            completionBlock = {
+            completionBlock = { [weak self] in
+                guard let strongSelf = self else { return }
                 existing()
-                block(self.output)
+                block(strongSelf.output)
             }
         }
         else {
-            completionBlock = {
-                block(self.output)
+            completionBlock = { [weak self] in
+                guard let strongSelf = self else { return }
+                block(strongSelf.output)
             }
         }
     }
 }
 
 extension ProducesResult where Self: ConcurrentOperation {
-    
     
     /// Use to chain multiple operations together, passing the output result of one as the input of the next.
     /// Only useable if the output and input types match. Consider using a `MapOperation` if they do not.
@@ -68,12 +67,12 @@ extension ProducesResult where Self: ConcurrentOperation {
     @discardableResult
     public func passesResult<Consumer>(to operation: Consumer) -> Consumer where Consumer: Operation, Consumer: ConsumesResult, Consumer.Input == Self.Output {
         operation.addDependency(self)
-        self.willFinish = {
-            if !self.isCancelled {
-                operation.input = self.output
+        willFinish = { [weak self] in
+            guard let strongSelf = self else { return }
+            if !strongSelf.isCancelled {
+                operation.input = strongSelf.output
             }
         }
         return operation
     }
 }
-
