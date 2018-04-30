@@ -4,6 +4,10 @@ The changelog for `THROperation`.
 
 --------------------------------------
 
+1.4.3
+-----
+- Make reference to operation unowned.
+
 1.4.2
 -----
 - Remove retain cycles.
