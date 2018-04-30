@@ -47,16 +47,16 @@ open class GroupChainOperation: ConcurrentOperation, ProducesResult, ConsumesRes
             progress.addChild(operationProgress, withPendingUnitCount: estimatedTime)
             progress.totalUnitCount += estimatedTime
         }
-
         
-        operation.addResultBlock { result in
+        operation.addResultBlock { [weak self] result in
+            guard let strongSelf = self else { return }
             switch result {
             case .success(_):
-                self.output = Result { }
+                strongSelf.output = Result { }
             case .failure(let error):
-                self.output = Result { throw error }
+                strongSelf.output = Result { throw error }
             }
-            self.finish()
+            strongSelf.finish()
         }
     }
     

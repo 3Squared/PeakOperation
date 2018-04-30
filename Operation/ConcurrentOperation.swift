@@ -137,5 +137,4 @@ open class ConcurrentOperation: Operation {
         }
         return totalProgress
     }
-    
 }
