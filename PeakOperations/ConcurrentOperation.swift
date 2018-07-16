@@ -1,6 +1,6 @@
 //
 //  ConcurrentOperation.swift
-//  Operation
+//  PeakOperations
 //
 //  Created by David Yates on 05/04/2017.
 //  Copyright © 2017 3Squared. All rights reserved.
@@ -25,7 +25,7 @@ open class ConcurrentOperation: Operation {
     
     public typealias TimeInSeconds = Int64
     
-    fileprivate let stateQueue = DispatchQueue(label: "THROperations.ConcurrentOperation.StateQueue", attributes: .concurrent)
+    fileprivate let stateQueue = DispatchQueue(label: "PeakOperations.ConcurrentOperation.StateQueue", attributes: .concurrent)
     fileprivate var rawState = OperationState.ready
     
     internal var progress = Progress(totalUnitCount: 1)

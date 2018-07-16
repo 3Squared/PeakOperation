@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04F7F0A8FC683F3680F64164 /* Pods_OperationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B15FA159FCAF02C0621F66B3 /* Pods_OperationTests.framework */; };
-		37A17FFEA5CCDE30789A56B2 /* Pods_Operation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A06144D1CD43E2478070122 /* Pods_Operation.framework */; };
+		804ED151A695F58EDCF39635 /* Pods_PeakOperations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 848FE938EE87B57EE94CAF9D /* Pods_PeakOperations.framework */; };
 		8D1A2D781E951E2F001EF435 /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A2D771E951E2F001EF435 /* ConcurrentOperation.swift */; };
+		98034CDC37C9ECFDC6CBA12E /* Pods_PeakOperationsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD227F8230EB2459DE52108 /* Pods_PeakOperationsTests.framework */; };
 		CB3178711FD7FE9800B063ED /* GroupChainOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3178701FD7FE9800B063ED /* GroupChainOperation.swift */; };
 		CB47513C1E3A4A4400A43672 /* Collection+Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB47513B1E3A4A4400A43672 /* Collection+Operations.swift */; };
 		CB47513E1E3A4AA500A43672 /* Operation+Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB47513D1E3A4AA500A43672 /* Operation+Queue.swift */; };
-		CB4C11661DF9800600837343 /* Operation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4C115C1DF9800600837343 /* Operation.framework */; };
-		CB4C116B1DF9800600837343 /* OperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C116A1DF9800600837343 /* OperationTests.swift */; };
-		CB4C116D1DF9800600837343 /* Operation.h in Headers */ = {isa = PBXBuildFile; fileRef = CB4C115F1DF9800600837343 /* Operation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CB4C11661DF9800600837343 /* PeakOperations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4C115C1DF9800600837343 /* PeakOperations.framework */; };
+		CB4C116B1DF9800600837343 /* PeakOperationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C116A1DF9800600837343 /* PeakOperationsTests.swift */; };
+		CB4C116D1DF9800600837343 /* PeakOperations.h in Headers */ = {isa = PBXBuildFile; fileRef = CB4C115F1DF9800600837343 /* PeakOperations.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CB4C11811DF9818500837343 /* MapOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C11791DF9818500837343 /* MapOperation.swift */; };
 		CB4C11831DF9818500837343 /* UsingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C117B1DF9818500837343 /* UsingResult.swift */; };
 		CB4C11841DF9818500837343 /* BlockResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C117C1DF9818500837343 /* BlockResultOperation.swift */; };
@@ -33,26 +33,32 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0AD227F8230EB2459DE52108 /* Pods_PeakOperationsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeakOperationsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		168EE6CEE16F9CA2AFA33AB2 /* Pods-Operation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Operation.release.xcconfig"; path = "Pods/Target Support Files/Pods-Operation/Pods-Operation.release.xcconfig"; sourceTree = "<group>"; };
 		2E503B0500355D779A902F51 /* Pods-Operation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Operation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Operation/Pods-Operation.debug.xcconfig"; sourceTree = "<group>"; };
+		41CC093C2123C7A834253ADD /* Pods-PeakOperationsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeakOperationsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PeakOperationsTests/Pods-PeakOperationsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6BAD05164ACF33ADC01BF327 /* Pods-OperationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OperationTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OperationTests/Pods-OperationTests.release.xcconfig"; sourceTree = "<group>"; };
+		72CC631AB9FA48135CDB8F9A /* Pods-PeakOperations.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeakOperations.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PeakOperations/Pods-PeakOperations.debug.xcconfig"; sourceTree = "<group>"; };
+		848FE938EE87B57EE94CAF9D /* Pods_PeakOperations.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeakOperations.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		894503B04E6CA2CDF1860AB5 /* Pods-OperationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OperationTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OperationTests/Pods-OperationTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8D1A2D771E951E2F001EF435 /* ConcurrentOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcurrentOperation.swift; sourceTree = "<group>"; };
 		9A06144D1CD43E2478070122 /* Pods_Operation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Operation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B15FA159FCAF02C0621F66B3 /* Pods_OperationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OperationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C81654710601A8D5B6238CB5 /* Pods-PeakOperationsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeakOperationsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PeakOperationsTests/Pods-PeakOperationsTests.release.xcconfig"; sourceTree = "<group>"; };
 		CB3178701FD7FE9800B063ED /* GroupChainOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupChainOperation.swift; sourceTree = "<group>"; };
 		CB47513B1E3A4A4400A43672 /* Collection+Operations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+Operations.swift"; sourceTree = "<group>"; };
 		CB47513D1E3A4AA500A43672 /* Operation+Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Operation+Queue.swift"; sourceTree = "<group>"; };
-		CB4C115C1DF9800600837343 /* Operation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Operation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CB4C115F1DF9800600837343 /* Operation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Operation.h; sourceTree = "<group>"; };
+		CB4C115C1DF9800600837343 /* PeakOperations.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PeakOperations.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB4C115F1DF9800600837343 /* PeakOperations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeakOperations.h; sourceTree = "<group>"; };
 		CB4C11601DF9800600837343 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CB4C11651DF9800600837343 /* OperationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OperationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CB4C116A1DF9800600837343 /* OperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationTests.swift; sourceTree = "<group>"; };
+		CB4C11651DF9800600837343 /* PeakOperationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeakOperationsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB4C116A1DF9800600837343 /* PeakOperationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeakOperationsTests.swift; sourceTree = "<group>"; };
 		CB4C116C1DF9800600837343 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB4C11791DF9818500837343 /* MapOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapOperation.swift; sourceTree = "<group>"; };
 		CB4C117B1DF9818500837343 /* UsingResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsingResult.swift; sourceTree = "<group>"; };
 		CB4C117C1DF9818500837343 /* BlockResultOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockResultOperation.swift; sourceTree = "<group>"; };
 		CB4C117D1DF9818500837343 /* RetryingOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryingOperation.swift; sourceTree = "<group>"; };
+		E50B66BCD9C8C97903076FE3 /* Pods-PeakOperations.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeakOperations.release.xcconfig"; path = "Pods/Target Support Files/Pods-PeakOperations/Pods-PeakOperations.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				37A17FFEA5CCDE30789A56B2 /* Pods_Operation.framework in Frameworks */,
+				804ED151A695F58EDCF39635 /* Pods_PeakOperations.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,8 +74,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB4C11661DF9800600837343 /* Operation.framework in Frameworks */,
-				04F7F0A8FC683F3680F64164 /* Pods_OperationTests.framework in Frameworks */,
+				CB4C11661DF9800600837343 /* PeakOperations.framework in Frameworks */,
+				98034CDC37C9ECFDC6CBA12E /* Pods_PeakOperationsTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,8 +85,8 @@
 		CB4C11521DF9800600837343 = {
 			isa = PBXGroup;
 			children = (
-				CB4C115E1DF9800600837343 /* Operation */,
-				CB4C11691DF9800600837343 /* OperationTests */,
+				CB4C115E1DF9800600837343 /* PeakOperations */,
+				CB4C11691DF9800600837343 /* PeakOperationsTests */,
 				CB4C115D1DF9800600837343 /* Products */,
 				F3A1D643BE27A1C74713AB2A /* Pods */,
 				CD596A4E5951B72ECA7F88DA /* Frameworks */,
@@ -90,16 +96,16 @@
 		CB4C115D1DF9800600837343 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CB4C115C1DF9800600837343 /* Operation.framework */,
-				CB4C11651DF9800600837343 /* OperationTests.xctest */,
+				CB4C115C1DF9800600837343 /* PeakOperations.framework */,
+				CB4C11651DF9800600837343 /* PeakOperationsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CB4C115E1DF9800600837343 /* Operation */ = {
+		CB4C115E1DF9800600837343 /* PeakOperations */ = {
 			isa = PBXGroup;
 			children = (
-				CB4C115F1DF9800600837343 /* Operation.h */,
+				CB4C115F1DF9800600837343 /* PeakOperations.h */,
 				8D1A2D771E951E2F001EF435 /* ConcurrentOperation.swift */,
 				CB47513B1E3A4A4400A43672 /* Collection+Operations.swift */,
 				CB3178701FD7FE9800B063ED /* GroupChainOperation.swift */,
@@ -110,16 +116,16 @@
 				CB4C117D1DF9818500837343 /* RetryingOperation.swift */,
 				CB4C11601DF9800600837343 /* Info.plist */,
 			);
-			path = Operation;
+			path = PeakOperations;
 			sourceTree = "<group>";
 		};
-		CB4C11691DF9800600837343 /* OperationTests */ = {
+		CB4C11691DF9800600837343 /* PeakOperationsTests */ = {
 			isa = PBXGroup;
 			children = (
-				CB4C116A1DF9800600837343 /* OperationTests.swift */,
+				CB4C116A1DF9800600837343 /* PeakOperationsTests.swift */,
 				CB4C116C1DF9800600837343 /* Info.plist */,
 			);
-			path = OperationTests;
+			path = PeakOperationsTests;
 			sourceTree = "<group>";
 		};
 		CD596A4E5951B72ECA7F88DA /* Frameworks */ = {
@@ -127,6 +133,8 @@
 			children = (
 				9A06144D1CD43E2478070122 /* Pods_Operation.framework */,
 				B15FA159FCAF02C0621F66B3 /* Pods_OperationTests.framework */,
+				848FE938EE87B57EE94CAF9D /* Pods_PeakOperations.framework */,
+				0AD227F8230EB2459DE52108 /* Pods_PeakOperationsTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -138,6 +146,10 @@
 				168EE6CEE16F9CA2AFA33AB2 /* Pods-Operation.release.xcconfig */,
 				894503B04E6CA2CDF1860AB5 /* Pods-OperationTests.debug.xcconfig */,
 				6BAD05164ACF33ADC01BF327 /* Pods-OperationTests.release.xcconfig */,
+				72CC631AB9FA48135CDB8F9A /* Pods-PeakOperations.debug.xcconfig */,
+				E50B66BCD9C8C97903076FE3 /* Pods-PeakOperations.release.xcconfig */,
+				41CC093C2123C7A834253ADD /* Pods-PeakOperationsTests.debug.xcconfig */,
+				C81654710601A8D5B6238CB5 /* Pods-PeakOperationsTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -149,16 +161,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB4C116D1DF9800600837343 /* Operation.h in Headers */,
+				CB4C116D1DF9800600837343 /* PeakOperations.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		CB4C115B1DF9800600837343 /* Operation */ = {
+		CB4C115B1DF9800600837343 /* PeakOperations */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CB4C11701DF9800600837343 /* Build configuration list for PBXNativeTarget "Operation" */;
+			buildConfigurationList = CB4C11701DF9800600837343 /* Build configuration list for PBXNativeTarget "PeakOperations" */;
 			buildPhases = (
 				128D3BC3FEBE4754C93805F8 /* [CP] Check Pods Manifest.lock */,
 				CB4C11571DF9800600837343 /* Sources */,
@@ -170,14 +182,14 @@
 			);
 			dependencies = (
 			);
-			name = Operation;
+			name = PeakOperations;
 			productName = Operation;
-			productReference = CB4C115C1DF9800600837343 /* Operation.framework */;
+			productReference = CB4C115C1DF9800600837343 /* PeakOperations.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		CB4C11641DF9800600837343 /* OperationTests */ = {
+		CB4C11641DF9800600837343 /* PeakOperationsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CB4C11731DF9800600837343 /* Build configuration list for PBXNativeTarget "OperationTests" */;
+			buildConfigurationList = CB4C11731DF9800600837343 /* Build configuration list for PBXNativeTarget "PeakOperationsTests" */;
 			buildPhases = (
 				BA7902D4FC3BF4940033AFF3 /* [CP] Check Pods Manifest.lock */,
 				CB4C11611DF9800600837343 /* Sources */,
@@ -190,9 +202,9 @@
 			dependencies = (
 				CB4C11681DF9800600837343 /* PBXTargetDependency */,
 			);
-			name = OperationTests;
+			name = PeakOperationsTests;
 			productName = OperationTests;
-			productReference = CB4C11651DF9800600837343 /* OperationTests.xctest */;
+			productReference = CB4C11651DF9800600837343 /* PeakOperationsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -217,7 +229,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CB4C11561DF9800600837343 /* Build configuration list for PBXProject "Operation" */;
+			buildConfigurationList = CB4C11561DF9800600837343 /* Build configuration list for PBXProject "PeakOperations" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -229,8 +241,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CB4C115B1DF9800600837343 /* Operation */,
-				CB4C11641DF9800600837343 /* OperationTests */,
+				CB4C115B1DF9800600837343 /* PeakOperations */,
+				CB4C11641DF9800600837343 /* PeakOperationsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -264,7 +276,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Operation-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-PeakOperations-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -277,7 +289,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-OperationTests/Pods-OperationTests-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-PeakOperationsTests/Pods-PeakOperationsTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/THRResult/THRResult.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -286,7 +298,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OperationTests/Pods-OperationTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PeakOperationsTests/Pods-PeakOperationsTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BA7902D4FC3BF4940033AFF3 /* [CP] Check Pods Manifest.lock */ = {
@@ -300,7 +312,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-OperationTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-PeakOperationsTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -329,7 +341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB4C116B1DF9800600837343 /* OperationTests.swift in Sources */,
+				CB4C116B1DF9800600837343 /* PeakOperationsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,7 +350,7 @@
 /* Begin PBXTargetDependency section */
 		CB4C11681DF9800600837343 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CB4C115B1DF9800600837343 /* Operation */;
+			target = CB4C115B1DF9800600837343 /* PeakOperations */;
 			targetProxy = CB4C11671DF9800600837343 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -463,7 +475,7 @@
 		};
 		CB4C11711DF9800600837343 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2E503B0500355D779A902F51 /* Pods-Operation.debug.xcconfig */;
+			baseConfigurationReference = 72CC631AB9FA48135CDB8F9A /* Pods-PeakOperations.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -471,10 +483,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Operation/Info.plist;
+				INFOPLIST_FILE = PeakOperations/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.3squared.Operation;
+				PRODUCT_BUNDLE_IDENTIFIER = com.3squared.PeakOperations;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -485,7 +497,7 @@
 		};
 		CB4C11721DF9800600837343 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 168EE6CEE16F9CA2AFA33AB2 /* Pods-Operation.release.xcconfig */;
+			baseConfigurationReference = E50B66BCD9C8C97903076FE3 /* Pods-PeakOperations.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -493,10 +505,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Operation/Info.plist;
+				INFOPLIST_FILE = PeakOperations/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.3squared.Operation;
+				PRODUCT_BUNDLE_IDENTIFIER = com.3squared.PeakOperations;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -506,12 +518,12 @@
 		};
 		CB4C11741DF9800600837343 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 894503B04E6CA2CDF1860AB5 /* Pods-OperationTests.debug.xcconfig */;
+			baseConfigurationReference = 41CC093C2123C7A834253ADD /* Pods-PeakOperationsTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				INFOPLIST_FILE = OperationTests/Info.plist;
+				INFOPLIST_FILE = PeakOperationsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.3squared.OperationTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.3squared.PeakOperationsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -520,12 +532,12 @@
 		};
 		CB4C11751DF9800600837343 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6BAD05164ACF33ADC01BF327 /* Pods-OperationTests.release.xcconfig */;
+			baseConfigurationReference = C81654710601A8D5B6238CB5 /* Pods-PeakOperationsTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				INFOPLIST_FILE = OperationTests/Info.plist;
+				INFOPLIST_FILE = PeakOperationsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.3squared.OperationTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.3squared.PeakOperationsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -535,7 +547,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CB4C11561DF9800600837343 /* Build configuration list for PBXProject "Operation" */ = {
+		CB4C11561DF9800600837343 /* Build configuration list for PBXProject "PeakOperations" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CB4C116E1DF9800600837343 /* Debug */,
@@ -544,7 +556,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CB4C11701DF9800600837343 /* Build configuration list for PBXNativeTarget "Operation" */ = {
+		CB4C11701DF9800600837343 /* Build configuration list for PBXNativeTarget "PeakOperations" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CB4C11711DF9800600837343 /* Debug */,
@@ -553,7 +565,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CB4C11731DF9800600837343 /* Build configuration list for PBXNativeTarget "OperationTests" */ = {
+		CB4C11731DF9800600837343 /* Build configuration list for PBXNativeTarget "PeakOperationsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CB4C11741DF9800600837343 /* Debug */,

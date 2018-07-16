@@ -1,6 +1,6 @@
 //
-//  OperationTests.swift
-//  OperationTests
+//  PeakOperationsTests.swift
+//  PeakOperationsTests
 //
 //  Created by Sam Oakley on 08/12/2016.
 //  Copyright © 2016 3Squared. All rights reserved.
@@ -8,9 +8,9 @@
 
 import XCTest
 import THRResult
-@testable import Operation
+@testable import PeakOperations
 
-class OperationTests: XCTestCase {
+class PeakOperationsTests: XCTestCase {
     
     func testInput() {
         let expect = expectation(description: "")

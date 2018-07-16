@@ -1,6 +1,6 @@
 //
-//  GroupResultOperation.swift
-//  Operation
+//  GroupChainOperation.swift
+//  PeakOperations
 //
 //  Created by Sam Oakley on 04/12/2017.
 //  Copyright © 2017 3Squared. All rights reserved.

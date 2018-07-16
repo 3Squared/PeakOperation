@@ -1,6 +1,6 @@
 //
-//  BaseOperation.swift
-//  THROperations
+//  BlockResultOperation.swift
+//  PeakOperations
 //
 //  Created by Sam Oakley on 14/10/2016.
 //  Copyright © 2016 Sam Oakley. All rights reserved.
