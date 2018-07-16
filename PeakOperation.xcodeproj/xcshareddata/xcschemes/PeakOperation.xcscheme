@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CB4C115B1DF9800600837343"
-               BuildableName = "PeakOperations.framework"
-               BlueprintName = "PeakOperations"
-               ReferencedContainer = "container:PeakOperations.xcodeproj">
+               BuildableName = "PeakOperation.framework"
+               BlueprintName = "PeakOperation"
+               ReferencedContainer = "container:PeakOperation.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,9 +34,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CB4C11641DF9800600837343"
-               BuildableName = "PeakOperationsTests.xctest"
-               BlueprintName = "PeakOperationsTests"
-               ReferencedContainer = "container:PeakOperations.xcodeproj">
+               BuildableName = "PeakOperationTests.xctest"
+               BlueprintName = "PeakOperationTests"
+               ReferencedContainer = "container:PeakOperation.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -44,9 +44,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CB4C115B1DF9800600837343"
-            BuildableName = "PeakOperations.framework"
-            BlueprintName = "PeakOperations"
-            ReferencedContainer = "container:PeakOperations.xcodeproj">
+            BuildableName = "PeakOperation.framework"
+            BlueprintName = "PeakOperation"
+            ReferencedContainer = "container:PeakOperation.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -66,9 +66,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CB4C115B1DF9800600837343"
-            BuildableName = "PeakOperations.framework"
-            BlueprintName = "PeakOperations"
-            ReferencedContainer = "container:PeakOperations.xcodeproj">
+            BuildableName = "PeakOperation.framework"
+            BlueprintName = "PeakOperation"
+            ReferencedContainer = "container:PeakOperation.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -84,9 +84,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CB4C115B1DF9800600837343"
-            BuildableName = "PeakOperations.framework"
-            BlueprintName = "PeakOperations"
-            ReferencedContainer = "container:PeakOperations.xcodeproj">
+            BuildableName = "PeakOperation.framework"
+            BlueprintName = "PeakOperation"
+            ReferencedContainer = "container:PeakOperation.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

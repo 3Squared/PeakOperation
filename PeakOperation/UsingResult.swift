@@ -1,13 +1,13 @@
 //
 //  UsingResult.swift
-//  PeakOperations
+//  PeakOperation
 //
 //  Created by Sam Oakley on 10/10/2016.
 //  Copyright © 2016 Sam Oakley. All rights reserved.
 //
 
 import Foundation
-import THRResult
+import PeakResult
 
 /// Implement this protocol to indicate that the object will produce a `Result` as output.
 public protocol ProducesResult: class {

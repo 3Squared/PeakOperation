@@ -1,12 +1,12 @@
 # CHANGELOG
 
-The changelog for `PeakOperations`.
+The changelog for `PeakOperation`.
 
 --------------------------------------
 
 4.0.0
 -----
-- Rename from `THROperations` to `PeakOperations`.
+- Rename from `THROperations` to `PeakOperation`.
 
 1.4.3
 -----

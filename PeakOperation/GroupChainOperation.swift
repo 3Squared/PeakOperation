@@ -1,14 +1,13 @@
 //
 //  GroupChainOperation.swift
-//  PeakOperations
+//  PeakOperation
 //
 //  Created by Sam Oakley on 04/12/2017.
 //  Copyright © 2017 3Squared. All rights reserved.
 //
 
 import Foundation
-import THRResult
-
+import PeakResult
 
 /// An operation which takes an operation and its dependants and executes them on an internal queue.
 ///

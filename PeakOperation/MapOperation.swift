@@ -1,14 +1,13 @@
 //
 //  MapOperation.swift
-//  PeakOperations
+//  PeakOperation
 //
 //  Created by Sam Oakley on 14/10/2016.
 //  Copyright © 2016 Sam Oakley. All rights reserved.
 //
 
 import Foundation
-import THRResult
-
+import PeakResult
 
 /// An operation which takes an Input and maps it to an Output.
 ///

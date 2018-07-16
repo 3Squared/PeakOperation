@@ -1,14 +1,14 @@
 //
 //  PeakOperationsTests.swift
-//  PeakOperationsTests
+//  PeakOperationTests
 //
 //  Created by Sam Oakley on 08/12/2016.
 //  Copyright © 2016 3Squared. All rights reserved.
 //
 
 import XCTest
-import THRResult
-@testable import PeakOperations
+import PeakResult
+@testable import PeakOperation
 
 class PeakOperationsTests: XCTestCase {
     
