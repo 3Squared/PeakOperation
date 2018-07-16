@@ -4,7 +4,7 @@ The changelog for `PeakOperation`.
 
 --------------------------------------
 
-4.0.0
+2.0.0
 -----
 - Rename from `THROperations` to `PeakOperation`.
 

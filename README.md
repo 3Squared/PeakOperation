@@ -1,6 +1,6 @@
-# PeakOperation 
+![Peak Operation](PeakOperation.png "Peak Operation")
 
-A collection of classes to aid performing operations.
+PeakOperation is a Swift microframework providing a collection of classes to aid performing operations. It is part of the [Peak Framework](#peak-framework).
 
 ## Installation
 
