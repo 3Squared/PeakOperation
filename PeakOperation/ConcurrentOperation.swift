@@ -25,7 +25,7 @@ open class ConcurrentOperation: Operation {
     
     public typealias TimeInSeconds = Int64
     
-    fileprivate let stateQueue = DispatchQueue(label: "PeakOperations.ConcurrentOperation.StateQueue", attributes: .concurrent)
+    fileprivate let stateQueue = DispatchQueue(label: "PeakOperation.ConcurrentOperation.StateQueue", attributes: .concurrent)
     fileprivate var rawState = OperationState.ready
     
     internal var progress = Progress(totalUnitCount: 1)

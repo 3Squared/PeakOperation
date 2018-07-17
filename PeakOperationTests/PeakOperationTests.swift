@@ -1,5 +1,5 @@
 //
-//  PeakOperationsTests.swift
+//  PeakOperationTests.swift
 //  PeakOperationTests
 //
 //  Created by Sam Oakley on 08/12/2016.
@@ -10,7 +10,7 @@ import XCTest
 import PeakResult
 @testable import PeakOperation
 
-class PeakOperationsTests: XCTestCase {
+class PeakOperationTests: XCTestCase {
     
     func testInput() {
         let expect = expectation(description: "")
