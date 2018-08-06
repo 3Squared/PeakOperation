@@ -196,7 +196,6 @@ Please see the included tests for further examples. Also check out [PeakNetwork]
 ### Installing
 
 - Using Cocoapods, add `pod 'PeakOperation'` to your Podfile.
-
 - `import PeakOperation` where necessary.
 
 ## Contributing
