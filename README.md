@@ -224,5 +224,3 @@ The Peak Framework is a collection of open-source microframeworks created by the
 |:--|:--|
 |[PeakResult](https://github.com/3squared/PeakResult)|A simple `Result` type.|
 |[PeakNetwork](https://github.com/3squared/PeakNetwork)|A networking framework built on top of `Session` using PeakOperation, leveraging the power of `Codable`.|
-|[PeakCoreData](https://github.com/3squared/PeakCoreData)|A collection of helpers and convenience methods for creating and observing ManagedObjects, including performant import operations using `PeakOperation`.|
-
