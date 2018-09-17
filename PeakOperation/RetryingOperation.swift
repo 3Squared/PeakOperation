@@ -1,13 +1,13 @@
 //
 //  RetryingOperation.swift
-//  THROperations
+//  PeakOperation
 //
 //  Created by Sam Oakley on 16/11/2016.
 //  Copyright © 2016 Sam Oakley. All rights reserved.
 //
 
 import Foundation
-import THRResult
+import PeakResult
 
 /// A `ConcurrentOperation` with an added `RetryStrategy`.
 /// When the operation completes with an error `Result`, the `StrategyBlock` is used to determine if the operation should be attempted again.
