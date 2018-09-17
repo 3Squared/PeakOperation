@@ -264,7 +264,7 @@ class PeakOperationTests: XCTestCase {
         let progress = operation2.overallProgress()
         
         keyValueObservingExpectation(for: progress, keyPath: "completedUnitCount") {  observedObject, change in
-            print("Change: \(progress.localizedDescription)")
+            print("Change: \(progress.localizedDescription!)")
             return progress.completedUnitCount >= progress.totalUnitCount
         }
         
