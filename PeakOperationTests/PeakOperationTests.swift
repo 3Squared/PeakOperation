@@ -1,16 +1,16 @@
 //
-//  OperationTests.swift
-//  OperationTests
+//  PeakOperationTests.swift
+//  PeakOperationTests
 //
 //  Created by Sam Oakley on 08/12/2016.
 //  Copyright © 2016 3Squared. All rights reserved.
 //
 
 import XCTest
-import THRResult
-@testable import Operation
+import PeakResult
+@testable import PeakOperation
 
-class OperationTests: XCTestCase {
+class PeakOperationTests: XCTestCase {
     
     func testInput() {
         let expect = expectation(description: "")
@@ -264,7 +264,7 @@ class OperationTests: XCTestCase {
         let progress = operation2.overallProgress()
         
         keyValueObservingExpectation(for: progress, keyPath: "completedUnitCount") {  observedObject, change in
-            print("Change: \(progress.localizedDescription)")
+            print("Change: \(progress.localizedDescription!)")
             return progress.completedUnitCount >= progress.totalUnitCount
         }
         
@@ -291,6 +291,39 @@ class OperationTests: XCTestCase {
         let group1 = firstOperation
             .passesResult(to: secondOperation)
             .group()
+        
+        group1.addResultBlock { result in
+            do {
+                let _ = try result.resolve()
+                expect.fulfill()
+            } catch {
+                XCTFail()
+            }
+        }
+        
+        let progress = group1.enqueueWithProgress()
+        
+        waitForExpectations(timeout: 10)
+        
+        XCTAssertEqual(progress.fractionCompleted, 1)
+        XCTAssertEqual(progress.totalUnitCount, 1)
+        print("Total Progress: \(progress.localizedAdditionalDescription!)")
+    }
+    
+    func testGroupOperationCollatingProgress() {
+        let expect = expectation(description: "")
+        
+        let firstOperation = BlockResultOperation {
+            return "Hello"
+        }
+        
+        let secondOperation = MapOperation<String, String> { input in
+            return Result { try "\(input.resolve()) World!" }
+        }
+        
+        let group1 = firstOperation
+            .passesResult(to: secondOperation)
+            .group(collateProgress: true)
         
         group1.addResultBlock { result in
             do {

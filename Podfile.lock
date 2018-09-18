@@ -1,16 +1,16 @@
 PODS:
-  - THRResult (1.0.1)
+  - PeakResult (2.1.0)
 
 DEPENDENCIES:
-  - THRResult
+  - PeakResult
 
 SPEC REPOS:
   "git@gitlab.3squared.com:iOSLibraries/CocoaPodSpecs.git":
-    - THRResult
+    - PeakResult
 
 SPEC CHECKSUMS:
-  THRResult: 1e24a2909fa3e56efdd5d5d12108b1d308a9f917
+  PeakResult: 4b8d79159f0bb20dc9715c73fd4ed642c15a24ea
 
-PODFILE CHECKSUM: 31d0763ba21a98d8a2355c3b793fcb6c738dfe05
+PODFILE CHECKSUM: 5ce11dae6614af9227932c0c2c5e2773f5124f4c
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

@@ -1,14 +1,13 @@
 //
-//  GroupResultOperation.swift
-//  Operation
+//  GroupChainOperation.swift
+//  PeakOperation
 //
 //  Created by Sam Oakley on 04/12/2017.
 //  Copyright © 2017 3Squared. All rights reserved.
 //
 
 import Foundation
-import THRResult
-
+import PeakResult
 
 /// An operation which takes an operation and its dependants and executes them on an internal queue.
 ///
@@ -32,20 +31,23 @@ open class GroupChainOperation: ConcurrentOperation, ProducesResult, ConsumesRes
     /// Create a new `GroupChainOperation`.
     ///
     /// - Parameter operation: A operation that produces a result. Its dependants will also be run.
-    public init<L>(with operation: L) where L: ProducesResult, L: Operation {
+    public init<L>(with operation: L, collateProgress: Bool = false) where L: ProducesResult, L: Operation {
         self.operation = operation
         super.init()
         
-        managesOwnProgress = true
-        progress = Progress(totalUnitCount: 0)
-        estimatedExecutionSeconds = 0
+        managesOwnProgress = collateProgress
         
-        operation.operationChain.compactMap { $0 as? ConcurrentOperation }.forEach { operation in
-            let operationProgress = operation.progress
-            let estimatedTime = operation.estimatedExecutionSeconds
-            estimatedExecutionSeconds += estimatedTime
-            progress.addChild(operationProgress, withPendingUnitCount: estimatedTime)
-            progress.totalUnitCount += estimatedTime
+        if (collateProgress) {
+            progress = Progress(totalUnitCount: 0)
+            estimatedExecutionSeconds = 0
+            
+            operation.operationChain.compactMap { $0 as? ConcurrentOperation }.forEach { operation in
+                let operationProgress = operation.progress
+                let estimatedTime = operation.estimatedExecutionSeconds
+                estimatedExecutionSeconds += estimatedTime
+                progress.addChild(operationProgress, withPendingUnitCount: estimatedTime)
+                progress.totalUnitCount += estimatedTime
+            }
         }
         
         operation.addResultBlock { [weak self] result in
@@ -77,7 +79,7 @@ extension ProducesResult where Self: ConcurrentOperation {
     /// Add the operation and its chain to a group.
     ///
     /// - Returns: A GroupChainOperation containing the operation and its chain.
-    public func group() -> GroupChainOperation {
-        return GroupChainOperation(with: self)
+    public func group(collateProgress: Bool = false) -> GroupChainOperation {
+        return GroupChainOperation(with: self, collateProgress: collateProgress)
     }
 }

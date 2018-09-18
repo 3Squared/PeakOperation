@@ -1,6 +1,6 @@
 //
 //  Operation+Queue.swift
-//  Operation
+//  PeakOperation
 //
 //  Created by Sam Oakley on 26/01/2017.
 //  Copyright © 2017 3Squared. All rights reserved.
