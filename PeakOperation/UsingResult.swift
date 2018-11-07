@@ -76,3 +76,21 @@ extension ProducesResult where Self: ConcurrentOperation {
         return operation
     }
 }
+
+
+extension ConsumesResult where Self: ProducesResult {
+    
+    /// Resolves the input to the object.
+    /// If the input is `.success`, calls the provided block with it as its argument and returns a new result.
+    /// If the input is `.failure`, the error is passed along and returns a new result containing the error.
+    ///
+    /// - Parameter block: A block which takes the input and transforms it into an output Result.
+    /// - Returns: If the input is `.success`, the result of calling the provided block. If the input is `.failure`, a result containing the error.
+    public func resolve(_ block: @escaping (Input) -> Result<Output>) -> Result<Output> {
+        do {
+            return block(try input.resolve())
+        } catch {
+            return Result { throw error }
+        }
+    }
+}

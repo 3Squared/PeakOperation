@@ -38,3 +38,33 @@ open class MapOperation<Input, Output>: ConcurrentOperation, ProducesResult, Con
         finish()
     }
 }
+
+/// An operation which takes an Input and maps it to an Output.
+///
+/// When chaining operations, you may wish to pass the result of one to another, but the types do not match.
+/// By inserting a MapOperation between them, you can perform a mapping of the Output type to the Input type.
+///
+/// This operation only passes successful inputs to the provided block. An error input is cascaded down (set as the output).
+open class MapSuccessOperation<Input, Output>: ConcurrentOperation, ProducesResult, ConsumesResult {
+    
+    /// The result to be mapped.
+    public var input: Result<Input> = Result { throw ResultError.noResult }
+    
+    /// The mapped result.
+    public var output: Result<Output> = Result { throw ResultError.noResult }
+    
+    let block: (Input) -> (Output)
+
+    /// Create a new `MapSuccessOperation`.
+    ///
+    /// - Parameter block: A block which takes a Result of type `Input` and maps it to one with type `Output`.
+    public init(_ block: @escaping (Input) -> (Output)) {
+        self.block = block
+    }
+    
+    /// :nodoc:
+    open override func execute() {
+        output = resolve { from in Result { self.block(from) } }
+        finish()
+    }
+}

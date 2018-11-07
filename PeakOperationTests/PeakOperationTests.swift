@@ -119,6 +119,41 @@ class PeakOperationTests: XCTestCase {
         XCTAssertEqual(op1.operationChain, [op1])
     }
     
+    func testMapSuccessOperationPassesSuccess() {
+        let expect = expectation(description: "")
+
+        let operation = MapSuccessOperation<Bool, Bool> { input in !input }
+        operation.input = Result { true }
+        
+        operation.addResultBlock { result in
+            XCTAssertFalse(try! result.resolve())
+            expect.fulfill()
+        }
+        
+        operation.enqueue()
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testMapSuccessOperationPassesError() {
+        let expect = expectation(description: "")
+        
+        let operation = MapSuccessOperation<Bool, Bool> { input in !input }
+        operation.input = Result { throw TestError.justATest }
+        
+        operation.addResultBlock { result in
+            do {
+                let _ = try result.resolve()
+                XCTFail()
+            } catch {
+                expect.fulfill()
+            }
+        }
+        
+        operation.enqueue()
+        waitForExpectations(timeout: 1)
+    }
+
+    
     func testManyOperationsRecursiveDependencies() {
         let op1 = MapOperation<Bool, Bool> { _ in
             return Result { return false }
@@ -451,5 +486,3 @@ open class TestRetryOperation: RetryingOperation<AnyObject> {
         finish()
     }
 }
-
-
