@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CB4C115B1DF9800600837343"
-               BuildableName = "PeakOperation.framework"
-               BlueprintName = "PeakOperation"
+               BuildableName = "PeakOperation-iOS.framework"
+               BlueprintName = "PeakOperation-iOS"
                ReferencedContainer = "container:PeakOperation.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,8 +34,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CB4C11641DF9800600837343"
-               BuildableName = "PeakOperationTests.xctest"
-               BlueprintName = "PeakOperationTests"
+               BuildableName = "PeakOperation-iOSTests.xctest"
+               BlueprintName = "PeakOperation-iOSTests"
                ReferencedContainer = "container:PeakOperation.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -44,8 +44,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CB4C115B1DF9800600837343"
-            BuildableName = "PeakOperation.framework"
-            BlueprintName = "PeakOperation"
+            BuildableName = "PeakOperation-iOS.framework"
+            BlueprintName = "PeakOperation-iOS"
             ReferencedContainer = "container:PeakOperation.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -66,8 +66,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CB4C115B1DF9800600837343"
-            BuildableName = "PeakOperation.framework"
-            BlueprintName = "PeakOperation"
+            BuildableName = "PeakOperation-iOS.framework"
+            BlueprintName = "PeakOperation-iOS"
             ReferencedContainer = "container:PeakOperation.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -84,8 +84,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CB4C115B1DF9800600837343"
-            BuildableName = "PeakOperation.framework"
-            BlueprintName = "PeakOperation"
+            BuildableName = "PeakOperation-iOS.framework"
+            BlueprintName = "PeakOperation-iOS"
             ReferencedContainer = "container:PeakOperation.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
