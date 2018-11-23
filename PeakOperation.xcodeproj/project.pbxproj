@@ -24,7 +24,7 @@
 		CB3178711FD7FE9800B063ED /* GroupChainOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3178701FD7FE9800B063ED /* GroupChainOperation.swift */; };
 		CB47513C1E3A4A4400A43672 /* Collection+Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB47513B1E3A4A4400A43672 /* Collection+Operations.swift */; };
 		CB47513E1E3A4AA500A43672 /* Operation+Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB47513D1E3A4AA500A43672 /* Operation+Queue.swift */; };
-		CB4C11661DF9800600837343 /* PeakOperation-iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4C115C1DF9800600837343 /* PeakOperation-iOS.framework */; };
+		CB4C11661DF9800600837343 /* PeakOperation_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4C115C1DF9800600837343 /* PeakOperation_iOS.framework */; };
 		CB4C116D1DF9800600837343 /* PeakOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = CB4C115F1DF9800600837343 /* PeakOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CB4C11811DF9818500837343 /* MapOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C11791DF9818500837343 /* MapOperation.swift */; };
 		CB4C11831DF9818500837343 /* UsingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C117B1DF9818500837343 /* UsingResult.swift */; };
@@ -54,7 +54,7 @@
 /* Begin PBXFileReference section */
 		1864BE6421998B79004E5436 /* PeakOperation_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PeakOperation_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1864BE6721998B79004E5436 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1864BE6C21998B79004E5436 /* PeakOperation-macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PeakOperation-macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1864BE6C21998B79004E5436 /* PeakOperation_macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeakOperation_macOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1864BE7321998B79004E5436 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18D0B5AF20FCE6E200CD77F6 /* PeakOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeakOperationTests.swift; sourceTree = "<group>"; };
 		1A9889E0EFBED43B1C4B338A /* Pods-PeakOperation-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeakOperation-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PeakOperation-iOS/Pods-PeakOperation-iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -69,10 +69,10 @@
 		CB3178701FD7FE9800B063ED /* GroupChainOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupChainOperation.swift; sourceTree = "<group>"; };
 		CB47513B1E3A4A4400A43672 /* Collection+Operations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+Operations.swift"; sourceTree = "<group>"; };
 		CB47513D1E3A4AA500A43672 /* Operation+Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Operation+Queue.swift"; sourceTree = "<group>"; };
-		CB4C115C1DF9800600837343 /* PeakOperation-iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "PeakOperation-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB4C115C1DF9800600837343 /* PeakOperation_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PeakOperation_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB4C115F1DF9800600837343 /* PeakOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeakOperation.h; sourceTree = "<group>"; };
 		CB4C11601DF9800600837343 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CB4C11651DF9800600837343 /* PeakOperation-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PeakOperation-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB4C11651DF9800600837343 /* PeakOperation_iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeakOperation_iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB4C116C1DF9800600837343 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB4C11791DF9818500837343 /* MapOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapOperation.swift; sourceTree = "<group>"; };
 		CB4C117B1DF9818500837343 /* UsingResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsingResult.swift; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB4C11661DF9800600837343 /* PeakOperation-iOS.framework in Frameworks */,
+				CB4C11661DF9800600837343 /* PeakOperation_iOS.framework in Frameworks */,
 				CFB3052151CBD1EC7882FE4D /* Pods_PeakOperation_iOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -236,10 +236,10 @@
 		CB4C115D1DF9800600837343 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CB4C115C1DF9800600837343 /* PeakOperation-iOS.framework */,
-				CB4C11651DF9800600837343 /* PeakOperation-iOSTests.xctest */,
+				CB4C115C1DF9800600837343 /* PeakOperation_iOS.framework */,
+				CB4C11651DF9800600837343 /* PeakOperation_iOSTests.xctest */,
 				1864BE6421998B79004E5436 /* PeakOperation_macOS.framework */,
-				1864BE6C21998B79004E5436 /* PeakOperation-macOSTests.xctest */,
+				1864BE6C21998B79004E5436 /* PeakOperation_macOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -322,7 +322,7 @@
 			);
 			name = "PeakOperation-macOSTests";
 			productName = "PeakOperation-macOSTests";
-			productReference = 1864BE6C21998B79004E5436 /* PeakOperation-macOSTests.xctest */;
+			productReference = 1864BE6C21998B79004E5436 /* PeakOperation_macOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		CB4C115B1DF9800600837343 /* PeakOperation-iOS */ = {
@@ -342,7 +342,7 @@
 			);
 			name = "PeakOperation-iOS";
 			productName = Operation;
-			productReference = CB4C115C1DF9800600837343 /* PeakOperation-iOS.framework */;
+			productReference = CB4C115C1DF9800600837343 /* PeakOperation_iOS.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		CB4C11641DF9800600837343 /* PeakOperation-iOSTests */ = {
@@ -363,7 +363,7 @@
 			);
 			name = "PeakOperation-iOSTests";
 			productName = OperationTests;
-			productReference = CB4C11651DF9800600837343 /* PeakOperation-iOSTests.xctest */;
+			productReference = CB4C11651DF9800600837343 /* PeakOperation_iOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -760,7 +760,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.3squared.PeakOperation-macOSTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 4.2;
 			};
@@ -784,7 +784,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.3squared.PeakOperation-macOSTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 4.2;
 			};
@@ -922,7 +922,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.3squared.PeakOperation-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -944,7 +944,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.3squared.PeakOperation-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 			};
@@ -959,7 +959,7 @@
 				INFOPLIST_FILE = "Unit Tests/Platforms/iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.3squared.PeakOperationTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 			};
@@ -974,7 +974,7 @@
 				INFOPLIST_FILE = "Unit Tests/Platforms/iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.3squared.PeakOperationTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
