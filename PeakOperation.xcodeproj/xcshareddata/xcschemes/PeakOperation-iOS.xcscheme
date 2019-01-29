@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CB4C115B1DF9800600837343"
-               BuildableName = "PeakOperation-iOS.framework"
+               BuildableName = "PeakOperation_iOS.framework"
                BlueprintName = "PeakOperation-iOS"
                ReferencedContainer = "container:PeakOperation.xcodeproj">
             </BuildableReference>
@@ -34,7 +34,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CB4C11641DF9800600837343"
-               BuildableName = "PeakOperation-iOSTests.xctest"
+               BuildableName = "PeakOperation_iOSTests.xctest"
                BlueprintName = "PeakOperation-iOSTests"
                ReferencedContainer = "container:PeakOperation.xcodeproj">
             </BuildableReference>
@@ -44,7 +44,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CB4C115B1DF9800600837343"
-            BuildableName = "PeakOperation-iOS.framework"
+            BuildableName = "PeakOperation_iOS.framework"
             BlueprintName = "PeakOperation-iOS"
             ReferencedContainer = "container:PeakOperation.xcodeproj">
          </BuildableReference>
@@ -66,7 +66,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CB4C115B1DF9800600837343"
-            BuildableName = "PeakOperation-iOS.framework"
+            BuildableName = "PeakOperation_iOS.framework"
             BlueprintName = "PeakOperation-iOS"
             ReferencedContainer = "container:PeakOperation.xcodeproj">
          </BuildableReference>
@@ -84,7 +84,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CB4C115B1DF9800600837343"
-            BuildableName = "PeakOperation-iOS.framework"
+            BuildableName = "PeakOperation_iOS.framework"
             BlueprintName = "PeakOperation-iOS"
             ReferencedContainer = "container:PeakOperation.xcodeproj">
          </BuildableReference>
