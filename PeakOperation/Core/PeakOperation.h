@@ -6,7 +6,15 @@
 //  Copyright © 2016 3Squared. All rights reserved.
 //
 
+#if TARGET_OS_IPHONE
+
 #import <UIKit/UIKit.h>
+
+#elif TARGET_OS_MAC
+
+#import <Cocoa/Cocoa.h>
+
+#endif
 
 //! Project version number for PeakOperation.
 FOUNDATION_EXPORT double PeakOperationVersionNumber;

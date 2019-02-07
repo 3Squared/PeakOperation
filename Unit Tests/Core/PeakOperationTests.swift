@@ -8,7 +8,16 @@
 
 import XCTest
 import PeakResult
-@testable import PeakOperation
+
+#if os(iOS)
+
+@testable import PeakOperation_iOS
+
+#else
+
+@testable import PeakOperation_macOS
+
+#endif
 
 class PeakOperationTests: XCTestCase {
     
