@@ -4,6 +4,10 @@ The changelog for `PeakOperation`.
 
 --------------------------------------
 
+2.2.1
+-----
+- Add macOS and tvOS support.
+
 2.0.0
 -----
 - Rename from `THROperations` to `PeakOperation`.
