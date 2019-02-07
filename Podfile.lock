@@ -1,16 +1,16 @@
 PODS:
-  - PeakResult (2.1.0)
+  - PeakResult (2.2.1)
 
 DEPENDENCIES:
   - PeakResult
 
 SPEC REPOS:
-  "git@gitlab.3squared.com:iOSLibraries/CocoaPodSpecs.git":
+  https://github.com/cocoapods/specs.git:
     - PeakResult
 
 SPEC CHECKSUMS:
-  PeakResult: 4b8d79159f0bb20dc9715c73fd4ed642c15a24ea
+  PeakResult: d75726e240ff934095cc0c7a37b74f9c8ebfc57a
 
-PODFILE CHECKSUM: 5ce11dae6614af9227932c0c2c5e2773f5124f4c
+PODFILE CHECKSUM: 654d2fe6c33f6f5a2af69b55acf0ece65b641cc1
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0
