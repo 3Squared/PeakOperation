@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E967A2158FD0B08F6E143C7 /* Pods_PeakOperation_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DC77FD284869034D55517C /* Pods_PeakOperation_macOS.framework */; };
 		1830B15C219D8F7700AC862F /* BlockResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C117C1DF9818500837343 /* BlockResultOperation.swift */; };
 		1830B15D219D8F7700AC862F /* Collection+Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB47513B1E3A4A4400A43672 /* Collection+Operations.swift */; };
 		1830B15E219D8F7700AC862F /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A2D771E951E2F001EF435 /* ConcurrentOperation.swift */; };
@@ -19,7 +18,9 @@
 		1864BE6D21998B79004E5436 /* PeakOperation_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1864BE6421998B79004E5436 /* PeakOperation_macOS.framework */; };
 		1864BE8221998F54004E5436 /* PeakOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = CB4C115F1DF9800600837343 /* PeakOperation.h */; };
 		18D0B5B020FCE6E200CD77F6 /* PeakOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D0B5AF20FCE6E200CD77F6 /* PeakOperationTests.swift */; };
-		827CA5581E7C8640437CAE73 /* Pods_PeakOperation_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1B54F06F6762B892245C7B3 /* Pods_PeakOperation_iOS.framework */; };
+		1AFFBAAAAFF03602C1199C30 /* libPods-PeakOperation-macOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF8BD227154D1065B470A94A /* libPods-PeakOperation-macOSTests.a */; };
+		2100928714E82DB165E7A701 /* libPods-PeakOperation-macOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10CB816006FAFFFDA44B9F22 /* libPods-PeakOperation-macOS.a */; };
+		3FE051C3E16AEAED2614CAB6 /* libPods-PeakOperation-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0F2F9D189C6B22D471C7489 /* libPods-PeakOperation-iOS.a */; };
 		8D1A2D781E951E2F001EF435 /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A2D771E951E2F001EF435 /* ConcurrentOperation.swift */; };
 		CB3178711FD7FE9800B063ED /* GroupChainOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3178701FD7FE9800B063ED /* GroupChainOperation.swift */; };
 		CB47513C1E3A4A4400A43672 /* Collection+Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB47513B1E3A4A4400A43672 /* Collection+Operations.swift */; };
@@ -30,8 +31,7 @@
 		CB4C11831DF9818500837343 /* UsingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C117B1DF9818500837343 /* UsingResult.swift */; };
 		CB4C11841DF9818500837343 /* BlockResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C117C1DF9818500837343 /* BlockResultOperation.swift */; };
 		CB4C11851DF9818500837343 /* RetryingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C117D1DF9818500837343 /* RetryingOperation.swift */; };
-		CFB3052151CBD1EC7882FE4D /* Pods_PeakOperation_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7E8FF9A2649D08DE9DC1EF3 /* Pods_PeakOperation_iOSTests.framework */; };
-		ECABFFCF63241449B681DD63 /* Pods_PeakOperation_macOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE01D7998829E83823F8DEC /* Pods_PeakOperation_macOSTests.framework */; };
+		FA3B9BFE728D56412DE61DCA /* libPods-PeakOperation-iOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C760F7DDF94ECAFE1AD9B36 /* libPods-PeakOperation-iOSTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,18 +52,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		10CB816006FAFFFDA44B9F22 /* libPods-PeakOperation-macOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PeakOperation-macOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1864BE6421998B79004E5436 /* PeakOperation_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PeakOperation_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1864BE6721998B79004E5436 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1864BE6C21998B79004E5436 /* PeakOperation_macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeakOperation_macOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1864BE7321998B79004E5436 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18D0B5AF20FCE6E200CD77F6 /* PeakOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeakOperationTests.swift; sourceTree = "<group>"; };
 		1A9889E0EFBED43B1C4B338A /* Pods-PeakOperation-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeakOperation-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PeakOperation-iOS/Pods-PeakOperation-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		1C760F7DDF94ECAFE1AD9B36 /* libPods-PeakOperation-iOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PeakOperation-iOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		764123E2025C68472F9EB8C7 /* Pods-PeakOperation-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeakOperation-macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PeakOperation-macOS/Pods-PeakOperation-macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		8D1A2D771E951E2F001EF435 /* ConcurrentOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcurrentOperation.swift; sourceTree = "<group>"; };
 		912B1A5DF9693DF046079D87 /* Pods-PeakOperation-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeakOperation-iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PeakOperation-iOSTests/Pods-PeakOperation-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		97DC77FD284869034D55517C /* Pods_PeakOperation_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeakOperation_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A02678E7450079FCCCDECEF5 /* Pods-PeakOperation-macOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeakOperation-macOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PeakOperation-macOSTests/Pods-PeakOperation-macOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		BEE01D7998829E83823F8DEC /* Pods_PeakOperation_macOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeakOperation_macOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4D9FC37F36B741BC4BAE8B8 /* Pods-PeakOperation-macOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeakOperation-macOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PeakOperation-macOSTests/Pods-PeakOperation-macOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C539CB07B15B4306F904908F /* Pods-PeakOperation-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeakOperation-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PeakOperation-iOSTests/Pods-PeakOperation-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		CB3178701FD7FE9800B063ED /* GroupChainOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupChainOperation.swift; sourceTree = "<group>"; };
@@ -78,10 +78,10 @@
 		CB4C117B1DF9818500837343 /* UsingResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsingResult.swift; sourceTree = "<group>"; };
 		CB4C117C1DF9818500837343 /* BlockResultOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockResultOperation.swift; sourceTree = "<group>"; };
 		CB4C117D1DF9818500837343 /* RetryingOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryingOperation.swift; sourceTree = "<group>"; };
+		CF8BD227154D1065B470A94A /* libPods-PeakOperation-macOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PeakOperation-macOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D491E143BA2208470DC02111 /* Pods-PeakOperation-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeakOperation-macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PeakOperation-macOS/Pods-PeakOperation-macOS.release.xcconfig"; sourceTree = "<group>"; };
-		D7E8FF9A2649D08DE9DC1EF3 /* Pods_PeakOperation_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeakOperation_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3067FE28CC26F0E7ACEA0F2 /* Pods-PeakOperation-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeakOperation-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PeakOperation-iOS/Pods-PeakOperation-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		F1B54F06F6762B892245C7B3 /* Pods_PeakOperation_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PeakOperation_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0F2F9D189C6B22D471C7489 /* libPods-PeakOperation-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PeakOperation-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E967A2158FD0B08F6E143C7 /* Pods_PeakOperation_macOS.framework in Frameworks */,
+				2100928714E82DB165E7A701 /* libPods-PeakOperation-macOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +98,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1864BE6D21998B79004E5436 /* PeakOperation_macOS.framework in Frameworks */,
-				ECABFFCF63241449B681DD63 /* Pods_PeakOperation_macOSTests.framework in Frameworks */,
+				1AFFBAAAAFF03602C1199C30 /* libPods-PeakOperation-macOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,7 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				827CA5581E7C8640437CAE73 /* Pods_PeakOperation_iOS.framework in Frameworks */,
+				3FE051C3E16AEAED2614CAB6 /* libPods-PeakOperation-iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,7 +115,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB4C11661DF9800600837343 /* PeakOperation_iOS.framework in Frameworks */,
-				CFB3052151CBD1EC7882FE4D /* Pods_PeakOperation_iOSTests.framework in Frameworks */,
+				FA3B9BFE728D56412DE61DCA /* libPods-PeakOperation-iOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,10 +140,10 @@
 		03B77AA2471D0BEC2E366485 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F1B54F06F6762B892245C7B3 /* Pods_PeakOperation_iOS.framework */,
-				D7E8FF9A2649D08DE9DC1EF3 /* Pods_PeakOperation_iOSTests.framework */,
-				97DC77FD284869034D55517C /* Pods_PeakOperation_macOS.framework */,
-				BEE01D7998829E83823F8DEC /* Pods_PeakOperation_macOSTests.framework */,
+				F0F2F9D189C6B22D471C7489 /* libPods-PeakOperation-iOS.a */,
+				1C760F7DDF94ECAFE1AD9B36 /* libPods-PeakOperation-iOSTests.a */,
+				10CB816006FAFFFDA44B9F22 /* libPods-PeakOperation-macOS.a */,
+				CF8BD227154D1065B470A94A /* libPods-PeakOperation-macOSTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
