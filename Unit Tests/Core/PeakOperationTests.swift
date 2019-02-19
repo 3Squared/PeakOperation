@@ -448,6 +448,24 @@ class PeakOperationTests: XCTestCase {
         waitForExpectations(timeout: 10)
     }
 
+    func testEnqueueWithCompletion() {
+        let expect = expectation(description: "")
+        
+        let _ = BlockResultOperation {
+            return true
+        }.enqueue { output in
+            do {
+                let boolean = try output.resolve()
+                XCTAssertTrue(boolean)
+                expect.fulfill()
+            } catch {
+                XCTFail()
+            }
+        }
+        
+        waitForExpectations(timeout: 1)
+    }
+
 }
 
 public enum TestError: Error {

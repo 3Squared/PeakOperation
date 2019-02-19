@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PeakResult
 
 // Extensions on `Operation` that enable chaining and result passing.
 public extension Operation {
@@ -21,8 +22,10 @@ public extension Operation {
     /// all of the receiver dependancies, and their dependencies, recursively.
     ///
     /// - Parameter queue: The queue to use. If not provided, a new one is made (optional).
-    func enqueue(on queue: OperationQueue = OperationQueue()) {
+    @discardableResult
+    func enqueue(on queue: OperationQueue = OperationQueue()) -> Self {
         operationChain.enqueue(on: queue)
+        return self
     }
     
     /// Add the given operation as a dependancy of the receiver.
@@ -37,6 +40,17 @@ public extension Operation {
     }
 }
 
+extension ProducesResult where Self: Operation {
+    
+    @discardableResult
+    func enqueue(on queue: OperationQueue = OperationQueue(), completion: @escaping (Result<Output>) -> ()) -> Self {
+        addResultBlock(block: completion)
+        operationChain.enqueue(on: queue)
+        return self
+    }
+}
+
+
 public extension ConcurrentOperation {
     /// Enqueue all of the operation chain, which includes the receiver and
     /// all of the receiver dependancies, and their dependencies, recursively.
@@ -46,5 +60,15 @@ public extension ConcurrentOperation {
     func enqueueWithProgress(on queue: OperationQueue = OperationQueue()) -> Progress {
         enqueue(on: queue)
         return overallProgress()
+    }
+}
+
+public extension Collection where Iterator.Element: Operation {
+    
+    /// Enqueue a collection of operations on the given queue.
+    ///
+    /// - Parameter queue: The queue to use. If not provided, a new one is made (optional).
+    func enqueue(on queue: OperationQueue = OperationQueue()) {
+        queue.addOperations(Array(self), waitUntilFinished: false)
     }
 }

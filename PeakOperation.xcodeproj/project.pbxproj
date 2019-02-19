@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1830B15C219D8F7700AC862F /* BlockResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C117C1DF9818500837343 /* BlockResultOperation.swift */; };
-		1830B15D219D8F7700AC862F /* Collection+Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB47513B1E3A4A4400A43672 /* Collection+Operations.swift */; };
 		1830B15E219D8F7700AC862F /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A2D771E951E2F001EF435 /* ConcurrentOperation.swift */; };
 		1830B15F219D8F7700AC862F /* GroupChainOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3178701FD7FE9800B063ED /* GroupChainOperation.swift */; };
 		1830B160219D8F7700AC862F /* MapOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C11791DF9818500837343 /* MapOperation.swift */; };
@@ -23,7 +22,6 @@
 		3FE051C3E16AEAED2614CAB6 /* libPods-PeakOperation-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0F2F9D189C6B22D471C7489 /* libPods-PeakOperation-iOS.a */; };
 		8D1A2D781E951E2F001EF435 /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A2D771E951E2F001EF435 /* ConcurrentOperation.swift */; };
 		CB3178711FD7FE9800B063ED /* GroupChainOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3178701FD7FE9800B063ED /* GroupChainOperation.swift */; };
-		CB47513C1E3A4A4400A43672 /* Collection+Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB47513B1E3A4A4400A43672 /* Collection+Operations.swift */; };
 		CB47513E1E3A4AA500A43672 /* Operation+Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB47513D1E3A4AA500A43672 /* Operation+Queue.swift */; };
 		CB4C11661DF9800600837343 /* PeakOperation_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4C115C1DF9800600837343 /* PeakOperation_iOS.framework */; };
 		CB4C116D1DF9800600837343 /* PeakOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = CB4C115F1DF9800600837343 /* PeakOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -67,7 +65,6 @@
 		C4D9FC37F36B741BC4BAE8B8 /* Pods-PeakOperation-macOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeakOperation-macOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PeakOperation-macOSTests/Pods-PeakOperation-macOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C539CB07B15B4306F904908F /* Pods-PeakOperation-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeakOperation-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PeakOperation-iOSTests/Pods-PeakOperation-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		CB3178701FD7FE9800B063ED /* GroupChainOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupChainOperation.swift; sourceTree = "<group>"; };
-		CB47513B1E3A4A4400A43672 /* Collection+Operations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+Operations.swift"; sourceTree = "<group>"; };
 		CB47513D1E3A4AA500A43672 /* Operation+Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Operation+Queue.swift"; sourceTree = "<group>"; };
 		CB4C115C1DF9800600837343 /* PeakOperation_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PeakOperation_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB4C115F1DF9800600837343 /* PeakOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PeakOperation.h; sourceTree = "<group>"; };
@@ -151,13 +148,12 @@
 		1864BE5D21998A6E004E5436 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				CB4C115F1DF9800600837343 /* PeakOperation.h */,
 				CB4C117C1DF9818500837343 /* BlockResultOperation.swift */,
-				CB47513B1E3A4A4400A43672 /* Collection+Operations.swift */,
 				8D1A2D771E951E2F001EF435 /* ConcurrentOperation.swift */,
 				CB3178701FD7FE9800B063ED /* GroupChainOperation.swift */,
 				CB4C11791DF9818500837343 /* MapOperation.swift */,
 				CB47513D1E3A4AA500A43672 /* Operation+Queue.swift */,
-				CB4C115F1DF9800600837343 /* PeakOperation.h */,
 				CB4C117D1DF9818500837343 /* RetryingOperation.swift */,
 				CB4C117B1DF9818500837343 /* UsingResult.swift */,
 			);
@@ -527,7 +523,6 @@
 				1830B162219D8F7700AC862F /* RetryingOperation.swift in Sources */,
 				1830B15F219D8F7700AC862F /* GroupChainOperation.swift in Sources */,
 				1830B15E219D8F7700AC862F /* ConcurrentOperation.swift in Sources */,
-				1830B15D219D8F7700AC862F /* Collection+Operations.swift in Sources */,
 				1830B161219D8F7700AC862F /* Operation+Queue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -544,7 +539,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB4C11831DF9818500837343 /* UsingResult.swift in Sources */,
-				CB47513C1E3A4A4400A43672 /* Collection+Operations.swift in Sources */,
 				CB47513E1E3A4AA500A43672 /* Operation+Queue.swift in Sources */,
 				CB4C11841DF9818500837343 /* BlockResultOperation.swift in Sources */,
 				8D1A2D781E951E2F001EF435 /* ConcurrentOperation.swift in Sources */,
