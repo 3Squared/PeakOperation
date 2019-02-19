@@ -42,6 +42,13 @@ public extension Operation {
 
 extension ProducesResult where Self: Operation {
     
+    /// Enqueue all of the operation chain, which includes the receiver and
+    /// all of the receiver dependancies, and their dependencies, recursively.
+    ///
+    /// - Parameters:
+    ///   - queue: The queue to use. If not provided, a new one is made (optional).
+    ///   - completion: The block to be called on completion.
+    /// - Returns: The operation that was queued.
     @discardableResult
     func enqueue(on queue: OperationQueue = OperationQueue(), completion: @escaping (Result<Output>) -> ()) -> Self {
         addResultBlock(block: completion)
@@ -50,8 +57,8 @@ extension ProducesResult where Self: Operation {
     }
 }
 
-
 public extension ConcurrentOperation {
+    
     /// Enqueue all of the operation chain, which includes the receiver and
     /// all of the receiver dependancies, and their dependencies, recursively.
     ///
