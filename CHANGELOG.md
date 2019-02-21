@@ -4,6 +4,12 @@ The changelog for `PeakOperation`.
 
 --------------------------------------
 
+3.0.0
+-----
+- Make it easier to subclass `MapOperation`.
+- Replace old `MapOperation` with `BlockMapOperation`.
+- Add method to enqueue and set a result block together.
+
 2.2.1
 -----
 - Add macOS and tvOS support.
