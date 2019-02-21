@@ -24,7 +24,7 @@ class PeakOperationTests: XCTestCase {
     func testInput() {
         let expect = expectation(description: "")
         
-        let negatingOperation = MapOperation<Bool, Bool> { input in
+        let negatingOperation = BlockMapOperation<Bool, Bool> { input in
             do {
                 let boolean = try input.resolve()
                 return Result { return !boolean }
@@ -84,7 +84,7 @@ class PeakOperationTests: XCTestCase {
             return true
         }
         
-        let negatingOperation = MapOperation<Bool, Bool> { previous in
+        let negatingOperation = BlockMapOperation<Bool, Bool> { previous in
             do {
                 let boolean = try previous.resolve()
                 return Result { return !boolean }
@@ -93,7 +93,7 @@ class PeakOperationTests: XCTestCase {
             }
         }
         
-        let stringOperation = MapOperation<Bool, String> { previous in
+        let stringOperation = BlockMapOperation<Bool, String> { previous in
             do {
                 let boolean = try previous.resolve()
                 return Result { return boolean.description }
@@ -122,22 +122,22 @@ class PeakOperationTests: XCTestCase {
     }
     
     func testSingleOperationRecursiveDependencies() {
-        let op1 = MapOperation<Bool, Bool> { _ in
+        let op1 = BlockMapOperation<Bool, Bool> { _ in
             return Result { return false }
         }
         XCTAssertEqual(op1.operationChain, [op1])
     }
     
     func testManyOperationsRecursiveDependencies() {
-        let op1 = MapOperation<Bool, Bool> { _ in
+        let op1 = BlockMapOperation<Bool, Bool> { _ in
             return Result { return false }
         }
         
-        let op2 = MapOperation<Bool, Bool> { _ in
+        let op2 = BlockMapOperation<Bool, Bool> { _ in
             return Result { return false }
         }
         
-        let op3 = MapOperation<Bool, Bool> { _ in
+        let op3 = BlockMapOperation<Bool, Bool> { _ in
             return Result { return false }
         }
         
@@ -192,11 +192,11 @@ class PeakOperationTests: XCTestCase {
     func testCancelledOperationPassesNoInput() {
         let expect = expectation(description: "")
         
-        let firstOperation = MapOperation<String, String> { _ in
+        let firstOperation = BlockMapOperation<String, String> { _ in
             return Result { "first" }
         }
 
-        let secondOperation = MapOperation<String, String> { input in
+        let secondOperation = BlockMapOperation<String, String> { input in
             do {
                 _ = try input.resolve()
                 XCTFail()
@@ -226,7 +226,7 @@ class PeakOperationTests: XCTestCase {
             return true
         }
         
-        let operation3 = MapOperation<String, String> { input in
+        let operation3 = BlockMapOperation<String, String> { input in
             return Result { throw TestError.justATest }
         }
 
@@ -293,7 +293,7 @@ class PeakOperationTests: XCTestCase {
             return "Hello"
         }
         
-        let secondOperation = MapOperation<String, String> { input in
+        let secondOperation = BlockMapOperation<String, String> { input in
             return Result { try "\(input.resolve()) World!" }
         }
         
@@ -326,7 +326,7 @@ class PeakOperationTests: XCTestCase {
             return "Hello"
         }
         
-        let secondOperation = MapOperation<String, String> { input in
+        let secondOperation = BlockMapOperation<String, String> { input in
             return Result { try "\(input.resolve()) World!" }
         }
         
@@ -360,7 +360,7 @@ class PeakOperationTests: XCTestCase {
             return "Hello"
         }
         
-        let secondOperation = MapOperation<String, String> { input in
+        let secondOperation = BlockMapOperation<String, String> { input in
             return Result { try "\(input.resolve()) World!" }
         }
         
@@ -384,11 +384,11 @@ class PeakOperationTests: XCTestCase {
     func testGroupOperationFirstFailure() {
         let expect = expectation(description: "")
 
-        let firstOperation = MapOperation<Void, String> { _ in
+        let firstOperation = BlockMapOperation<Void, String> { _ in
             return Result { throw TestError.justATest }
         }
 
-        let secondOperation = MapOperation<String, String> { input in
+        let secondOperation = BlockMapOperation<String, String> { input in
             return Result { try "\(input.resolve()) World!" }
         }
 
@@ -397,7 +397,7 @@ class PeakOperationTests: XCTestCase {
             .group()
 
 
-        let group2 = MapOperation<Void, String> { _ in
+        let group2 = BlockMapOperation<Void, String> { _ in
             return Result { "Lorem Ipsum." }
         }.group()
 
@@ -423,11 +423,11 @@ class PeakOperationTests: XCTestCase {
     func testGroupOperationSecondFailure() {
         let expect = expectation(description: "")
 
-        let firstOperation = MapOperation<Void, String> { input in
+        let firstOperation = BlockMapOperation<Void, String> { input in
             return Result { try "\(input.resolve()) World!" }
         }
 
-        let secondOperation = MapOperation<String, String> { _ in
+        let secondOperation = BlockMapOperation<String, String> { _ in
             return Result { throw TestError.justATest }
         }
 
@@ -465,11 +465,93 @@ class PeakOperationTests: XCTestCase {
         
         waitForExpectations(timeout: 1)
     }
+    
+    
+    func testMapOperationOverrideMapValueSuccess() {
+        let expect = expectation(description: "")
+        
+        let negatingOperation = TestMapValueOperation(input: true)
+        negatingOperation.addResultBlock { output in
+            switch (output) {
+            case .success(let boolean):
+                XCTAssertFalse(boolean)
+                expect.fulfill()
+            default:
+                XCTFail()
+            }
+        }
+        
+        negatingOperation.enqueue()
+        
+        waitForExpectations(timeout: 1)
+    }
+    
+    func testMapOperationOverrideMapValueFailure() {
+        let expect = expectation(description: "")
+        
+        let negatingOperation = TestMapValueOperation()
+        negatingOperation.input = .failure(TestError.justATest)
+        
+        negatingOperation.addResultBlock { output in
+            switch (output) {
+            case .failure(TestError.justATest):
+                expect.fulfill()
+            default:
+                XCTFail()
+            }
+        }
+        
+        negatingOperation.enqueue()
+        
+        waitForExpectations(timeout: 1)
+    }
+
+
+    func testMapOperationOverrideMapResultSuccess() {
+        let expect = expectation(description: "")
+        
+        let negatingOperation = TestMapResultOperation(input: true)
+        negatingOperation.addResultBlock { output in
+            switch (output) {
+            case .success(let boolean):
+                XCTAssertFalse(boolean)
+                expect.fulfill()
+            default:
+                XCTFail()
+            }
+        }
+        
+        negatingOperation.enqueue()
+        
+        waitForExpectations(timeout: 1)
+    }
+    
+    
+    func testMapOperationOverrideMapResultFailure() {
+        let expect = expectation(description: "")
+        
+        let negatingOperation = TestMapResultOperation(input: true)
+        negatingOperation.input = .failure(TestError.justATest)
+
+        negatingOperation.addResultBlock { output in
+            switch (output) {
+            case .failure(TestError.alsoATest):
+                expect.fulfill()
+            default:
+                XCTFail()
+            }
+        }
+        
+        negatingOperation.enqueue()
+        
+        waitForExpectations(timeout: 1)
+    }
 
 }
 
 public enum TestError: Error {
     case justATest
+    case alsoATest
 }
 
 open class TestRetryOperation: RetryingOperation<AnyObject> {
@@ -479,4 +561,19 @@ open class TestRetryOperation: RetryingOperation<AnyObject> {
     }
 }
 
+open class TestMapValueOperation: MapOperation<Bool, Bool> {
+    open override func map(input: Bool) -> Result<Bool> {
+        return .success(!input)
+    }
+}
 
+open class TestMapResultOperation: MapOperation<Bool, Bool> {
+    open override func map(input: Result<Bool>) -> Result<Bool> {
+        switch input {
+        case .success(let value):
+            return .success(!value)
+        case .failure(_):
+            return .failure(TestError.alsoATest)
+        }
+    }
+}
