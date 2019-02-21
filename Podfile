@@ -2,28 +2,20 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target 'PeakOperation-iOS' do
 
-	platform :ios, '10.0'
+    platform :ios, '10.0'
+        pod 'PeakResult'
 
-	use_frameworks!
+        target 'PeakOperation-iOSTests' do
+            inherit! :search_paths
+        end
+    end
 
-	pod 'PeakResult'
-		
-  target 'PeakOperation-iOSTests' do
+    target 'PeakOperation-macOS' do
 
-		inherit! :search_paths
-	end
-end
+        platform :osx, '10.13'
+        pod 'PeakResult'
 
-target 'PeakOperation-macOS' do
-
-	platform :osx, '10.13'
-
-	use_frameworks!
-
-	pod 'PeakResult'
-		
-  target 'PeakOperation-macOSTests' do
-
-		inherit! :search_paths
-	end
+        target 'PeakOperation-macOSTests' do
+            inherit! :search_paths
+        end
 end
