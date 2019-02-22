@@ -34,7 +34,7 @@ public extension Operation {
     /// - Parameter operation: An operation to run after `self` is finished.
     /// - Returns: The dependant operation, with the dependancy added.
     @discardableResult
-    public func then(do operation: Operation) -> Operation {
+    public func then<O: Operation>(do operation: O) -> O {
         operation.addDependency(self)
         return operation
     }
