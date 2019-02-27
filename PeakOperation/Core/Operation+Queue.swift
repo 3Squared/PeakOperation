@@ -14,8 +14,8 @@ public extension Operation {
 
     /// The list of this operation's dependancies, and their dependencies, recursively.
     /// Includes `self`.
-    internal var operationChain: [Operation] {
-        return dependencies.flatMap { $0.operationChain } + [self]
+    internal var operationChain: Set<Operation> {
+        return Set(dependencies.flatMap { $0.operationChain } + [self])
     }
     
     /// Enqueue all of the operation chain, which includes the receiver and 
