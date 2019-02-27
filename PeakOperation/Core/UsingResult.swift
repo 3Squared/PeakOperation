@@ -67,7 +67,7 @@ extension ProducesResult where Self: ConcurrentOperation {
     @discardableResult
     public func passesResult<Consumer>(to operation: Consumer) -> Consumer where Consumer: Operation, Consumer: ConsumesResult, Consumer.Input == Self.Output {
         operation.addDependency(self)
-        willFinish = { [weak self, unowned operation] in
+        addWillFinishBlock { [weak self, unowned operation] in
             guard let strongSelf = self else { return }
             if !strongSelf.isCancelled {
                 operation.input = strongSelf.output
