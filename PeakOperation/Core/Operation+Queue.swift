@@ -76,6 +76,7 @@ public extension Collection where Iterator.Element: Operation {
     ///
     /// - Parameter queue: The queue to use. If not provided, a new one is made (optional).
     public func enqueue(on queue: OperationQueue = OperationQueue()) {
-        queue.addOperations(Array(self), waitUntilFinished: false)
+        let chain = Set(flatMap { $0.operationChain })
+        queue.addOperations(Array(chain), waitUntilFinished: false)
     }
 }
