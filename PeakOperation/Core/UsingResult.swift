@@ -132,6 +132,28 @@ extension ProducesResult where Self: ConcurrentOperation {
         }
         return operations
     }
+    
+    /// Use to chain multiple operations together, passing the output result of one as the input of the next.
+    /// Does not pass successful results, only failures. This way operations without matching types can be chained.
+    ///
+    /// - Parameter operation: The operation to pass the receiver's `Result` to.
+    /// - Returns: The dependant operation, with the dependancy added.
+    @discardableResult
+    public func passesError<Consumer>(to operation: Consumer) -> Consumer where Consumer: Operation, Consumer: ConsumesResult  {
+        operation.addDependency(self)
+        addWillFinishBlock { [weak self, unowned operation] in
+            guard let strongSelf = self else { return }
+            if !strongSelf.isCancelled {
+                switch strongSelf.output {
+                case .failure(let error):
+                    operation.input = .failure(error)
+                default:
+                    break
+                }
+            }
+        }
+        return operation
+    }
 }
 
 
