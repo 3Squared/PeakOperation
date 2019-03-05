@@ -50,7 +50,7 @@ extension ProducesResult where Self: Operation {
     ///   - completion: The block to be called on completion.
     /// - Returns: The operation that was queued.
     @discardableResult
-    public func enqueue(on queue: OperationQueue = OperationQueue(), completion: @escaping (Result<Output>) -> ()) -> Self {
+    public func enqueue(on queue: OperationQueue = OperationQueue(), completion: @escaping (Result<Output>) -> Void) -> Self {
         addResultBlock(block: completion)
         operationChain.enqueue(on: queue)
         return self

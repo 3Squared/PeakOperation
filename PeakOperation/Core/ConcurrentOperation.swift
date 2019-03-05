@@ -22,8 +22,8 @@ fileprivate enum OperationState: Int {
 /// Override `execute()` to perform your work. It is up to the user to perform the work on another thread - one is not made for you.
 /// When your work is completed, call `finish()` to complete the operation.
 open class ConcurrentOperation: Operation {
-    private var willStart: () -> () = { }
-    private var willFinish: () -> () = { }
+    private var willStart: () -> Void = { }
+    private var willFinish: () -> Void = { }
     
     public typealias TimeInSeconds = Int64
     
