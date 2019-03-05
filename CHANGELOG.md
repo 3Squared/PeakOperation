@@ -4,6 +4,14 @@ The changelog for `PeakOperation`.
 
 --------------------------------------
 
+3.1.0
+-----
+- Allow passing of result to multiple dependants
+- Allow receiving of multiple results by a dependant 
+- Make willStart/Finish publicly settable
+- Add method that passes only error
+- Infer type of operation passed into `then(do:)` function
+
 3.0.0
 -----
 - Make it easier to subclass `MapOperation`.
