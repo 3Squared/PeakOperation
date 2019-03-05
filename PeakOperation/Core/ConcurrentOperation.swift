@@ -22,8 +22,8 @@ fileprivate enum OperationState: Int {
 /// Override `execute()` to perform your work. It is up to the user to perform the work on another thread - one is not made for you.
 /// When your work is completed, call `finish()` to complete the operation.
 open class ConcurrentOperation: Operation {
-    internal var willStart: () -> () = { }
-    internal var willFinish: () -> () = { }
+    private var willStart: () -> Void = { }
+    private var willFinish: () -> Void = { }
     
     public typealias TimeInSeconds = Int64
     
@@ -136,5 +136,30 @@ open class ConcurrentOperation: Operation {
             totalProgress.totalUnitCount += estimatedTime
         }
         return totalProgress
+    }
+    
+    
+    /// Add a block to be called just before an operation begins executing.
+    /// Any inputs to an operation is not guaranteed to be set by the time the block is called.
+    ///
+    /// - Parameter block
+    public func addWillStartBlock(block: @escaping () -> Void) {
+        let existing = willStart
+        willStart = {
+            existing()
+            block()
+        }
+    }
+    
+    /// Add a block to be called after execution has finished.
+    /// Any output from an operation should be set by the time the block is called.
+    ///
+    /// - Parameter block
+    public func addWillFinishBlock(block: @escaping () -> Void) {
+        let existing = willFinish
+        willFinish = {
+            existing()
+            block()
+        }
     }
 }

@@ -14,8 +14,8 @@ public extension Operation {
 
     /// The list of this operation's dependancies, and their dependencies, recursively.
     /// Includes `self`.
-    internal var operationChain: [Operation] {
-        return dependencies.flatMap { $0.operationChain } + [self]
+    internal var operationChain: Set<Operation> {
+        return Set(dependencies.flatMap { $0.operationChain } + [self])
     }
     
     /// Enqueue all of the operation chain, which includes the receiver and 
@@ -23,7 +23,7 @@ public extension Operation {
     ///
     /// - Parameter queue: The queue to use. If not provided, a new one is made (optional).
     @discardableResult
-    func enqueue(on queue: OperationQueue = OperationQueue()) -> Self {
+    public func enqueue(on queue: OperationQueue = OperationQueue()) -> Self {
         operationChain.enqueue(on: queue)
         return self
     }
@@ -50,7 +50,7 @@ extension ProducesResult where Self: Operation {
     ///   - completion: The block to be called on completion.
     /// - Returns: The operation that was queued.
     @discardableResult
-    func enqueue(on queue: OperationQueue = OperationQueue(), completion: @escaping (Result<Output>) -> ()) -> Self {
+    public func enqueue(on queue: OperationQueue = OperationQueue(), completion: @escaping (Result<Output>) -> Void) -> Self {
         addResultBlock(block: completion)
         operationChain.enqueue(on: queue)
         return self
@@ -64,7 +64,7 @@ public extension ConcurrentOperation {
     ///
     /// - Parameter queue: The queue to use. If not provided, a new one is made (optional).
     /// - Returns: The progress of the operation chain's execution.
-    func enqueueWithProgress(on queue: OperationQueue = OperationQueue()) -> Progress {
+    public func enqueueWithProgress(on queue: OperationQueue = OperationQueue()) -> Progress {
         enqueue(on: queue)
         return overallProgress()
     }
@@ -75,7 +75,8 @@ public extension Collection where Iterator.Element: Operation {
     /// Enqueue a collection of operations on the given queue.
     ///
     /// - Parameter queue: The queue to use. If not provided, a new one is made (optional).
-    func enqueue(on queue: OperationQueue = OperationQueue()) {
-        queue.addOperations(Array(self), waitUntilFinished: false)
+    public func enqueue(on queue: OperationQueue = OperationQueue()) {
+        let chain = Set(flatMap { $0.operationChain })
+        queue.addOperations(Array(chain), waitUntilFinished: false)
     }
 }
