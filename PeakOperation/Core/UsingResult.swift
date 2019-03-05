@@ -9,6 +9,8 @@
 import Foundation
 import PeakResult
 
+let resultPassingQueue = DispatchQueue(label: "PeakOperation.resultPassingQueue", attributes: .concurrent)
+
 /// Implement this protocol to indicate that the object will produce a `Result` as output.
 public protocol ProducesResult: class {
     associatedtype Output
@@ -23,6 +25,14 @@ public protocol ConsumesResult: class {
     
     /// The `Result` to use as input.
     var input: Result<Input> { get set }
+}
+
+/// Implement this protocol to indicate that the object can receive multiple `Result`s as input.
+public protocol ConsumesMultipleResults: class {
+    associatedtype Input
+    
+    /// The array of `Result`s to use as input.
+    var input: [Result<Input>] { get set }
 }
 
 /// Built-in `Error`s for use as failure states for a `ProducesResult` Operation.
@@ -57,21 +67,107 @@ extension ProducesResult where Self: Operation {
 
 extension ProducesResult where Self: ConcurrentOperation {
     
-    /// Use to chain multiple operations together, passing the output result of one as the input of the next.
+    /// Use to chain multiple operations together, passing the output result as the input of the next.
     /// Only useable if the output and input types match. Consider using a `MapOperation` if they do not.
-    ///
-    /// This is only available on `ConcurrentOperation`s because of the need for a `willFinish` notification.
     ///
     /// - Parameter operation: The operation to pass the receiver's `Result` to.
     /// - Returns: The dependant operation, with the dependancy added.
     @discardableResult
     public func passesResult<Consumer>(to operation: Consumer) -> Consumer where Consumer: Operation, Consumer: ConsumesResult, Consumer.Input == Self.Output {
         operation.addDependency(self)
-        willFinish = { [weak self, unowned operation] in
+        addWillFinishBlock { [weak self, unowned operation] in
             guard let strongSelf = self else { return }
             if !strongSelf.isCancelled {
                 operation.input = strongSelf.output
             }
+        }
+        return operation
+    }
+    
+    /// Use to chain multiple operations together, adding the output result to the array of input of the next.
+    /// Only useable if the output and input types match. Consider using a `MapOperation` if they do not.
+    ///
+    /// - Parameter operation: The operation to pass the receiver's `Result` to.
+    /// - Returns: The dependant operation, with the dependancy added.
+    @discardableResult
+    public func passesResult<Consumer>(to operation: Consumer) -> Consumer where Consumer: Operation, Consumer: ConsumesMultipleResults, Consumer.Input == Self.Output {
+        operation.addDependency(self)
+        addWillFinishBlock { [weak self, unowned operation] in
+            guard let strongSelf = self else { return }
+            if !strongSelf.isCancelled {
+                resultPassingQueue.async(flags: .barrier) {
+                    operation.input.append(strongSelf.output)
+                }
+            }
+        }
+        return operation
+    }
+
+    /// Use to chain multiple operations together, passing the output result as the input to each operation in an array.
+    /// Only useable if the output and input types match. Consider using a `MapOperation` if they do not.
+    ///
+    /// This method does not add dependancies between the operations in the array.
+    ///
+    /// - Parameter operations: An array operation to pass the receiver's `Result` to.
+    /// - Returns: The dependant operations, with the dependancies added.
+    @discardableResult
+    public func passesResult<Consumer>(to operations: [Consumer]) -> [Consumer] where Consumer: Operation, Consumer: ConsumesResult, Consumer.Input == Self.Output {
+        for operation in operations {
+            passesResult(to: operation)
+        }
+        return operations
+    }
+    
+    /// Use to chain multiple operations together, adding the output result to the array of input of each operation in an array.
+    /// Only useable if the output and input types match. Consider using a `MapOperation` if they do not.
+    ///
+    /// This method does not add dependancies between the operations in the array.
+    ///
+    /// - Parameter operations: An array operation to pass the receiver's `Result` to.
+    /// - Returns: The dependant operations, with the dependancies added.
+    @discardableResult
+    public func passesResult<Consumer>(to operations: [Consumer]) -> [Consumer] where Consumer: Operation, Consumer: ConsumesMultipleResults, Consumer.Input == Self.Output {
+        for operation in operations {
+            passesResult(to: operation)
+        }
+        return operations
+    }
+    
+    /// Use to chain multiple operations together, passing the output result of one as the input of the next.
+    /// Does not pass successful results, only failures. This way operations without matching types can be chained.
+    ///
+    /// - Parameter operation: The operation to pass the receiver's `Result` to.
+    /// - Returns: The dependant operation, with the dependancy added.
+    @discardableResult
+    public func passesError<Consumer>(to operation: Consumer) -> Consumer where Consumer: Operation, Consumer: ConsumesResult  {
+        operation.addDependency(self)
+        addWillFinishBlock { [weak self, unowned operation] in
+            guard let strongSelf = self else { return }
+            if !strongSelf.isCancelled {
+                switch strongSelf.output {
+                case .failure(let error):
+                    operation.input = .failure(error)
+                default:
+                    break
+                }
+            }
+        }
+        return operation
+    }
+}
+
+
+public extension Collection where Iterator.Element: ProducesResult & ConcurrentOperation {
+    
+    /// Use to chain multiple operations together, adding the output result of each operation in the collection to
+    /// to the array of input to the next.
+    ///
+    /// - Parameter operation: The operation to pass the receiver's `Result`s to.
+    /// - Returns: The dependant operation, with the dependancies added.
+    @discardableResult
+    public func passesResults<Consumer>(to operation: Consumer) -> Consumer where Consumer: Operation, Consumer: ConsumesMultipleResults, Consumer.Input == Self.Element.Output {
+        for producer in self {
+            producer.passesResult(to: operation)
         }
         return operation
     }

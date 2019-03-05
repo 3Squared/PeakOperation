@@ -16,7 +16,7 @@
 		1830B163219D8F7700AC862F /* UsingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C117B1DF9818500837343 /* UsingResult.swift */; };
 		1864BE6D21998B79004E5436 /* PeakOperation_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1864BE6421998B79004E5436 /* PeakOperation_macOS.framework */; };
 		1864BE8221998F54004E5436 /* PeakOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = CB4C115F1DF9800600837343 /* PeakOperation.h */; };
-		18D0B5B020FCE6E200CD77F6 /* PeakOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D0B5AF20FCE6E200CD77F6 /* PeakOperationTests.swift */; };
+		18D0B5B020FCE6E200CD77F6 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D0B5AF20FCE6E200CD77F6 /* ResultTests.swift */; };
 		1AFFBAAAAFF03602C1199C30 /* libPods-PeakOperation-macOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF8BD227154D1065B470A94A /* libPods-PeakOperation-macOSTests.a */; };
 		2100928714E82DB165E7A701 /* libPods-PeakOperation-macOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10CB816006FAFFFDA44B9F22 /* libPods-PeakOperation-macOS.a */; };
 		3FE051C3E16AEAED2614CAB6 /* libPods-PeakOperation-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0F2F9D189C6B22D471C7489 /* libPods-PeakOperation-iOS.a */; };
@@ -29,6 +29,11 @@
 		CB4C11831DF9818500837343 /* UsingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C117B1DF9818500837343 /* UsingResult.swift */; };
 		CB4C11841DF9818500837343 /* BlockResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C117C1DF9818500837343 /* BlockResultOperation.swift */; };
 		CB4C11851DF9818500837343 /* RetryingOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C117D1DF9818500837343 /* RetryingOperation.swift */; };
+		CB55BB572226A783000A0E17 /* ProgressTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB55BB562226A783000A0E17 /* ProgressTests.swift */; };
+		CB55BB592226A7C1000A0E17 /* GroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB55BB582226A7C1000A0E17 /* GroupTests.swift */; };
+		CB55BB5B2226A7F3000A0E17 /* MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB55BB5A2226A7F3000A0E17 /* MapTests.swift */; };
+		CB55BB5D2226A849000A0E17 /* RetryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB55BB5C2226A849000A0E17 /* RetryTests.swift */; };
+		CB55BB5F2226AE20000A0E17 /* CombineOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB55BB5E2226AE20000A0E17 /* CombineOperation.swift */; };
 		FA3B9BFE728D56412DE61DCA /* libPods-PeakOperation-iOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C760F7DDF94ECAFE1AD9B36 /* libPods-PeakOperation-iOSTests.a */; };
 /* End PBXBuildFile section */
 
@@ -55,7 +60,7 @@
 		1864BE6721998B79004E5436 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1864BE6C21998B79004E5436 /* PeakOperation_macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeakOperation_macOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1864BE7321998B79004E5436 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		18D0B5AF20FCE6E200CD77F6 /* PeakOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeakOperationTests.swift; sourceTree = "<group>"; };
+		18D0B5AF20FCE6E200CD77F6 /* ResultTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultTests.swift; sourceTree = "<group>"; };
 		1A9889E0EFBED43B1C4B338A /* Pods-PeakOperation-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeakOperation-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PeakOperation-iOS/Pods-PeakOperation-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		1C760F7DDF94ECAFE1AD9B36 /* libPods-PeakOperation-iOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PeakOperation-iOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		764123E2025C68472F9EB8C7 /* Pods-PeakOperation-macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeakOperation-macOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PeakOperation-macOS/Pods-PeakOperation-macOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -75,6 +80,11 @@
 		CB4C117B1DF9818500837343 /* UsingResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsingResult.swift; sourceTree = "<group>"; };
 		CB4C117C1DF9818500837343 /* BlockResultOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockResultOperation.swift; sourceTree = "<group>"; };
 		CB4C117D1DF9818500837343 /* RetryingOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryingOperation.swift; sourceTree = "<group>"; };
+		CB55BB562226A783000A0E17 /* ProgressTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTests.swift; sourceTree = "<group>"; };
+		CB55BB582226A7C1000A0E17 /* GroupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTests.swift; sourceTree = "<group>"; };
+		CB55BB5A2226A7F3000A0E17 /* MapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTests.swift; sourceTree = "<group>"; };
+		CB55BB5C2226A849000A0E17 /* RetryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetryTests.swift; sourceTree = "<group>"; };
+		CB55BB5E2226AE20000A0E17 /* CombineOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineOperation.swift; sourceTree = "<group>"; };
 		CF8BD227154D1065B470A94A /* libPods-PeakOperation-macOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PeakOperation-macOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D491E143BA2208470DC02111 /* Pods-PeakOperation-macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeakOperation-macOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-PeakOperation-macOS/Pods-PeakOperation-macOS.release.xcconfig"; sourceTree = "<group>"; };
 		E3067FE28CC26F0E7ACEA0F2 /* Pods-PeakOperation-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PeakOperation-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PeakOperation-iOS/Pods-PeakOperation-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -153,6 +163,7 @@
 				8D1A2D771E951E2F001EF435 /* ConcurrentOperation.swift */,
 				CB3178701FD7FE9800B063ED /* GroupChainOperation.swift */,
 				CB4C11791DF9818500837343 /* MapOperation.swift */,
+				CB55BB5E2226AE20000A0E17 /* CombineOperation.swift */,
 				CB47513D1E3A4AA500A43672 /* Operation+Queue.swift */,
 				CB4C117D1DF9818500837343 /* RetryingOperation.swift */,
 				CB4C117B1DF9818500837343 /* UsingResult.swift */,
@@ -163,7 +174,11 @@
 		1864BE5E21998AA7004E5436 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				18D0B5AF20FCE6E200CD77F6 /* PeakOperationTests.swift */,
+				18D0B5AF20FCE6E200CD77F6 /* ResultTests.swift */,
+				CB55BB562226A783000A0E17 /* ProgressTests.swift */,
+				CB55BB582226A7C1000A0E17 /* GroupTests.swift */,
+				CB55BB5A2226A7F3000A0E17 /* MapTests.swift */,
+				CB55BB5C2226A849000A0E17 /* RetryTests.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -545,6 +560,7 @@
 				CB3178711FD7FE9800B063ED /* GroupChainOperation.swift in Sources */,
 				CB4C11811DF9818500837343 /* MapOperation.swift in Sources */,
 				CB4C11851DF9818500837343 /* RetryingOperation.swift in Sources */,
+				CB55BB5F2226AE20000A0E17 /* CombineOperation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,7 +568,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18D0B5B020FCE6E200CD77F6 /* PeakOperationTests.swift in Sources */,
+				CB55BB572226A783000A0E17 /* ProgressTests.swift in Sources */,
+				CB55BB592226A7C1000A0E17 /* GroupTests.swift in Sources */,
+				CB55BB5B2226A7F3000A0E17 /* MapTests.swift in Sources */,
+				18D0B5B020FCE6E200CD77F6 /* ResultTests.swift in Sources */,
+				CB55BB5D2226A849000A0E17 /* RetryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
