@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import PeakResult
 
 /// Wrap a given block as an `Operation`.
 ///
@@ -16,9 +15,9 @@ import PeakResult
 open class BlockResultOperation<Output>: ConcurrentOperation, ProducesResult {
     
     /// The result produced by executing the block.
-    public var output: Result<Output> = Result { throw ResultError.noResult }
+    public var output: Result<Output, Error> = Result { throw ResultError.noResult }
     
-    let block: () -> (Result<Output>)
+    let block: () -> (Result<Output, Error>)
     
     /// Create a new `BlockOperation`.
     /// The return value of the block will be wrapped and set as the operation's `Result`.
@@ -34,7 +33,7 @@ open class BlockResultOperation<Output>: ConcurrentOperation, ProducesResult {
     /// The `Result` of the block will be set as the operation's `Result`.
     ///
     /// - Parameter block: A block that returns a `Result`.
-    public init(_ block: @escaping () -> (Result<Output>)) {
+    public init(_ block: @escaping () -> (Result<Output, Error>)) {
         self.block = block
     }
     

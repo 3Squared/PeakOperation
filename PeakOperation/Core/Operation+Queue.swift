@@ -7,14 +7,13 @@
 //
 
 import Foundation
-import PeakResult
 
 // Extensions on `Operation` that enable chaining and result passing.
-public extension Operation {
+extension Operation {
 
     /// The list of this operation's dependancies, and their dependencies, recursively.
     /// Includes `self`.
-    internal var operationChain: Set<Operation> {
+    var operationChain: Set<Operation> {
         return Set(dependencies.flatMap { $0.operationChain } + [self])
     }
     
@@ -50,14 +49,14 @@ extension ProducesResult where Self: Operation {
     ///   - completion: The block to be called on completion.
     /// - Returns: The operation that was queued.
     @discardableResult
-    public func enqueue(on queue: OperationQueue = OperationQueue(), completion: @escaping (Result<Output>) -> Void) -> Self {
+    public func enqueue(on queue: OperationQueue = OperationQueue(), completion: @escaping (Result<Output, Error>) -> Void) -> Self {
         addResultBlock(block: completion)
         operationChain.enqueue(on: queue)
         return self
     }
 }
 
-public extension ConcurrentOperation {
+extension ConcurrentOperation {
     
     /// Enqueue all of the operation chain, which includes the receiver and
     /// all of the receiver dependancies, and their dependencies, recursively.
@@ -70,7 +69,7 @@ public extension ConcurrentOperation {
     }
 }
 
-public extension Collection where Iterator.Element: Operation {
+extension Collection where Iterator.Element: Operation {
     
     /// Enqueue a collection of operations on the given queue.
     ///

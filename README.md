@@ -51,13 +51,13 @@ let progress: Progress = secondOperation.overallProgress()
 
 ## Passing Results
 
-Adding dependencies between operations is useful, but passing results between operations is where PeakOperation really shines. PeakOperation includes two protocols your operation can conform to: `ProducesResult` and `ConsumesResult`. We use the `Result` type provided by [PeakResult]().
+Adding dependencies between operations is useful, but passing results between operations is where PeakOperation really shines. PeakOperation includes two protocols your operation can conform to: `ProducesResult` and `ConsumesResult`.
 
-Let's say we have three operations. The first produces a `Result<Int>`.
+Let's say we have three operations. The first produces a `Result<Int, Error>`.
 
 ```swift
 class IntOperation: ConcurrentOperation, ProducesResult {
-    var output: Result<Int>
+    var output: Result<Int, Error>
     override func execute() {
         output = Result { 1 }
         finish()
@@ -65,27 +65,27 @@ class IntOperation: ConcurrentOperation, ProducesResult {
 }
 ```
 
-The second operation consumes a `Result<Int>` and produces a `Result<String>`. It unpacks its input, adds 1, converts it to a string, then sets it's output.
+The second operation consumes a `Result<Int, Error>` and produces a `Result<String, Error>`. It unpacks its input, adds 1, converts it to a string, then sets it's output.
 
 ```swift
 class AddOneOperation: ConcurrentOperation, ConsumesResult, ProducesResult {
-    var input: Result<Int>
-    var output: Result<String>
+    var input: Result<Int, Error>
+    var output: Result<String, Error>
     override func execute() {
-        output = Result { "\(try input.resolve() + 1)" }
+        output = Result { "\(try input.get() + 1)" }
         finish()
     }
 }
 ```
 
-The final operation consumes a `Result<String>`. It unpacks it and prints it to the console:
+The final operation consumes a `Result<String, Error>`. It unpacks it and prints it to the console:
 
 ```swift
 class PrintOperation: ConcurrentOperation, ConsumesResult {
-    var input: Result<String>
+    var input: Result<String, Error>
     override func execute() {
         do {
-            print("Hello \(try input.resolve())!")
+            print("Hello \(try input.get())!")
         } catch { }
         finish()
     }
@@ -109,11 +109,11 @@ If any of the operations fail and its result is `.failure`, then the result will
 
 ```swift
 class RethrowingOperation: ConcurrentOperation, ConsumesResult, ProducesResult {
-    var input: Result<String>
-    var output: Result<String>
+    var input: Result<String, Error>
+    var output: Result<String, Error>
     override func execute() {
         do {
-            let _ = try input.resolve()
+            let _ = try input.get()
             output = ...
         } catch { 
             output = Result { throw error }
@@ -143,7 +143,7 @@ anotherSuccessfulOperation.addResultBlock { result in
 
 ## Grouping
 
-`GroupChainOperation` takes an operation and its dependants and executes them on an internal queue. The result of the operations is retained and it is inspected in order that this operation can produce a result of type ` Result<Void>` - the value is lost, but the `.success`/`.failure` is kept. This allows you to chain together groups with otherwise incompatible input/outputs.
+`GroupChainOperation` takes an operation and its dependants and executes them on an internal queue. The result of the operations is retained and it is inspected in order that this operation can produce a result of type ` Result<Void, Error>` - the value is lost, but the `.success`/`.failure` is kept. This allows you to chain together groups with otherwise incompatible input/outputs.
 
 ```swift
 // would otherwise produce String, now produces Void
@@ -222,5 +222,4 @@ The Peak Framework is a collection of open-source microframeworks created by the
 |Name|Description|
 |:--|:--|
 |[PeakCoreData](https://github.com/3squared/PeakCoreData)|Provides enhances and conveniences to `Core Data`.|
-|[PeakResult](https://github.com/3squared/PeakResult)|A simple `Result` type.|
 |[PeakNetwork](https://github.com/3squared/PeakNetwork)|A networking framework built on top of `Session` using PeakOperation, leveraging the power of `Codable`.|

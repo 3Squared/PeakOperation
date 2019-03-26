@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "PeakOperation"
-  s.version      = "3.1.0"
+  s.version      = "3.2.0"
   s.summary      = "A collection of Operation subclasses and extensions."
   s.homepage     = "https://github.com/3squared/PeakOperation"
   s.license      = { :type => 'Custom', :file => 'LICENSE.md' }
@@ -9,8 +9,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "10.0"
   s.source       = { :git => "https://github.com/3squared/PeakOperation.git", :tag => s.version.to_s }
   s.source_files = "PeakOperation", "PeakOperation/**/*.{h,m,swift}"
-  s.dependency 'PeakResult'
-  s.swift_version = '4.2'
+  s.swift_version = '5.0'
 
   s.ios.deployment_target = '10.0'
   s.tvos.deployment_target = '10.0'
