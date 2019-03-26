@@ -3,6 +3,11 @@
 The changelog for `PeakOperation`.
 
 --------------------------------------
+3.2.0
+-----
+- Remove PeakResult as a dependency in favour of Swift 5's native Result.
+- Update project to Swift 5.
+
 
 3.1.0
 -----
