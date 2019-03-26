@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import PeakResult
 
 let resultPassingQueue = DispatchQueue(label: "PeakOperation.resultPassingQueue", attributes: .concurrent)
 
@@ -16,7 +15,7 @@ public protocol ProducesResult: class {
     associatedtype Output
     
     /// The `Result` that will be produced as output.
-    var output: Result<Output> { get set }
+    var output: Result<Output, Error> { get set }
 }
 
 /// Implement this protocol to indicate that the object can receive a `Result` as input.
@@ -24,7 +23,7 @@ public protocol ConsumesResult: class {
     associatedtype Input
     
     /// The `Result` to use as input.
-    var input: Result<Input> { get set }
+    var input: Result<Input, Error> { get set }
 }
 
 /// Implement this protocol to indicate that the object can receive multiple `Result`s as input.
@@ -32,7 +31,7 @@ public protocol ConsumesMultipleResults: class {
     associatedtype Input
     
     /// The array of `Result`s to use as input.
-    var input: [Result<Input>] { get set }
+    var input: [Result<Input, Error>] { get set }
 }
 
 /// Built-in `Error`s for use as failure states for a `ProducesResult` Operation.
@@ -48,7 +47,7 @@ extension ProducesResult where Self: Operation {
     /// Multiple result blocks can be added to a single `Operation`.
     ///
     /// - Parameter block: The block to be called on completion.
-    public func addResultBlock(block: @escaping (Result<Output>) -> Void) {
+    public func addResultBlock(block: @escaping (Result<Output, Error>) -> Void) {
         if let existing = completionBlock {
             completionBlock = { [weak self] in
                 guard let strongSelf = self else { return }
@@ -95,7 +94,7 @@ extension ProducesResult where Self: ConcurrentOperation {
         addWillFinishBlock { [weak self, unowned operation] in
             guard let strongSelf = self else { return }
             if !strongSelf.isCancelled {
-                resultPassingQueue.async(flags: .barrier) {
+                resultPassingQueue.sync(flags: .barrier) {
                     operation.input.append(strongSelf.output)
                 }
             }
@@ -157,7 +156,7 @@ extension ProducesResult where Self: ConcurrentOperation {
 }
 
 
-public extension Collection where Iterator.Element: ProducesResult & ConcurrentOperation {
+extension Collection where Iterator.Element: ProducesResult & ConcurrentOperation {
     
     /// Use to chain multiple operations together, adding the output result of each operation in the collection to
     /// to the array of input to the next.

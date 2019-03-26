@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import PeakResult
 #if os(iOS)
 @testable import PeakOperation_iOS
 #else

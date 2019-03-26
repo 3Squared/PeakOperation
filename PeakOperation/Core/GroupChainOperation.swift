@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import PeakResult
 
 /// An operation which takes an operation and its dependants and executes them on an internal queue.
 ///
@@ -17,8 +16,8 @@ import PeakResult
 /// If it succeeds, it will be a successful result but contain no object.
 open class GroupChainOperation: ConcurrentOperation, ProducesResult, ConsumesResult {
     
-    public var output: Result<Void> = Result { throw ResultError.noResult }
-    public var input: Result<Void> = Result { }
+    public var output: Result<Void, Error> = Result { throw ResultError.noResult }
+    public var input: Result<Void, Error> = Result { }
     
     fileprivate lazy var internalQueue: OperationQueue = {
         let queue = OperationQueue()
@@ -64,7 +63,7 @@ open class GroupChainOperation: ConcurrentOperation, ProducesResult, ConsumesRes
     
     open override func execute() {
         do {
-            try input.resolve()
+            try input.get()
             operation.enqueue(on: internalQueue)
         } catch {
             output = Result { throw error }

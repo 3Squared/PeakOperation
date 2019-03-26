@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import PeakResult
 
 /// An operation which takes an Input and maps it to an Output.
 ///
@@ -18,10 +17,10 @@ import PeakResult
 open class MapOperation<Input, Output>: ConcurrentOperation, ConsumesResult, ProducesResult {
     
     /// The result to be mapped.
-    public var input: Result<Input> = Result { throw ResultError.noResult }
+    public var input: Result<Input, Error> = Result { throw ResultError.noResult }
     
     /// The mapped result.
-    public var output: Result<Output> = Result { throw ResultError.noResult }
+    public var output: Result<Output, Error> = Result { throw ResultError.noResult }
     
     /// Create a new `MapOperation`.
     ///
@@ -42,7 +41,7 @@ open class MapOperation<Input, Output>: ConcurrentOperation, ConsumesResult, Pro
     ///
     /// - Parameter input:
     /// - Returns: A converted output Result.
-    open func map(input: Result<Input>) -> Result<Output> {
+    open func map(input: Result<Input, Error>) -> Result<Output, Error> {
         switch input {
         case .success(let value):
             return self.map(input: value)
@@ -55,7 +54,7 @@ open class MapOperation<Input, Output>: ConcurrentOperation, ConsumesResult, Pro
     ///
     /// - Parameter input:
     /// - Returns: A converted output Result.
-    open func map(input: Input) -> Result<Output> {
+    open func map(input: Input) -> Result<Output, Error> {
         fatalError("Subclasses must implement `map(Input)` or `map(Result<Input>)`.")
     }
 }
@@ -68,17 +67,17 @@ open class MapOperation<Input, Output>: ConcurrentOperation, ConsumesResult, Pro
 /// `ProducesStringOperation -> MapOperation<String, Integer> -> ConsumesIntegerOperation`
 open class BlockMapOperation<Input, Output>: MapOperation<Input, Output> {
     
-    let block: (Result<Input>) -> (Result<Output>)
+    let block: (Result<Input, Error>) -> (Result<Output, Error>)
     
     /// Create a new `MapOperation`.
     ///
     /// - Parameter block: A block which takes a Result of type `Input` and maps it to one with type `Output`.
-    public init(_ block: @escaping (Result<Input>) -> (Result<Output>)) {
+    public init(_ block: @escaping (Result<Input, Error>) -> (Result<Output, Error>)) {
         self.block = block
         super.init()
     }
     
-    open override func map(input: Result<Input>) -> Result<Output> {
+    open override func map(input: Result<Input, Error>) -> Result<Output, Error> {
         return block(input)
     }
 }

@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import PeakResult
 #if os(iOS)
 @testable import PeakOperation_iOS
 #else
@@ -99,13 +98,13 @@ class MapTests: XCTestCase {
 }
 
 open class TestMapValueOperation: MapOperation<Bool, Bool> {
-    open override func map(input: Bool) -> Result<Bool> {
+    open override func map(input: Bool) -> Result<Bool, Error> {
         return .success(!input)
     }
 }
 
 open class TestMapResultOperation: MapOperation<Bool, Bool> {
-    open override func map(input: Result<Bool>) -> Result<Bool> {
+    open override func map(input: Result<Bool, Error>) -> Result<Bool, Error> {
         switch input {
         case .success(let value):
             return .success(!value)

@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import PeakResult
 #if os(iOS)
 @testable import PeakOperation_iOS
 #else
@@ -21,7 +20,7 @@ class ResultTests: XCTestCase {
         
         let negatingOperation = BlockMapOperation<Bool, Bool> { input in
             do {
-                let boolean = try input.resolve()
+                let boolean = try input.get()
                 return Result { return !boolean }
             } catch {
                 return Result { throw error }
@@ -32,7 +31,7 @@ class ResultTests: XCTestCase {
         
         negatingOperation.addResultBlock { output in
             do {
-                let boolean = try output.resolve()
+                let boolean = try output.get()
                 XCTAssertFalse(boolean)
                 expect.fulfill()
             } catch {
@@ -81,7 +80,7 @@ class ResultTests: XCTestCase {
         
         let negatingOperation = BlockMapOperation<Bool, Bool> { previous in
             do {
-                let boolean = try previous.resolve()
+                let boolean = try previous.get()
                 return Result { return !boolean }
             } catch {
                 return Result { throw error }
@@ -90,7 +89,7 @@ class ResultTests: XCTestCase {
         
         let stringOperation = BlockMapOperation<Bool, String> { previous in
             do {
-                let boolean = try previous.resolve()
+                let boolean = try previous.get()
                 return Result { return boolean.description }
             } catch {
                 return Result { throw error }
@@ -100,7 +99,7 @@ class ResultTests: XCTestCase {
         
         stringOperation.addResultBlock { result in
             do {
-                let string = try result.resolve()
+                let string = try result.get()
                 XCTAssertEqual(string, "false")
                 expect.fulfill()
             } catch {
@@ -171,7 +170,7 @@ class ResultTests: XCTestCase {
 
         let secondOperation = BlockMapOperation<String, String> { input in
             do {
-                _ = try input.resolve()
+                _ = try input.get()
                 XCTFail()
             } catch {
                 expect.fulfill()
@@ -196,7 +195,7 @@ class ResultTests: XCTestCase {
             return true
         }.enqueue { output in
             do {
-                let boolean = try output.resolve()
+                let boolean = try output.get()
                 XCTAssertTrue(boolean)
                 expect.fulfill()
             } catch {
@@ -214,10 +213,10 @@ class ResultTests: XCTestCase {
         
         let operationsB = [
             BlockMapOperation<String, String> { input in
-                return .success(try! input.resolve() + " my name is sam")
+                return .success(try! input.get() + " my name is sam")
             },
             BlockMapOperation<String, String> { input in
-                return .success(try! input.resolve() + " world")
+                return .success(try! input.get() + " world")
             }
         ]
         
@@ -237,8 +236,8 @@ class ResultTests: XCTestCase {
         
         waitForExpectations(timeout: 5)
         
-        let output1 = try! operationsB[0].output.resolve()
-        let output2 = try! operationsB[1].output.resolve()
+        let output1 = try! operationsB[0].output.get()
+        let output2 = try! operationsB[1].output.get()
 
         XCTAssertEqual(output1, "hello my name is sam")
         XCTAssertEqual(output2, "hello world")
@@ -266,7 +265,7 @@ class ResultTests: XCTestCase {
         
         waitForExpectations(timeout: 100)
         
-        let output = try! operationB.output.resolve()
+        let output = try! operationB.output.get()
         XCTAssertEqual(output.count, 2)
         XCTAssertTrue(output.contains("hello my name is sam"))
         XCTAssertTrue(output.contains("hello world"))
