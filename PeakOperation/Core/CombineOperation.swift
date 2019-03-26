@@ -7,17 +7,15 @@
 //
 
 import Foundation
-import PeakResult
-
 
 /// Take an array of Results and combine them into a Result holding an array.
 /// If any of the elements of the input are errors, then the output will be an error.
 open class CombineOperation<Input>: ConcurrentOperation, ConsumesMultipleResults, ProducesResult {
 
-    public var input: [Result<Input>] = []
-    public var output: Result<[Input]> = .failure(ResultError.noResult)
+    public var input: [Result<Input, Error>] = []
+    public var output: Result<[Input], Error> = .failure(ResultError.noResult)
     
-    public init(input: [Result<Input>]? = nil) {
+    public init(input: [Result<Input, Error>]? = nil) {
         super.init()
         if let input = input {
             self.input = input
@@ -29,7 +27,7 @@ open class CombineOperation<Input>: ConcurrentOperation, ConsumesMultipleResults
         finish()
     }
     
-    open func combine(input: [Result<Input>]) -> Result<Output> {
+    open func combine(input: [Result<Input, Error>]) -> Result<Output, Error> {
         guard input.count > 0 else { return .failure(ResultError.noResult) }
         
         let errors: [Error] = input.compactMap {
@@ -42,7 +40,7 @@ open class CombineOperation<Input>: ConcurrentOperation, ConsumesMultipleResults
         if errors.count > 0 {
             return .failure(CombineOperationError.errors(errors))
         } else {
-            let inputs = input.map { try! $0.resolve() }
+            let inputs = input.map { try! $0.get() }
             return .success(inputs)
         }
     }

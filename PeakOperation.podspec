@@ -9,7 +9,6 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "10.0"
   s.source       = { :git => "https://github.com/3squared/PeakOperation.git", :tag => s.version.to_s }
   s.source_files = "PeakOperation", "PeakOperation/**/*.{h,m,swift}"
-  s.dependency 'PeakResult'
   s.swift_version = '4.2'
 
   s.ios.deployment_target = '10.0'

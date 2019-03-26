@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import PeakResult
 
 /// A `ConcurrentOperation` with an added `RetryStrategy`.
 /// When the operation completes with an error `Result`, the `StrategyBlock` is used to determine if the operation should be attempted again.
@@ -16,7 +15,7 @@ open class RetryingOperation<Output>: ConcurrentOperation, ProducesResult {
 
     /// The result produced by the operation. 
     /// This is checked, and if it is of type `failure(...)`, then the `retryStrategy` will be executed.
-    public var output: Result<Output> = Result { throw ResultError.noResult }
+    public var output: Result<Output, Error> = Result { throw ResultError.noResult }
 
     var failureCount = 0
     

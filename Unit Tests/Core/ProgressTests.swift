@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import PeakResult
 #if os(iOS)
 @testable import PeakOperation_iOS
 #else
@@ -94,7 +93,7 @@ class ProgressTests: XCTestCase {
         }
         
         let secondOperation = BlockMapOperation<String, String> { input in
-            return Result { try "\(input.resolve()) World!" }
+            return Result { try "\(input.get()) World!" }
         }
         
         let group1 = firstOperation
@@ -103,7 +102,7 @@ class ProgressTests: XCTestCase {
         
         group1.addResultBlock { result in
             do {
-                let _ = try result.resolve()
+                let _ = try result.get()
                 expect.fulfill()
             } catch {
                 XCTFail()
@@ -127,7 +126,7 @@ class ProgressTests: XCTestCase {
         }
         
         let secondOperation = BlockMapOperation<String, String> { input in
-            return Result { try "\(input.resolve()) World!" }
+            return Result { try "\(input.get()) World!" }
         }
         
         let group1 = firstOperation
@@ -136,7 +135,7 @@ class ProgressTests: XCTestCase {
         
         group1.addResultBlock { result in
             do {
-                let _ = try result.resolve()
+                let _ = try result.get()
                 expect.fulfill()
             } catch {
                 XCTFail()

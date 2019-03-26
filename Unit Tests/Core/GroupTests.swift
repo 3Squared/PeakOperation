@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import PeakResult
 #if os(iOS)
 @testable import PeakOperation_iOS
 #else
@@ -24,7 +23,7 @@ class GroupTests: XCTestCase {
         }
         
         let secondOperation = BlockMapOperation<String, String> { input in
-            return Result { try "\(input.resolve()) World!" }
+            return Result { try "\(input.get()) World!" }
         }
         
         let group1 = firstOperation
@@ -33,7 +32,7 @@ class GroupTests: XCTestCase {
         
         group1.addResultBlock { result in
             do {
-                let _ = try result.resolve()
+                let _ = try result.get()
                 expect.fulfill()
             } catch {
                 XCTFail()
@@ -52,7 +51,7 @@ class GroupTests: XCTestCase {
         }
         
         let secondOperation = BlockMapOperation<String, String> { input in
-            return Result { try "\(input.resolve()) World!" }
+            return Result { try "\(input.get()) World!" }
         }
         
         let group1 = firstOperation
@@ -67,7 +66,7 @@ class GroupTests: XCTestCase {
         
         group2.addResultBlock { result in
             do {
-                let _ = try result.resolve()
+                let _ = try result.get()
                 XCTFail()
             } catch {
                 expect.fulfill()
@@ -87,7 +86,7 @@ class GroupTests: XCTestCase {
         let expect = expectation(description: "")
         
         let firstOperation = BlockMapOperation<Void, String> { input in
-            return Result { try "\(input.resolve()) World!" }
+            return Result { try "\(input.get()) World!" }
         }
         
         let secondOperation = BlockMapOperation<String, String> { _ in
@@ -100,7 +99,7 @@ class GroupTests: XCTestCase {
         
         group1.addResultBlock { result in
             do {
-                let _ = try result.resolve()
+                let _ = try result.get()
                 XCTFail()
             } catch {
                 expect.fulfill()
