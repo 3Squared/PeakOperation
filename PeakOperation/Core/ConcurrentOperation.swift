@@ -22,6 +22,10 @@ fileprivate enum OperationState: Int {
 /// Override `execute()` to perform your work. It is up to the user to perform the work on another thread - one is not made for you.
 /// When your work is completed, call `finish()` to complete the operation.
 open class ConcurrentOperation: Operation {
+    
+    static let operationWillStart = Notification.Name("PeakOperation.ConcurrentOperation.operationWillStart")
+    static let operationWillFinish = Notification.Name("PeakOperation.ConcurrentOperation.operationWillFinish")
+
     private var willStart: () -> Void = { }
     private var willFinish: () -> Void = { }
     
@@ -34,6 +38,7 @@ open class ConcurrentOperation: Operation {
     internal var managesOwnProgress = false
     
     public var estimatedExecutionSeconds: TimeInSeconds = 1
+    public var label: String?
     
     @objc
     fileprivate dynamic var state: OperationState {
@@ -105,9 +110,32 @@ open class ConcurrentOperation: Operation {
         if isCancelled {
             return finish()
         }
+        
+        postNotification(ConcurrentOperation.operationWillStart)
         willStart()
         state = .executing
         execute()
+    }
+    
+    private func postNotification(_ notification: Notification.Name) {
+        var userInfo = [String: String]()
+        if let label = label {
+            userInfo["label"] = label
+        }
+
+        if let label = label {
+            userInfo["label"] = label
+        }
+
+        if let queueName = OperationQueue.current?.name {
+            userInfo["queue"] = queueName
+        }
+
+        NotificationCenter.default.post(
+            name: notification,
+            object: self,
+            userInfo: userInfo
+        )
     }
     
     // MARK: - Public
@@ -121,8 +149,9 @@ open class ConcurrentOperation: Operation {
         fatalError("Subclasses must implement `execute`.")
     }
     
-    /// Call this method to indicate that your work is finished.
+    /// Call this method to indicate that your work is finished. Ensure you call `super.finish()`.
     open func finish() {
+        postNotification(ConcurrentOperation.operationWillFinish)
         willFinish()
         state = .finished
     }
