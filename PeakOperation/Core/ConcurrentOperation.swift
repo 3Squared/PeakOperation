@@ -119,9 +119,6 @@ open class ConcurrentOperation: Operation {
     
     private func postNotification(_ notification: Notification.Name) {
         var userInfo = [String: String]()
-        if let label = label {
-            userInfo["label"] = label
-        }
 
         if let label = label {
             userInfo["label"] = label
