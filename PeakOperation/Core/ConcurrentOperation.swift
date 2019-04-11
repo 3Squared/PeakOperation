@@ -23,8 +23,8 @@ fileprivate enum OperationState: Int {
 /// When your work is completed, call `finish()` to complete the operation.
 open class ConcurrentOperation: Operation {
     
-    static let operationWillStart = Notification.Name("PeakOperation.ConcurrentOperation.operationWillStart")
-    static let operationWillFinish = Notification.Name("PeakOperation.ConcurrentOperation.operationWillFinish")
+    public static let operationWillStart = Notification.Name("PeakOperation.ConcurrentOperation.operationWillStart")
+    public static let operationWillFinish = Notification.Name("PeakOperation.ConcurrentOperation.operationWillFinish")
 
     private var willStart: () -> Void = { }
     private var willFinish: () -> Void = { }
