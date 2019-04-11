@@ -150,4 +150,51 @@ class ProgressTests: XCTestCase {
         XCTAssertEqual(progress.totalUnitCount, 2)
         print("Total Progress: \(progress.localizedAdditionalDescription!)")
     }
+    
+    func testNestedGroupOperationsCollatingProgress() {
+        let a1 = BlockResultOperation {
+            return 1
+        }
+        
+        let a2 = BlockResultOperation {
+            return 2
+        }
+
+        let a3 = BlockResultOperation {
+            return 3
+        }
+
+        let b1 = BlockResultOperation {
+            return 1
+        }
+        
+        let b2 = BlockResultOperation {
+            return 2
+        }
+        
+        let b3 = BlockResultOperation {
+            return 3
+        }
+
+        let a = a1.then(do: a2).then(do: a3).group(collateProgress: true)
+        
+        let b = b1.then(do: b2).then(do: b3).group(collateProgress: true)
+
+        
+        let superGroup = a.then(do: b).group(collateProgress: true)
+        
+        let progress = superGroup.enqueueWithProgress()
+
+        keyValueObservingExpectation(for: progress, keyPath: "fractionCompleted") {  observedObject, change in
+            print("Change: \(progress.localizedDescription!)")
+            return progress.completedUnitCount == progress.totalUnitCount
+        }
+
+        waitForExpectations(timeout: 10)
+        
+        XCTAssertEqual(progress.fractionCompleted, 1)
+        XCTAssertEqual(progress.totalUnitCount, 6)
+        print("Total Progress: \(progress.localizedAdditionalDescription!)")
+    }
+
 }
