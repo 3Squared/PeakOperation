@@ -140,6 +140,9 @@ open class ConcurrentOperation: Operation {
     
     // MARK: - Public
     
+    open override var description: String {
+        return "\(String(describing: type(of: self)))(label: '\(label ?? "nil")', state: \(state.rawValue))"
+    }
     
     /// Override this method to perform your work. 
     /// This will not be executed on a separate thread; it is your responsibiity to do so, if needed.

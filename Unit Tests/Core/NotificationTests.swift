@@ -98,4 +98,12 @@ class NotificationTests: XCTestCase {
         waitForExpectations(timeout: 10)
     }
 
+    func testOperationHasNiceDescription() {
+        let operation = BlockResultOperation { return "Hello" }
+        operation.label = "Doing some work..."
+
+        let description = operation.description
+        
+        XCTAssertEqual(description, "BlockResultOperation<String>(label: 'Doing some work...', state: 0)")
+    }
 }
