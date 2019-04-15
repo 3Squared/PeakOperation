@@ -51,7 +51,6 @@ class ProgressTests: XCTestCase {
         waitForExpectations(timeout: 10)
         
         XCTAssertEqual(progress.fractionCompleted, 1)
-        print("Total Progress: \(progress.localizedAdditionalDescription!)")
     }
     
     func testSubclassWithDetailedOperationProgress() {
@@ -82,7 +81,6 @@ class ProgressTests: XCTestCase {
         
         XCTAssertEqual(progress.fractionCompleted, 1)
         XCTAssertEqual(progress.totalUnitCount, 11)
-        print("Total Progress: \(progress.localizedAdditionalDescription!)")
     }
     
     func testGroupOperationProgress() {
@@ -115,7 +113,6 @@ class ProgressTests: XCTestCase {
         
         XCTAssertEqual(progress.fractionCompleted, 1)
         XCTAssertEqual(progress.totalUnitCount, 1)
-        print("Total Progress: \(progress.localizedAdditionalDescription!)")
     }
     
     func testGroupOperationCollatingProgress() {
@@ -148,7 +145,6 @@ class ProgressTests: XCTestCase {
         
         XCTAssertEqual(progress.fractionCompleted, 1)
         XCTAssertEqual(progress.totalUnitCount, 2)
-        print("Total Progress: \(progress.localizedAdditionalDescription!)")
     }
     
     func testNestedGroupOperationsCollatingProgress() {
@@ -194,7 +190,6 @@ class ProgressTests: XCTestCase {
         
         XCTAssertEqual(progress.fractionCompleted, 1)
         XCTAssertEqual(progress.totalUnitCount, 6)
-        print("Total Progress: \(progress.localizedAdditionalDescription!)")
     }
 
 }
