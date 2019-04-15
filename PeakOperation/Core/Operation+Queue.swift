@@ -13,7 +13,7 @@ extension Operation {
 
     /// The list of this operation's dependancies, and their dependencies, recursively.
     /// Includes `self`.
-    var operationChain: Set<Operation> {
+    public var operationChain: Set<Operation> {
         return Set(dependencies.flatMap { $0.operationChain } + [self])
     }
     
@@ -65,7 +65,21 @@ extension ConcurrentOperation {
     /// - Returns: The progress of the operation chain's execution.
     public func enqueueWithProgress(on queue: OperationQueue = OperationQueue()) -> Progress {
         enqueue(on: queue)
-        return overallProgress()
+        return chainProgress()
+    }
+}
+
+extension ProducesResult where Self: ConcurrentOperation {
+    
+    /// Enqueue all of the operation chain, which includes the receiver and
+    /// all of the receiver dependancies, and their dependencies, recursively.
+    ///
+    /// - Parameter queue: The queue to use. If not provided, a new one is made (optional).
+    /// - Returns: The progress of the operation chain's execution.
+    public func enqueueWithProgress(on queue: OperationQueue = OperationQueue(), completion: @escaping (Result<Output, Error>) -> Void) -> Progress {
+        addResultBlock(block: completion)
+        enqueue(on: queue)
+        return chainProgress()
     }
 }
 

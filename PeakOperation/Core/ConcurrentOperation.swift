@@ -155,7 +155,7 @@ open class ConcurrentOperation: Operation {
         state = .finished
     }
     
-    public func overallProgress() -> Progress {
+    public func chainProgress() -> Progress {
         let totalProgress = Progress(totalUnitCount: 0)
         operationChain.compactMap { $0 as? ConcurrentOperation }.forEach { operation in
             let progress = operation.progress
