@@ -38,7 +38,6 @@ open class ConcurrentOperation: Operation {
     internal var managesOwnProgress = false
     
     public var estimatedExecutionSeconds: TimeInSeconds = 1
-    public var label: String?
     
     @objc
     fileprivate dynamic var state: OperationState {
@@ -120,8 +119,8 @@ open class ConcurrentOperation: Operation {
     private func postNotification(_ notification: Notification.Name) {
         var userInfo = [String: String]()
 
-        if let label = label {
-            userInfo["label"] = label
+        if let name = name {
+            userInfo["name"] = name
         }
 
         if let queueName = OperationQueue.current?.name {
@@ -138,7 +137,7 @@ open class ConcurrentOperation: Operation {
     // MARK: - Public
     
     open override var description: String {
-        return "\(String(describing: type(of: self)))(label: '\(label ?? "nil")', state: \(state.rawValue))"
+        return "\(String(describing: type(of: self)))(name: '\(name ?? "nil")', state: \(state.rawValue))"
     }
     
     /// Override this method to perform your work. 

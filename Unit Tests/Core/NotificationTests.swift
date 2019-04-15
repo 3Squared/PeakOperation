@@ -60,18 +60,18 @@ class NotificationTests: XCTestCase {
     
     func testCustomOperationLabelIsSentInNotification() {
         let operation = BlockResultOperation { return "Hello" }
-        operation.label = "Doing some work..."
+        operation.name = "Doing some work..."
         operation.enqueue()
         
         expectation(forNotification: ConcurrentOperation.operationWillStart, object: nil, notificationCenter: .default) { notification in
-            let operationLabel = notification.userInfo?["label"] as! String
-            XCTAssertEqual(operationLabel, operation.label)
+            let operationLabel = notification.userInfo?["name"] as! String
+            XCTAssertEqual(operationLabel, operation.name)
             return true
         }
         
         expectation(forNotification: ConcurrentOperation.operationWillFinish, object: nil, notificationCenter: .default) { notification in
-            let operationLabel = notification.userInfo?["label"] as! String
-            XCTAssertEqual(operationLabel, operation.label)
+            let operationLabel = notification.userInfo?["name"] as! String
+            XCTAssertEqual(operationLabel, operation.name)
             return true
         }
         
@@ -80,7 +80,7 @@ class NotificationTests: XCTestCase {
     
     func testOperationIsSentInNotification() {
         let operation = BlockResultOperation { return "Hello" }
-        operation.label = "Doing some work..."
+        operation.name = "Doing some work..."
         operation.enqueue()
         
         expectation(forNotification: ConcurrentOperation.operationWillStart, object: nil, notificationCenter: .default) { notification in
@@ -100,10 +100,10 @@ class NotificationTests: XCTestCase {
 
     func testOperationHasNiceDescription() {
         let operation = BlockResultOperation { return "Hello" }
-        operation.label = "Doing some work..."
+        operation.name = "Doing some work..."
 
         let description = operation.description
         
-        XCTAssertEqual(description, "BlockResultOperation<String>(label: 'Doing some work...', state: 0)")
+        XCTAssertEqual(description, "BlockResultOperation<String>(name: 'Doing some work...', state: 0)")
     }
 }
