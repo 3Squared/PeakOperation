@@ -34,10 +34,8 @@ open class ConcurrentOperation: Operation {
     fileprivate let stateQueue = DispatchQueue(label: "PeakOperation.ConcurrentOperation.StateQueue", attributes: .concurrent)
     fileprivate var rawState = OperationState.ready
     
-    internal var progress = Progress(totalUnitCount: 1)
+    public var progress = Progress(totalUnitCount: 100)
     internal var managesOwnProgress = false
-    
-    public var estimatedExecutionSeconds: TimeInSeconds = 1
     
     @objc
     fileprivate dynamic var state: OperationState {
@@ -54,7 +52,7 @@ open class ConcurrentOperation: Operation {
             if !managesOwnProgress {
                 switch newValue {
                 case .finished:
-                    progress.completedUnitCount = 1
+                    progress.completedUnitCount = progress.totalUnitCount
                 default: break;
                 }
             }
@@ -154,18 +152,6 @@ open class ConcurrentOperation: Operation {
         willFinish()
         state = .finished
     }
-    
-    public func overallProgress() -> Progress {
-        let totalProgress = Progress(totalUnitCount: 0)
-        operationChain.compactMap { $0 as? ConcurrentOperation }.forEach { operation in
-            let progress = operation.progress
-            let estimatedTime = operation.estimatedExecutionSeconds
-            totalProgress.addChild(progress, withPendingUnitCount: estimatedTime)
-            totalProgress.totalUnitCount += estimatedTime
-        }
-        return totalProgress
-    }
-    
     
     /// Add a block to be called just before an operation begins executing.
     /// Any inputs to an operation is not guaranteed to be set by the time the block is called.
