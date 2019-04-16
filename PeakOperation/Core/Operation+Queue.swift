@@ -37,6 +37,23 @@ extension Operation {
         operation.addDependency(self)
         return operation
     }
+    
+    public func chainProgress() -> Progress {
+        let chain = operationChain.compactMap { $0 as? ConcurrentOperation }
+        let totalProgress = Progress(totalUnitCount: 100)
+        let progressPerOperation = totalProgress.totalUnitCount / Int64(chain.count)
+        let remainder = totalProgress.totalUnitCount - (progressPerOperation * Int64(chain.count))
+        
+        chain.enumerated().forEach { index, operation in
+            if index < chain.count - 1 {
+                totalProgress.addChild(operation.progress, withPendingUnitCount: progressPerOperation)
+            } else {
+                totalProgress.addChild(operation.progress, withPendingUnitCount: progressPerOperation + remainder)
+            }
+        }
+        
+        return totalProgress
+    }
 }
 
 extension ProducesResult where Self: Operation {
