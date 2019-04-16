@@ -22,6 +22,10 @@ fileprivate enum OperationState: Int {
 /// Override `execute()` to perform your work. It is up to the user to perform the work on another thread - one is not made for you.
 /// When your work is completed, call `finish()` to complete the operation.
 open class ConcurrentOperation: Operation {
+    
+    public static let operationWillStart = Notification.Name("PeakOperation.ConcurrentOperation.operationWillStart")
+    public static let operationWillFinish = Notification.Name("PeakOperation.ConcurrentOperation.operationWillFinish")
+
     private var willStart: () -> Void = { }
     private var willFinish: () -> Void = { }
     
@@ -30,10 +34,8 @@ open class ConcurrentOperation: Operation {
     fileprivate let stateQueue = DispatchQueue(label: "PeakOperation.ConcurrentOperation.StateQueue", attributes: .concurrent)
     fileprivate var rawState = OperationState.ready
     
-    internal var progress = Progress(totalUnitCount: 1)
+    public var progress = Progress(totalUnitCount: 100)
     internal var managesOwnProgress = false
-    
-    public var estimatedExecutionSeconds: TimeInSeconds = 1
     
     @objc
     fileprivate dynamic var state: OperationState {
@@ -50,7 +52,7 @@ open class ConcurrentOperation: Operation {
             if !managesOwnProgress {
                 switch newValue {
                 case .finished:
-                    progress.completedUnitCount = 1
+                    progress.completedUnitCount = progress.totalUnitCount
                 default: break;
                 }
             }
@@ -105,13 +107,36 @@ open class ConcurrentOperation: Operation {
         if isCancelled {
             return finish()
         }
+        
+        postNotification(ConcurrentOperation.operationWillStart)
         willStart()
         state = .executing
         execute()
     }
     
+    private func postNotification(_ notification: Notification.Name) {
+        var userInfo = [String: String]()
+
+        if let name = name {
+            userInfo["name"] = name
+        }
+
+        if let queueName = OperationQueue.current?.name {
+            userInfo["queue"] = queueName
+        }
+
+        NotificationCenter.default.post(
+            name: notification,
+            object: self,
+            userInfo: userInfo
+        )
+    }
+    
     // MARK: - Public
     
+    open override var description: String {
+        return "\(String(describing: type(of: self)))(name: '\(name ?? "nil")', state: \(state.rawValue))"
+    }
     
     /// Override this method to perform your work. 
     /// This will not be executed on a separate thread; it is your responsibiity to do so, if needed.
@@ -121,23 +146,12 @@ open class ConcurrentOperation: Operation {
         fatalError("Subclasses must implement `execute`.")
     }
     
-    /// Call this method to indicate that your work is finished.
+    /// Call this method to indicate that your work is finished. Ensure you call `super.finish()`.
     open func finish() {
+        postNotification(ConcurrentOperation.operationWillFinish)
         willFinish()
         state = .finished
     }
-    
-    public func overallProgress() -> Progress {
-        let totalProgress = Progress(totalUnitCount: 0)
-        operationChain.compactMap { $0 as? ConcurrentOperation }.forEach { operation in
-            let progress = operation.progress
-            let estimatedTime = operation.estimatedExecutionSeconds
-            totalProgress.addChild(progress, withPendingUnitCount: estimatedTime)
-            totalProgress.totalUnitCount += estimatedTime
-        }
-        return totalProgress
-    }
-    
     
     /// Add a block to be called just before an operation begins executing.
     /// Any inputs to an operation is not guaranteed to be set by the time the block is called.

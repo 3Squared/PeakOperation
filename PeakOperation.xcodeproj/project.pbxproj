@@ -18,6 +18,7 @@
 		1864BE8221998F54004E5436 /* PeakOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = CB4C115F1DF9800600837343 /* PeakOperation.h */; };
 		18D0B5B020FCE6E200CD77F6 /* ResultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D0B5AF20FCE6E200CD77F6 /* ResultTests.swift */; };
 		8D1A2D781E951E2F001EF435 /* ConcurrentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1A2D771E951E2F001EF435 /* ConcurrentOperation.swift */; };
+		CB0C195E225F7E35004ECDD1 /* NotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB0C195D225F7E35004ECDD1 /* NotificationTests.swift */; };
 		CB3178711FD7FE9800B063ED /* GroupChainOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB3178701FD7FE9800B063ED /* GroupChainOperation.swift */; };
 		CB47513E1E3A4AA500A43672 /* Operation+Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB47513D1E3A4AA500A43672 /* Operation+Queue.swift */; };
 		CB4C11661DF9800600837343 /* PeakOperation_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4C115C1DF9800600837343 /* PeakOperation_iOS.framework */; };
@@ -57,6 +58,7 @@
 		1864BE7321998B79004E5436 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18D0B5AF20FCE6E200CD77F6 /* ResultTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultTests.swift; sourceTree = "<group>"; };
 		8D1A2D771E951E2F001EF435 /* ConcurrentOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcurrentOperation.swift; sourceTree = "<group>"; };
+		CB0C195D225F7E35004ECDD1 /* NotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTests.swift; sourceTree = "<group>"; };
 		CB3178701FD7FE9800B063ED /* GroupChainOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupChainOperation.swift; sourceTree = "<group>"; };
 		CB47513D1E3A4AA500A43672 /* Operation+Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Operation+Queue.swift"; sourceTree = "<group>"; };
 		CB4C115C1DF9800600837343 /* PeakOperation_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PeakOperation_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +135,7 @@
 				CB55BB582226A7C1000A0E17 /* GroupTests.swift */,
 				CB55BB5A2226A7F3000A0E17 /* MapTests.swift */,
 				CB55BB5C2226A849000A0E17 /* RetryTests.swift */,
+				CB0C195D225F7E35004ECDD1 /* NotificationTests.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				CB55BB592226A7C1000A0E17 /* GroupTests.swift in Sources */,
 				CB55BB5B2226A7F3000A0E17 /* MapTests.swift in Sources */,
 				18D0B5B020FCE6E200CD77F6 /* ResultTests.swift in Sources */,
+				CB0C195E225F7E35004ECDD1 /* NotificationTests.swift in Sources */,
 				CB55BB5D2226A849000A0E17 /* RetryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "PeakOperation"
-  s.version      = "3.2.0"
+  s.version      = "4.0.0"
   s.summary      = "A collection of Operation subclasses and extensions."
   s.homepage     = "https://github.com/3squared/PeakOperation"
   s.license      = { :type => 'Custom', :file => 'LICENSE.md' }

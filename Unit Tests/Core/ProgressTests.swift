@@ -39,7 +39,7 @@ class ProgressTests: XCTestCase {
             .then(do: operation4)
         
         
-        let progress = operation4.overallProgress()
+        let progress = operation4.chainProgress()
         
         keyValueObservingExpectation(for: progress, keyPath: "completedUnitCount") {  observedObject, change in
             print("Change: \(change)")
@@ -51,38 +51,6 @@ class ProgressTests: XCTestCase {
         waitForExpectations(timeout: 10)
         
         XCTAssertEqual(progress.fractionCompleted, 1)
-        print("Total Progress: \(progress.localizedAdditionalDescription!)")
-    }
-    
-    func testSubclassWithDetailedOperationProgress() {
-        
-        let operation1 = BlockResultOperation {
-            return true
-        }
-        
-        let operation2 = BlockResultOperation {
-            return true
-        }
-        
-        operation1.estimatedExecutionSeconds = 1
-        operation2.estimatedExecutionSeconds = 10
-        
-        operation1.then(do: operation2)
-        
-        let progress = operation2.overallProgress()
-        
-        keyValueObservingExpectation(for: progress, keyPath: "completedUnitCount") {  observedObject, change in
-            print("Change: \(progress.localizedDescription!)")
-            return progress.completedUnitCount >= progress.totalUnitCount
-        }
-        
-        operation2.enqueue()
-        
-        waitForExpectations(timeout: 10)
-        
-        XCTAssertEqual(progress.fractionCompleted, 1)
-        XCTAssertEqual(progress.totalUnitCount, 11)
-        print("Total Progress: \(progress.localizedAdditionalDescription!)")
     }
     
     func testGroupOperationProgress() {
@@ -114,8 +82,6 @@ class ProgressTests: XCTestCase {
         waitForExpectations(timeout: 10)
         
         XCTAssertEqual(progress.fractionCompleted, 1)
-        XCTAssertEqual(progress.totalUnitCount, 1)
-        print("Total Progress: \(progress.localizedAdditionalDescription!)")
     }
     
     func testGroupOperationCollatingProgress() {
@@ -147,7 +113,50 @@ class ProgressTests: XCTestCase {
         waitForExpectations(timeout: 10)
         
         XCTAssertEqual(progress.fractionCompleted, 1)
-        XCTAssertEqual(progress.totalUnitCount, 2)
-        print("Total Progress: \(progress.localizedAdditionalDescription!)")
     }
+    
+    func testNestedGroupOperationsCollatingProgress() {
+        let a1 = BlockResultOperation {
+            return 1
+        }
+        
+        let a2 = BlockResultOperation {
+            return 2
+        }
+
+        let a3 = BlockResultOperation {
+            return 3
+        }
+
+        let b1 = BlockResultOperation {
+            return 1
+        }
+        
+        let b2 = BlockResultOperation {
+            return 2
+        }
+        
+        let b3 = BlockResultOperation {
+            return 3
+        }
+
+        let a = a1.then(do: a2).then(do: a3).group(collateProgress: true)
+        
+        let b = b1.then(do: b2).then(do: b3).group(collateProgress: true)
+
+        
+        let superGroup = a.then(do: b).group(collateProgress: true)
+        
+        let progress = superGroup.enqueueWithProgress()
+
+        keyValueObservingExpectation(for: progress, keyPath: "fractionCompleted") {  observedObject, change in
+            print("Change: \(progress.localizedDescription!)")
+            return progress.completedUnitCount == progress.totalUnitCount
+        }
+
+        waitForExpectations(timeout: 10)
+        
+        XCTAssertEqual(progress.fractionCompleted, 1)
+    }
+
 }
