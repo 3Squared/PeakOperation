@@ -3,6 +3,13 @@
 The changelog for `PeakOperation`.
 
 --------------------------------------
+4.0.0
+-----
+- Add notifications that are posted on start/finish of `ConcurrentOperation`.
+- Rename `overallProgress` to `chainProgress`.
+- Fix issues with `chainProgress` reporting incorrect values.
+- Make `operationChain` public, available on all `Operations`.
+
 3.2.0
 -----
 - Remove PeakResult as a dependency in favour of Swift 5's native Result.
