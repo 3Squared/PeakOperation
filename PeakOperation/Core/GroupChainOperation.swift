@@ -61,8 +61,12 @@ open class GroupChainOperation: ConcurrentOperation, ProducesResult, ConsumesRes
             finish()
         }
     }
+    
+    open override func cancel() {
+        internalQueue.cancelAllOperations()
+        super.cancel()
+    }
 }
-
 
 extension ProducesResult where Self: ConcurrentOperation {
     
