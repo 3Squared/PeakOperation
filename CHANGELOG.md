@@ -3,6 +3,10 @@
 The changelog for `PeakOperation`.
 
 --------------------------------------
+4.0.1
+-----
+- Fix issue where cancelling a `GroupChainOperation` would not cancel its children.
+
 4.0.0
 -----
 - Add notifications that are posted on start/finish of `ConcurrentOperation`.
