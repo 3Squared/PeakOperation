@@ -81,7 +81,6 @@ class GroupTests: XCTestCase {
         waitForExpectations(timeout: 10)
     }
     
-    
     func testGroupOperationSecondFailure() {
         let expect = expectation(description: "")
         
@@ -108,6 +107,52 @@ class GroupTests: XCTestCase {
         group1.execute()
         
         waitForExpectations(timeout: 10)
+    }
+
+    func testGroupOperationCancellationCancelsChildren() {
+        let expectFinish = expectation(description: "")
+        let expectCancel = expectation(description: "")
+
+        let firstOperation = BlockMapOperation<Void, String> { input in
+            return Result { "one" }
+        }
+        
+        let secondOperation = BlockMapOperation<String, String> { _ in
+            usleep(2 * 1000000)
+            return Result { "two" }
+        }
+        
+        let group1 = firstOperation
+            .passesResult(to: secondOperation)
+            .group()
+        
+        firstOperation.addResultBlock { result in
+            expectFinish.fulfill()
+        }
+        
+        group1.addResultBlock { result in
+            expectCancel.fulfill()
+        }
+        
+        // Start the group
+        group1.enqueue()
+        
+        // Wait until the first op in the group has finished (op 2 has a delay)
+        wait(for: [expectFinish], timeout: 10)
+        
+        // Now cancel the group and children
+        group1.cancel()
+        
+        // Wait for the group to finish
+        wait(for: [expectCancel], timeout: 10)
+
+        
+        // We expect the group to be cancelled
+        // Op1 to NOT be cancelled, since it finished before the cancel command
+        // Op2 to be cancelled, since the cancel command came in as it was executing
+        XCTAssert(group1.isFinished && group1.isCancelled)
+        XCTAssert(firstOperation.isFinished && !firstOperation.isCancelled)
+        XCTAssert(secondOperation.isFinished && secondOperation.isCancelled)
     }
 
 }
