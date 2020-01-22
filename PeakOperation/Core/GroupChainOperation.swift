@@ -19,12 +19,6 @@ open class GroupChainOperation: ConcurrentOperation, ProducesResult, ConsumesRes
     public var output: Result<Void, Error> = Result { throw ResultError.noResult }
     public var input: Result<Void, Error> = Result { }
     
-    fileprivate lazy var internalQueue: OperationQueue = {
-        let queue = OperationQueue()
-        queue.name = "GroupOperation.InternalQueue"
-        return queue
-    }()
-
     fileprivate let operation: Operation
     
     /// Create a new `GroupChainOperation`.
@@ -60,11 +54,6 @@ open class GroupChainOperation: ConcurrentOperation, ProducesResult, ConsumesRes
             output = Result { throw error }
             finish()
         }
-    }
-    
-    open override func cancel() {
-        internalQueue.cancelAllOperations()
-        super.cancel()
     }
 }
 
