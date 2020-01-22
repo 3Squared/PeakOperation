@@ -168,6 +168,7 @@ class NotificationTests: XCTestCase {
             let object = notification.object as! ConcurrentOperation
             XCTAssertNil(object.startDate)
             XCTAssertNil(object.finishDate)
+            XCTAssertEqual(operation.executionTime, 0)
             return true
         }
         
@@ -175,6 +176,7 @@ class NotificationTests: XCTestCase {
             let object = notification.object as! ConcurrentOperation
             XCTAssertNotNil(object.startDate)
             XCTAssertNil(object.finishDate)
+            XCTAssertGreaterThan(operation.executionTime, 0)
             return true
         }
         
@@ -182,6 +184,7 @@ class NotificationTests: XCTestCase {
             let object = notification.object as! ConcurrentOperation
             XCTAssertNotNil(object.startDate)
             XCTAssertNil(object.finishDate)
+            XCTAssertGreaterThan(operation.executionTime, 0)
             return true
         }
         
@@ -189,6 +192,7 @@ class NotificationTests: XCTestCase {
             let object = notification.object as! ConcurrentOperation
             XCTAssertNotNil(object.startDate)
             XCTAssertNotNil(object.finishDate)
+            XCTAssertEqual(operation.executionTime, operation.finishDate!.timeIntervalSince(operation.startDate!))
             return true
         }
         
@@ -207,24 +211,28 @@ class NotificationTests: XCTestCase {
         operation.addWillStartBlock {
             XCTAssertNil(operation.startDate)
             XCTAssertNil(operation.finishDate)
+            XCTAssertEqual(operation.executionTime, 0)
             expect.fulfill()
         }
         
         operation.addDidStartBlock {
             XCTAssertNotNil(operation.startDate)
             XCTAssertNil(operation.finishDate)
+            XCTAssertGreaterThan(operation.executionTime, 0)
             expect.fulfill()
         }
         
         operation.addWillFinishBlock {
             XCTAssertNotNil(operation.startDate)
             XCTAssertNil(operation.finishDate)
+            XCTAssertGreaterThan(operation.executionTime, 0)
             expect.fulfill()
         }
         
         operation.addDidFinishBlock {
             XCTAssertNotNil(operation.startDate)
             XCTAssertNotNil(operation.finishDate)
+            XCTAssertEqual(operation.executionTime, operation.finishDate!.timeIntervalSince(operation.startDate!))
             expect.fulfill()
         }
         
