@@ -24,6 +24,16 @@ class NotificationTests: XCTestCase {
         
         waitForExpectations(timeout: 10)
     }
+    
+    func testDidStartNotificationIsSent() {
+        let queue = OperationQueue()
+        let operation = BlockResultOperation { return "Hello" }
+        operation.enqueue(on: queue)
+        
+        expectation(forNotification: ConcurrentOperation.operationDidStart, object: nil, notificationCenter: .default)
+        
+        waitForExpectations(timeout: 10)
+    }
 
     func testWillFinishNotificationIsSent() {
         let queue = OperationQueue()
@@ -31,6 +41,16 @@ class NotificationTests: XCTestCase {
         operation.enqueue(on: queue)
         
         expectation(forNotification: ConcurrentOperation.operationWillFinish, object: nil, notificationCenter: .default)
+        
+        waitForExpectations(timeout: 10)
+    }
+    
+    func testDidFinishNotificationIsSent() {
+        let queue = OperationQueue()
+        let operation = BlockResultOperation { return "Hello" }
+        operation.enqueue(on: queue)
+        
+        expectation(forNotification: ConcurrentOperation.operationDidFinish, object: nil, notificationCenter: .default)
         
         waitForExpectations(timeout: 10)
     }
