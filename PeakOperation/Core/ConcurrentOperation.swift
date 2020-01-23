@@ -24,21 +24,38 @@ fileprivate enum OperationState: Int {
 open class ConcurrentOperation: Operation {
     
     public static let operationWillStart = Notification.Name("PeakOperation.ConcurrentOperation.operationWillStart")
+    public static let operationDidStart = Notification.Name("PeakOperation.ConcurrentOperation.operationDidStart")
     public static let operationWillFinish = Notification.Name("PeakOperation.ConcurrentOperation.operationWillFinish")
+    public static let operationDidFinish = Notification.Name("PeakOperation.ConcurrentOperation.operationDidFinish")
 
     private var willStart: () -> Void = { }
+    private var didStart: () -> Void = { }
     private var willFinish: () -> Void = { }
+    private var didFinish: () -> Void = { }
+
+    private let stateQueue = DispatchQueue(label: "PeakOperation.ConcurrentOperation.StateQueue", attributes: .concurrent)
+    private var rawState = OperationState.ready
     
-    public typealias TimeInSeconds = Int64
+    public private(set) var startDate: Date?
+    public private(set) var finishDate: Date?
     
-    fileprivate let stateQueue = DispatchQueue(label: "PeakOperation.ConcurrentOperation.StateQueue", attributes: .concurrent)
-    fileprivate var rawState = OperationState.ready
+    public var executionTime: TimeInterval {
+        guard let startDate = startDate else { return 0 }
+        let endDate = finishDate ?? Date()
+        return endDate.timeIntervalSince(startDate)
+    }
     
     public var progress = Progress(totalUnitCount: 100)
     internal var managesOwnProgress = false
     
+    public lazy var internalQueue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.name = "PeakOperation.ConcurrentOperation.InternalQueue"
+        return queue
+    }()
+    
     @objc
-    fileprivate dynamic var state: OperationState {
+    private dynamic var state: OperationState {
         get {
             return stateQueue.sync(execute: { rawState })
         }
@@ -64,17 +81,17 @@ open class ConcurrentOperation: Operation {
     // MARK: - NSObject
     
     @objc
-    fileprivate dynamic class func keyPathsForValuesAffectingIsReady() -> Set<String> {
+    private dynamic class func keyPathsForValuesAffectingIsReady() -> Set<String> {
         return ["state"]
     }
     
     @objc
-    fileprivate dynamic class func keyPathsForValuesAffectingIsExecuting() -> Set<String> {
+    private dynamic class func keyPathsForValuesAffectingIsExecuting() -> Set<String> {
         return ["state"]
     }
     
     @objc
-    fileprivate dynamic class func keyPathsForValuesAffectingIsFinished() -> Set<String> {
+    private dynamic class func keyPathsForValuesAffectingIsFinished() -> Set<String> {
         return ["state"]
     }
     
@@ -111,6 +128,11 @@ open class ConcurrentOperation: Operation {
         postNotification(ConcurrentOperation.operationWillStart)
         willStart()
         state = .executing
+        
+        startDate = Date()
+        postNotification(ConcurrentOperation.operationDidStart)
+        didStart()
+        
         execute()
     }
     
@@ -138,6 +160,11 @@ open class ConcurrentOperation: Operation {
         return "\(String(describing: type(of: self)))(name: '\(name ?? "nil")', state: \(state.rawValue))"
     }
     
+    open override func cancel() {
+        internalQueue.cancelAllOperations()
+        super.cancel()
+    }
+    
     /// Override this method to perform your work. 
     /// This will not be executed on a separate thread; it is your responsibiity to do so, if needed.
     ///
@@ -151,6 +178,10 @@ open class ConcurrentOperation: Operation {
         postNotification(ConcurrentOperation.operationWillFinish)
         willFinish()
         state = .finished
+        
+        finishDate = Date()
+        postNotification(ConcurrentOperation.operationDidFinish)
+        didFinish()
     }
     
     /// Add a block to be called just before an operation begins executing.
@@ -165,13 +196,36 @@ open class ConcurrentOperation: Operation {
         }
     }
     
-    /// Add a block to be called after execution has finished.
+    /// Add a block to be called just after an operation begins executing.
+    ///
+    /// - Parameter block
+    public func addDidStartBlock(block: @escaping () -> Void) {
+        let existing = didStart
+        didStart = {
+            existing()
+            block()
+        }
+    }
+    
+    /// Add a block to be called before finishing.
     /// Any output from an operation should be set by the time the block is called.
     ///
     /// - Parameter block
     public func addWillFinishBlock(block: @escaping () -> Void) {
         let existing = willFinish
         willFinish = {
+            existing()
+            block()
+        }
+    }
+    
+    /// Add a block to be called after finishing.
+    /// Any output from an operation should be set by the time the block is called.
+    ///
+    /// - Parameter block
+    public func addDidFinishBlock(block: @escaping () -> Void) {
+        let existing = didFinish
+        didFinish = {
             existing()
             block()
         }
