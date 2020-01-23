@@ -33,11 +33,11 @@ open class ConcurrentOperation: Operation {
     private var willFinish: () -> Void = { }
     private var didFinish: () -> Void = { }
 
-    fileprivate let stateQueue = DispatchQueue(label: "PeakOperation.ConcurrentOperation.StateQueue", attributes: .concurrent)
-    fileprivate var rawState = OperationState.ready
+    private let stateQueue = DispatchQueue(label: "PeakOperation.ConcurrentOperation.StateQueue", attributes: .concurrent)
+    private var rawState = OperationState.ready
     
-    public var startDate: Date?
-    public var finishDate: Date?
+    public private(set) var startDate: Date?
+    public private(set) var finishDate: Date?
     
     public var executionTime: TimeInterval {
         guard let startDate = startDate else { return 0 }
@@ -55,7 +55,7 @@ open class ConcurrentOperation: Operation {
     }()
     
     @objc
-    fileprivate dynamic var state: OperationState {
+    private dynamic var state: OperationState {
         get {
             return stateQueue.sync(execute: { rawState })
         }
@@ -81,17 +81,17 @@ open class ConcurrentOperation: Operation {
     // MARK: - NSObject
     
     @objc
-    fileprivate dynamic class func keyPathsForValuesAffectingIsReady() -> Set<String> {
+    private dynamic class func keyPathsForValuesAffectingIsReady() -> Set<String> {
         return ["state"]
     }
     
     @objc
-    fileprivate dynamic class func keyPathsForValuesAffectingIsExecuting() -> Set<String> {
+    private dynamic class func keyPathsForValuesAffectingIsExecuting() -> Set<String> {
         return ["state"]
     }
     
     @objc
-    fileprivate dynamic class func keyPathsForValuesAffectingIsFinished() -> Set<String> {
+    private dynamic class func keyPathsForValuesAffectingIsFinished() -> Set<String> {
         return ["state"]
     }
     
