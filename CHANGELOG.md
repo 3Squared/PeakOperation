@@ -3,6 +3,13 @@
 The changelog for `PeakOperation`.
 
 --------------------------------------
+
+4.1.0
+-----
+- Adds an internal dispatch queue to `ConcurrentOperation`.
+- Adds `startDate`, `finishDate` and `executionTime` properties to `ConcurrentOperation`.
+- Add notifications and blocks for `didStart` and `didFinish`.
+
 4.0.1
 -----
 - Fix issue where cancelling a `GroupChainOperation` would not cancel its children.
