@@ -17,7 +17,7 @@ open class RetryingOperation<Output>: ConcurrentOperation, ProducesResult {
     /// This is checked, and if it is of type `failure(...)`, then the `retryStrategy` will be executed.
     public var output: Result<Output, Error> = Result { throw ResultError.noResult }
 
-    var failureCount = 0
+    public var failureCount = 0
     
     
     /// A `StrategyBlock` which is executed to determine whether the operation should be retried.
@@ -27,9 +27,9 @@ open class RetryingOperation<Output>: ConcurrentOperation, ProducesResult {
     /// :nodoc:
     open override func finish() {
         switch output {
-        case .failure(_):
+        case .failure(let error):
             failureCount += 1
-            if retryStrategy(failureCount) {
+            if retryStrategy(failureCount, error) {
                 execute()
                 return
             }
@@ -41,19 +41,19 @@ open class RetryingOperation<Output>: ConcurrentOperation, ProducesResult {
 }
 
 /// Takes the number of attempts and returns a boolean indicating whether to retry.
-public typealias StrategyBlock = (Int) -> Bool
+public typealias StrategyBlock = (Int, Error) -> Bool
 
 /// Common retry strategies that can be used to determine if a `RetryingOperation` should retry on failure.
 /// You can implement your own strategies by providing a block of type `(Int) -> Bool`.
 public struct RetryStrategy {
     
     /// Do not retry.
-    public static let none: StrategyBlock = { _ in return false }
+    public static let none: StrategyBlock = { _, _ in return false }
 
     /// Repeat the given number of times. There is no delay between attempts.
     ///
     /// - Parameter times: number of times to retry.
     public static func `repeat`(times: Int)  -> StrategyBlock {
-        return { attemptCount in return attemptCount <= times }
+        return { attemptCount, _ in return attemptCount <= times }
     }
 }

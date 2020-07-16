@@ -21,7 +21,7 @@ class RetryTests: XCTestCase {
         let operation = TestRetryOperation()
         
         var runCount = 0
-        operation.retryStrategy = { failureCount in
+        operation.retryStrategy = { failureCount, error in
             runCount += 1
             return failureCount < 3
         }
