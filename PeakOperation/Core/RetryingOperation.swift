@@ -17,7 +17,7 @@ open class RetryingOperation<Output>: ConcurrentOperation, ProducesResult {
     /// This is checked, and if it is of type `failure(...)`, then the `retryStrategy` will be executed.
     public var output: Result<Output, Error> = Result { throw ResultError.noResult }
 
-    public var failureCount = 0
+    private(set) public var failureCount = 0
     
     
     /// A `StrategyBlock` which is executed to determine whether the operation should be retried.
