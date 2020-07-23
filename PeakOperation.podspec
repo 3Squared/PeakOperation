@@ -11,8 +11,8 @@ Pod::Spec.new do |s|
   s.source_files = "PeakOperation", "PeakOperation/**/*.{h,m,swift}"
   s.swift_version = '5.0'
 
-  s.ios.deployment_target = '10.0'
-  s.tvos.deployment_target = '10.0'
+  s.ios.deployment_target = '11.0'
+  s.tvos.deployment_target = '11.0'
   s.macos.deployment_target = '10.13'
 
   s.source_files = "PeakOperation", "PeakOperation/Core/**/*.{h,m,swift}"
