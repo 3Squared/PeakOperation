@@ -4,6 +4,11 @@ The changelog for `PeakOperation`.
 
 --------------------------------------
 
+4.2.0
+-----
+- The error is now passed in to the retry strategy block.
+- Dropped support for iOS 10.
+
 4.1.0
 -----
 - Adds an internal dispatch queue to `ConcurrentOperation`.
