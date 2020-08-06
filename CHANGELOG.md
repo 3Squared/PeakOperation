@@ -4,6 +4,10 @@ The changelog for `PeakOperation`.
 
 --------------------------------------
 
+4.3.0
+-----
+- Add support for Swift Package Manager.
+
 4.2.0
 -----
 - The error is now passed in to the retry strategy block.
