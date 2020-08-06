@@ -1,6 +1,6 @@
 //
 //  CombineOperation.swift
-//  PeakOperation-iOS
+//  PeakOperation
 //
 //  Created by Sam Oakley on 27/02/2019.
 //  Copyright © 2019 3Squared. All rights reserved.
