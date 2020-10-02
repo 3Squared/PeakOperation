@@ -191,13 +191,6 @@ There are 2 provided `StrategyBlocks`:
 
 Please see the included tests for further examples. Also check out [PeakNetwork]() which uses PeakOperation extensively. 
 
-## Getting Started
-
-### Installing
-
-- Using Cocoapods, add `pod 'PeakOperation'` to your Podfile.
-- `import PeakOperation` where necessary.
-
 ## Contributing
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
