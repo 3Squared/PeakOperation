@@ -4,6 +4,10 @@ The changelog for `PeakOperation`.
 
 --------------------------------------
 
+4.4.0
+-----
+- Remove support for Cocoapods.
+
 4.3.0
 -----
 - Add support for Swift Package Manager.
