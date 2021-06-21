@@ -11,7 +11,7 @@ import Foundation
 let resultPassingQueue = DispatchQueue(label: "PeakOperation.resultPassingQueue", attributes: .concurrent)
 
 /// Implement this protocol to indicate that the object will produce a `Result` as output.
-public protocol ProducesResult: class {
+public protocol ProducesResult: AnyObject {
     associatedtype Output
     
     /// The `Result` that will be produced as output.
@@ -19,7 +19,7 @@ public protocol ProducesResult: class {
 }
 
 /// Implement this protocol to indicate that the object can receive a `Result` as input.
-public protocol ConsumesResult: class {
+public protocol ConsumesResult: AnyObject {
     associatedtype Input
     
     /// The `Result` to use as input.
@@ -27,7 +27,7 @@ public protocol ConsumesResult: class {
 }
 
 /// Implement this protocol to indicate that the object can receive multiple `Result`s as input.
-public protocol ConsumesMultipleResults: class {
+public protocol ConsumesMultipleResults: AnyObject {
     associatedtype Input
     
     /// The array of `Result`s to use as input.
