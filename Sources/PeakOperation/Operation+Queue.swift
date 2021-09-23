@@ -38,6 +38,7 @@ extension Operation {
         return operation
     }
     
+    @available(iOS 9, macOS 10.11, *)
     public func chainProgress() -> Progress {
         let chain = operationChain.compactMap { $0 as? ConcurrentOperation }
         let totalProgress = Progress(totalUnitCount: 100)
@@ -80,6 +81,7 @@ extension ConcurrentOperation {
     ///
     /// - Parameter queue: The queue to use. If not provided, a new one is made (optional).
     /// - Returns: The progress of the operation chain's execution.
+    @available(iOS 9, macOS 10.11, *)
     public func enqueueWithProgress(on queue: OperationQueue = OperationQueue()) -> Progress {
         enqueue(on: queue)
         return chainProgress()
@@ -93,6 +95,7 @@ extension ProducesResult where Self: ConcurrentOperation {
     ///
     /// - Parameter queue: The queue to use. If not provided, a new one is made (optional).
     /// - Returns: The progress of the operation chain's execution.
+    @available(iOS 9, macOS 10.11, *)
     public func enqueueWithProgress(on queue: OperationQueue = OperationQueue(), completion: @escaping (Result<Output, Error>) -> Void) -> Progress {
         addResultBlock(block: completion)
         enqueue(on: queue)
