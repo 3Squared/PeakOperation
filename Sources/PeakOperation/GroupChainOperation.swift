@@ -14,6 +14,7 @@ import Foundation
 /// that this operation can produce a result.
 /// If any operation in the group fails, the overall group operation will have a failure result.
 /// If it succeeds, it will be a successful result but contain no object.
+@available(iOS 9, macOS 10.11, *)
 open class GroupChainOperation: ConcurrentOperation, ProducesResult, ConsumesResult {
     
     public var output: Result<Void, Error> = Result { throw ResultError.noResult }
@@ -57,6 +58,7 @@ open class GroupChainOperation: ConcurrentOperation, ProducesResult, ConsumesRes
     }
 }
 
+@available(iOS 9, macOS 10.11, *)
 extension ProducesResult where Self: ConcurrentOperation {
     
     /// Add the operation and its chain to a group.
